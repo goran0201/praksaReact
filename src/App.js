@@ -20,19 +20,19 @@ export default class App extends React.Component {
                         <ul>
                             <li>
                                 <Link to = "/">Drivers</Link>
-                                <Link to = "/">Teams</Link>
-                                <Link to = "/">Races</Link>
+                                <Link to = "/teams">Teams</Link>
+                                <Link to = "/races">Races</Link>
                             </li>
                         </ul>
                     </nav>
                     <Switch>
                         <Route path = "/" exact component = {Drivers} />
-                        <Route path = "/" exact component = {Teams} />
-                        <Route path = "/" exact component = {Races} />
+                        <Route path = "/teams" exact component = {Teams} />
+                        <Route path = "/races" exact component = {Races} />
                     </Switch>
                 </Router>
 
     );
-        
+    
     }
 }
