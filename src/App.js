@@ -11,7 +11,6 @@ import history from "./history";
 
 
 export default class App extends React.Component {
-
     
     render() {
         return (
@@ -34,6 +33,6 @@ export default class App extends React.Component {
                 </Router>
 
     );
+        
+    }
 }
-}
-
