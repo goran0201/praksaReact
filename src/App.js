@@ -31,5 +31,6 @@ export default class App extends React.Component {
                         <Route path = "/" exact component = {Races} />
                     </Switch>
                 </Router>
-
+        )
+    }
 }
