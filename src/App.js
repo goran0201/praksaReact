@@ -31,6 +31,7 @@ export default class App extends React.Component {
                         <Route path = "/races" exact component = {Races} />
                         <Route path = "/driverDetails/:driverId" exact component = {DriverDetails} />
                         <Route path = "/teams/details/:constructorId" exact component = {TeamDetails} />
+                        <Route path = "/raceDetails/:raceId" exact component = {RaceDetails} />
                     </Switch>
                 </Router>
 
