@@ -85,15 +85,15 @@ export default class TeamDetails extends React.Component {
           {this.state.details2.map((details2, i) => {
             return (
 
-
-              <tr key={i}>
+            <tbody key={i}>
+              <tr>
                 <td>{details2.round}</td>
                 <td>{details2.raceName}</td>
                 <td>{details2.Results[0].position}</td>
                 <td>{details2.Results[1].position}</td>
                 <td>{parseInt(details2.Results[0].points) + parseInt(details2.Results[1].points)}</td>
               </tr>
-
+            </tbody>
 
             );
           })}
