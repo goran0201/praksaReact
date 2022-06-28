@@ -9,11 +9,7 @@ export default class Races extends React.Component {
     seasons: {}
   }
 
-  handleQualifyng = (racesId) => {
-    console.log("racesID", racesId);
-    const linkTo = "/raceDetails/" + racesId;
-    history.push(linkTo);
-  }
+  
 
   componentDidMount() {
     this.getRaces();
@@ -33,7 +29,11 @@ export default class Races extends React.Component {
 
   }
 
-  
+  handleQualifyng = (racesId) => {
+    console.log("racesID", racesId);
+    const linkTo = "/raceDetails/" + racesId;
+    history.push(linkTo);
+  }
 
 
   render() {
@@ -41,7 +41,7 @@ export default class Races extends React.Component {
     return (
       <div>
         <h2>Race calendar</h2>
-        <h3><RaceDetails /></h3>
+       
 
         <div>
           <table className="tableRace">

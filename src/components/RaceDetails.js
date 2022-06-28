@@ -1,17 +1,17 @@
 import React from "react";
- 
+
 
 
 export default class RaceDetails extends React.Component {
 
   state = {
     qualifyngDetails: []
-    
+
   };
 
-  // componentDidMount() {
-  //   this.getQualifiersDetails();
-  // }
+  componentDidMount() {
+    this.getQualifiersDetails();
+  }
 
   getQualifiersDetails = async () => {
 
@@ -35,21 +35,27 @@ export default class RaceDetails extends React.Component {
   render() {
     return (
       <div>
-       <table className="table-race-details">
+        <table className="table-race-details">
           <thead>
             <tr>
               <th>Qualifying results</th>
+            </tr>
+            <tr>
+              <th>Pos</th>
+              <th>Driver</th>
+              <th>Team</th>
+              <th>Best time</th>
             </tr>
           </thead>
           {this.state.qualifyngDetails.map((qualifying, i) => {
             return (
               <tbody key={i}>
                 <tr>
-                  <td>{}</td>
-                  <td> {}</td>
-                  <td> {}</td>
-                  <td> {}</td>
-                  <td>{}</td>
+                  <td>{qualifying.position}</td>
+                  <td> {qualifying.familyName }</td>
+                  <td> { qualifying.constructorId}</td>
+                  <td> { qualifying.Q3}</td>
+
                 </tr>
               </tbody>
             );
