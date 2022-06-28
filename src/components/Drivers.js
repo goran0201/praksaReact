@@ -3,7 +3,9 @@ import React from "react";
 
 export default class Drivers extends React.Component {
     state = {
-        allDrivers: []
+        allDrivers: [],
+        seasons: {}
+
     };
 
     componentDidMount() {
@@ -15,32 +17,43 @@ export default class Drivers extends React.Component {
         const response = await fetch(url);
         console.log("resp", response);
         const drivers = await response.json();
-        console.log("drivers resp", drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings);
+        console.log("drivers",drivers);
         const allDrivers = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
+        console.log("drivers resp", allDrivers);
+        const seasons = drivers.MRData.StandingsTable;
+        console.log("seasons", seasons);
         this.setState({
-            allDrivers: allDrivers
+            allDrivers: allDrivers,
+            seasons: seasons
         });
     };
 
     render() {
         return (
-            <div>
-
-                {this.state.allDrivers.map((driver,i) => {
-                    return (
-                        <div key={i}>
-                            <h3>{driver.position}</h3>
-                            <h3>{driver.Driver.givenName} {driver.Driver.familyName}</h3>
-                            <h3>{driver.Constructors[0].name}</h3>
-                            <h3>{driver.points}</h3>
-                        </div>
-                    );
-                })}
-
-
-
-            </div>
+            <>
+                <h1>Drivers Campionship</h1>
+                <div >
+                    <table className="table">
+                        <thead>
+                            <tr>
+                                <th colSpan="4">Drivers Championship Standings - {this.state.seasons.season}</th>
+                            </tr>
+                        </thead>
+                        {this.state.allDrivers.map((driver, i) => {
+                            return (
+                                <tbody key={i}>
+                                    <tr>
+                                        <td>{driver.position}</td>
+                                        <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                        <td>{driver.Constructors[0].name}</td>
+                                        <td>{driver.points}</td>
+                                    </tr>
+                                </tbody>
+                            );
+                        })}
+                    </table>
+                </div>
+            </>
         );
     }
-
 }

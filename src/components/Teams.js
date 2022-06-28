@@ -1,5 +1,4 @@
 import React from "react";
-import * as $ from "jquery";
 import TeamDetails from "./TeamDetails";
 
 
@@ -32,23 +31,28 @@ export default class Teams extends React.Component {
     return (
       <>
         <h1>Constructors Campionship</h1>
-        <p>Constructors Championship Standings - 2013</p>
-        {this.state.allTeams.map( (team, i) => {
-          return (
-            <div key = {i}>
-              <table className = "table">
-                <thead>
+        <div >
+          <table className="table">
+            <thead>
+              <tr>
+                <th colSpan="4">Constructors Championship Standings - 2013</th>
+              </tr>
+            </thead>
+            {this.state.allTeams.map((team, i) => {
+              return (
+                <tbody key={i}>
                   <tr>
-                    <th>{team.position}</th>
-                    <th>{team.Constructor.constructorId}</th>
-                    <th><a href={team.Constructor.url}>Details</a></th>
-                    <th>{team.points}</th>
+                    <td>{team.position}</td>
+                    <td>{team.Constructor.name}</td>
+                    <td><a href={team.Constructor.url}>Details</a></td>
+                    <td>{team.points}</td>
                   </tr>
-                </thead>
-             </table>
-            </div>
-          );
-        })}
+                </tbody>
+              );
+            })}
+          </table>
+        </div>
       </>
-    )}}
-      
+    );
+  }
+}
