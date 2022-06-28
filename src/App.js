@@ -22,6 +22,7 @@ export default class App extends React.Component {
                                 <Link to = "/">Drivers</Link>
                                 <Link to = "/teams">Teams</Link>
                                 <Link to = "/races">Races</Link>
+                                <Link to = "/details">DRVDetails</Link>
                             </li>
                         </ul>
                     </nav>
@@ -29,6 +30,7 @@ export default class App extends React.Component {
                         <Route path = "/" exact component = {Drivers} />
                         <Route path = "/teams" exact component = {Teams} />
                         <Route path = "/races" exact component = {Races} />
+                        <Route path = "/details" exact component = {DriverDetails} />
                     </Switch>
                 </Router>
 
