@@ -8,19 +8,22 @@ export default class RaceDetails extends React.Component {
     qualifyngDetails: []
     
   };
-  
+
+  // componentDidMount() {
+  //   this.getQualifiersDetails();
+  // }
 
   getQualifiersDetails = async () => {
 
-    const racesName = this.props.match.params.racesId;
-    const url = `http://ergast.com/api/f1/2013/${racesId}/qualifying.json`;
-    console.log("proba", racesName);
+    const raceId = this.props.match.params.raceId;
+    const url = `http://ergast.com/api/f1/2013/${raceId}/qualifying.json`;
+    console.log("raceId", raceId);
 
     const response = await fetch(url);
     console.log("response", response);
     const qualifiers = await response.json();
     console.log("qualifiers", qualifiers);
-    const qualifiersDetails = '';
+    // const qualifiersDetails = '';
     console.log("qualifiersDetails", qualifiersDetails);
     this.setState({
       qualifyngDetails: qualifiers
