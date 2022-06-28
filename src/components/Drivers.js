@@ -1,4 +1,6 @@
 import React from "react";
+import history from "./../history";
+import DriverDetails from "./DriverDetails";
 
 
 export default class Drivers extends React.Component {
@@ -28,6 +30,12 @@ export default class Drivers extends React.Component {
         });
     };
 
+    handleDrivers = (driverId) => {
+        console.log("driverID",driverId);
+        const linkTo = "/driverDetails/" + driverId;
+        history.push(linkTo);
+    }
+
     render() {
         return (
             <>
@@ -40,8 +48,9 @@ export default class Drivers extends React.Component {
                             </tr>
                         </thead>
                         {this.state.allDrivers.map((driver, i) => {
+                            console.log("driverlog",driver);
                             return (
-                                <tbody key={i}>
+                                <tbody key={i} onClick={() => this.handleDrivers(driver.Driver.driverId)}>
                                     <tr>
                                         <td>{driver.position}</td>
                                         <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
