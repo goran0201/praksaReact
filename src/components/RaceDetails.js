@@ -23,7 +23,7 @@ export default class RaceDetails extends React.Component {
     console.log("response", response);
     const qualifiers = await response.json();
     console.log("qualifiers", qualifiers);
-    const qualifiersDetails = qualifiers.MrData.RaceTable.Races.QualifyingResults;
+    const qualifiersDetails = qualifiers.MRData.RaceTable.Races[0].QualifyingResults;
     console.log("qualifiersDetails", qualifiersDetails);
     this.setState({
       qualifyngDetails: qualifiersDetails
@@ -52,11 +52,10 @@ export default class RaceDetails extends React.Component {
               <tbody key={i}>
                 <tr>
                   <td>{qualifying.position}</td>
-                  <td> {qualifying.familyName }</td>
-                  <td> { qualifying.constructorId}</td>
-                  <td> { qualifying.Q3}</td>
-
-                </tr>
+                  <td> {qualifying.Driver.familyName}</td>
+                  <td> {qualifying.Constructor.name}</td>
+                  <td> {qualifying.Q3}</td>
+                  </tr>
               </tbody>
             );
           })}
