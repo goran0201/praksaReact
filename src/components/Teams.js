@@ -1,4 +1,5 @@
 import React from "react";
+import history from "./../history";
 import TeamDetails from "./TeamDetails";
 
 
@@ -30,6 +31,11 @@ export default class Teams extends React.Component {
     });
   };
 
+  handleTeams = (constructorId) => {
+    const linkTo = "/teams/details/" + constructorId;
+    history.push(linkTo);
+}
+
 
   render() {
     return (
@@ -44,7 +50,7 @@ export default class Teams extends React.Component {
             </thead>
             {this.state.allTeams.map((team, i) => {
               return (
-                <tbody key={i}>
+                <tbody key={i} onClick={() => this.handleTeams(team.Constructor.constructorId)}>
                   <tr>
                     <td>{team.position}</td>
                     <td>{team.Constructor.name}</td>
