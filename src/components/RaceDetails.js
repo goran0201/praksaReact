@@ -23,7 +23,7 @@ export default class RaceDetails extends React.Component {
     console.log("response", response);
     const qualifiers = await response.json();
     console.log("qualifiers", qualifiers);
-    const qualifiersDetails = qualifiers.MrData.RaceTable.Races;
+    const qualifiersDetails = qualifiers.MrData.RaceTable.Races.QualifyingResults;
     console.log("qualifiersDetails", qualifiersDetails);
     this.setState({
       qualifyngDetails: qualifiersDetails
