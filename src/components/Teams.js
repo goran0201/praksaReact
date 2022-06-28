@@ -5,7 +5,8 @@ import TeamDetails from "./TeamDetails";
 export default class Teams extends React.Component {
 
   state = {
-    allTeams: []
+    allTeams: [],
+    seasons: {}
   };
 
   componentDidMount() {
@@ -20,9 +21,12 @@ export default class Teams extends React.Component {
     console.log("teams", teams);
     const allTeams = teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
     console.log("allTeams", allTeams);
+    const seasons = teams.MRData.StandingsTable;
+    console.log("seasons", seasons);
 
     this.setState({
-      allTeams: allTeams
+      allTeams: allTeams,
+      seasons: seasons
     });
   };
 
@@ -35,7 +39,7 @@ export default class Teams extends React.Component {
           <table className="table">
             <thead>
               <tr>
-                <th colSpan="4">Constructors Championship Standings - 2013</th>
+                <th colSpan="4">Constructors Championship Standings - {this.state.seasons.season}</th>
               </tr>
             </thead>
             {this.state.allTeams.map((team, i) => {
