@@ -23,10 +23,10 @@ export default class RaceDetails extends React.Component {
     console.log("response", response);
     const qualifiers = await response.json();
     console.log("qualifiers", qualifiers);
-    // const qualifiersDetails = '';
+    const qualifiersDetails = qualifiers.MrData.RaceTable.Races;
     console.log("qualifiersDetails", qualifiersDetails);
     this.setState({
-      qualifyngDetails: qualifiers
+      qualifyngDetails: qualifiersDetails
     });
   };
 
@@ -35,7 +35,26 @@ export default class RaceDetails extends React.Component {
   render() {
     return (
       <div>
-        Race Details
+       <table className="table-race-details">
+          <thead>
+            <tr>
+              <th>Qualifying results</th>
+            </tr>
+          </thead>
+          {this.state.qualifyngDetails.map((qualifying, i) => {
+            return (
+              <tbody key={i}>
+                <tr>
+                  <td>{}</td>
+                  <td> {}</td>
+                  <td> {}</td>
+                  <td> {}</td>
+                  <td>{}</td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </table>
 
       </div>
     );
