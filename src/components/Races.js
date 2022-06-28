@@ -1,11 +1,18 @@
 import React from "react";
-// import history from "./../history";
+import RaceDetails from "./RaceDetails";
+import history from "./../history";
 
 export default class Races extends React.Component {
 
   state = {
     races: [],
     seasons: {}
+  }
+
+  handleQualifyng = (racesId) => {
+    console.log("racesID", racesId);
+    const linkTo = "/racesDetails/" + racesId;
+    history.push(linkTo);
   }
 
   componentDidMount() {
@@ -26,11 +33,7 @@ export default class Races extends React.Component {
 
   }
 
-  //   handleClickDetails = () => {
-  //     console.log();
-  //     const linkTo = "/details/" + ;
-  //     history.push(linkTo);
-  // }
+  
 
 
   render() {
@@ -38,12 +41,15 @@ export default class Races extends React.Component {
     return (
       <div>
         <h2>Race calendar</h2>
+        <h3><RaceDetails /></h3>
 
         <div>
           <table className="tableRace">
 
             <thead>
-            <th colSpan="4" align="left">Race callendar - {this.state.seasons.season}</th>
+              <tr>
+            <th align="left">Race callendar - {this.state.seasons.season}</th>
+            </tr>
               <tr>
                 <th>Round</th>
                 <th>Grand Prix</th>
@@ -53,10 +59,10 @@ export default class Races extends React.Component {
               </tr>
             </thead>
 
-            <tbody>
+            <tbody >
               {this.state.races.map((race, i) => {
                 return (
-                  <tr key={i}>
+                  <tr key={i} onClick={() => this.handleQualifyng(race.raceName.racesId)}>
                     <td>{race.round}</td>
                     <td>{race.raceName}</td>
                     <td>{race.Circuit.circuitName}</td>
