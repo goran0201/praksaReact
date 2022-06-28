@@ -1,26 +1,30 @@
 import React from "react";
-// state=[
-//   qualifiersDetails = []
+ 
 
-// ]
 
 export default class RaceDetails extends React.Component {
 
+  state = {
+    qualifyngDetails: []
+    
+  };
+  
+
   getQualifiersDetails = async () => {
 
-    const raceName = this.props;
-    // const url = `http://ergast.com/api/f1/2013/${raceName}/qualifying.json`;
-    console.log("proba", raceName);
+    const racesName = this.props.match.params.racesId;
+    const url = `http://ergast.com/api/f1/2013/${racesId}/qualifying.json`;
+    console.log("proba", racesName);
 
-    // const response = await fetch(url);
-    // console.log("response", response);
-    // const qualifiers = await response.json();
-    // console.log("qualifiers", qualifiers);
-    // const qualifiersDetails = '';
-    // console.log("qualifiersDetails", qualifiersDetails);
-    // this.setState({
-    //   qualifiersDetails: qualifiers
-    // });
+    const response = await fetch(url);
+    console.log("response", response);
+    const qualifiers = await response.json();
+    console.log("qualifiers", qualifiers);
+    const qualifiersDetails = '';
+    console.log("qualifiersDetails", qualifiersDetails);
+    this.setState({
+      qualifyngDetails: qualifiers
+    });
   };
 
 
@@ -28,7 +32,8 @@ export default class RaceDetails extends React.Component {
   render() {
     return (
       <div>
-        RaceDetails
+        Race Details
+
       </div>
     );
   }

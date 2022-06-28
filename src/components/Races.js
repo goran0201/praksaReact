@@ -11,7 +11,7 @@ export default class Races extends React.Component {
 
   handleQualifyng = (racesId) => {
     console.log("racesID", racesId);
-    const linkTo = "/racesDetails/" + racesId;
+    const linkTo = "/raceDetails/" + racesId;
     history.push(linkTo);
   }
 
