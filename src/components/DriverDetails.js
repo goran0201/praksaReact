@@ -4,7 +4,8 @@ import React from "react";
 export default class DriverDetails extends React.Component {
   state = {
     driverDetails: [],
-    racesDetails: []
+    racesDetails: [],
+    isLoading: true
   };
 
   componentDidMount() {
@@ -24,11 +25,15 @@ export default class DriverDetails extends React.Component {
     const racesDetails = races.MRData.RaceTable.Races;
     this.setState({
       driverDetails: driverDetails,
-      racesDetails: racesDetails
+      racesDetails: racesDetails,
+      isLoading: false
     });
   };
 
   render() {
+    if(this.state.isLoading) {
+      return (<h2>Loading...</h2>)
+    }
     console.log(this.state);
     return (
       <div>
