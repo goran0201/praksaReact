@@ -1,10 +1,13 @@
 import React from "react";
+import Pulseloader from "react-spinners/Pulseloader";
 
 
 export default class DriverDetails extends React.Component {
   state = {
     driverDetails: [],
-    racesDetails: []
+    racesDetails: [],
+    seasons: {},
+    isLoading: true
   };
 
   componentDidMount() {
@@ -15,21 +18,32 @@ export default class DriverDetails extends React.Component {
     const driverId = this.props.match.params.driverId;
     const url = `http://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`;
     const urlRaces = `https://ergast.com/api/f1/2013/drivers/${driverId}/results.json`;
-   // console.log("test",urlRaces);
     const response = await fetch(url);
     const responseRaces = await fetch(urlRaces);
     const drivers = await response.json();
     const races = await responseRaces.json();
     const driverDetails = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const racesDetails = races.MRData.RaceTable.Races;
+    const seasons = drivers.MRData.StandingsTable;
+
     this.setState({
       driverDetails: driverDetails,
-      racesDetails: racesDetails
+      racesDetails: racesDetails,
+      seasons: seasons,
+      isLoading: false
     });
+
   };
 
   render() {
-    console.log(this.state);
+    if (this.state.isLoading) {
+      return (
+        <div>
+          <p>loading...</p>
+          <Pulseloader size={12} color="coral" />
+        </div>
+      );
+    }
     return (
       <div>
         <table className="table-small">
@@ -46,7 +60,7 @@ export default class DriverDetails extends React.Component {
                   <td>Country: {driverDetail.Driver.nationality}</td>
                   <td>Team: {driverDetail.Constructors[0].name}</td>
                   <td>Birth: {driverDetail.Driver.dateOfBirth}</td>
-                  <td><a href={driverDetail.Driver.url}>Biography</a></td>
+                  <td>Biography: <a href={driverDetail.Driver.url}>Link</a></td>
                 </tr>
               </tbody>
             );
@@ -55,7 +69,7 @@ export default class DriverDetails extends React.Component {
         <table className="table">
           <thead>
             <tr>
-              <th>Formula 1 2013 Results</th>
+              <th colSpan="5">Formula 1 {this.state.seasons.season} Results</th>
             </tr>
             <tr>
               <th>Round</th>
@@ -82,5 +96,4 @@ export default class DriverDetails extends React.Component {
       </div>
     );
   }
-
 }

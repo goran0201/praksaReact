@@ -40,15 +40,14 @@ export default class Races extends React.Component {
 
     return (
       <div>
-        <h2>Race calendar</h2>
-       
-
-        <div>
-          <table className="tableRace">
+ 
+        <div className="background">
+        <h1 className="title">Race calendar</h1>
+          <table className="table">
 
             <thead>
               <tr>
-            <th align="left">Race callendar - {this.state.seasons.season}</th>
+            <th className="title-small" >Race callendar - {this.state.seasons.season}</th>
             </tr>
               <tr>
                 <th>Round</th>
