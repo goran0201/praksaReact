@@ -1,5 +1,6 @@
 import React from "react";
 import PulseLoader from "react-spinners/PulseLoader";
+import Flag from 'react-flagkit';
 
 export default class TeamDetails extends React.Component {
 

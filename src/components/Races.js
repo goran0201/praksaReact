@@ -1,6 +1,7 @@
 import React from "react";
 import RaceDetails from "./RaceDetails";
 import history from "./../history";
+import Flag from 'react-flagkit';
 
 export default class Races extends React.Component {
 
