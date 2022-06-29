@@ -1,5 +1,5 @@
 import React from "react";
-import Pulseloader from "react-spinners/Pulseloader";
+import PulseLoader from "react-spinners/Pulseloader";
 
 
 export default class DriverDetails extends React.Component {
@@ -40,7 +40,7 @@ export default class DriverDetails extends React.Component {
       return (
         <div>
           <p>loading...</p>
-          <Pulseloader size={12} color="coral" />
+          <PulseLoader size={12} color="coral" />
         </div>
       );
     }
