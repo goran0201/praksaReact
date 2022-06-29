@@ -9,7 +9,7 @@ export default class Races extends React.Component {
     seasons: {}
   }
 
-  
+
 
   componentDidMount() {
     this.getRaces();
@@ -39,16 +39,16 @@ export default class Races extends React.Component {
   render() {
 
     return (
-      <div>
- 
+      <>
+
         <div className="background">
-        <h1 className="title">Race calendar</h1>
+          <h1 className="title">Race calendar</h1>
           <table className="table">
 
             <thead>
               <tr>
-            <th className="title-small" >Race callendar - {this.state.seasons.season}</th>
-            </tr>
+                <th colSpan="5" className="title-small" >Race callendar - {this.state.seasons.season}</th>
+              </tr>
               <tr>
                 <th>Round</th>
                 <th>Grand Prix</th>
@@ -60,7 +60,7 @@ export default class Races extends React.Component {
 
             <tbody >
               {this.state.races.map((race, i) => {
-                    console.log("race", race);
+                console.log("race", race);
                 return (
                   <tr key={i} onClick={() => this.handleQualifyng(race.round)}>
                     <td>{race.round}</td>
@@ -78,7 +78,7 @@ export default class Races extends React.Component {
 
 
 
-      </div>
+      </>
     );
   }
 

@@ -1,10 +1,15 @@
 html, body{
-    margin: 0;
+    margin: 0 auto;
     padding: 0;
 }
 
 .main {
     display: flex;
+    background-color: rgb(77, 75, 75);
+}
+
+.navigation {
+    width: 20%;
 }
 
 ul{
@@ -31,19 +36,37 @@ li a{
 
 .background {
     background-color: darkgray;
+    width: 80%;
+    justify-content: center;
+    padding: 20px;
 }
 
 .title {
+    margin: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
     text-shadow: 2px 2px 8px black;
+    padding: 20px;
+    font-size: 40px;
 }
+
+.title-small {
+    background-color: lightgrey;
+}
+
+.table {
+    padding: 20px;
+    margin: 0;
+    width: 100%;
+    border-radius: 20px;
+    border-collapse: collapse;
+}
+
 
 .table th,
 .table td {
     background-color: white;
     border: 1px solid #ddd;
-    border-collapse: collapse;
     text-align: left;
     padding: 15px;
 }
