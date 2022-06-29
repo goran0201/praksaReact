@@ -70,10 +70,10 @@ export default class RaceDetails extends React.Component {
             );
           })}
         </table>
-        <table className="table-race-details">
+        <table className="table-details-race">
           <thead>
             <tr>
-              <th>Qualifying results</th>
+              <th colSpan="4" className="title-small">Qualifying results</th>
             </tr>
             <tr>
               <th>Pos</th>
@@ -100,10 +100,10 @@ export default class RaceDetails extends React.Component {
             );
           })}
         </table>
-        <table className="table-race-details">
+        <table className="table-details-race">
           <thead>
             <tr>
-              <th>Race results</th>
+              <th colSpan="5" className="title-small">Race results</th>
             </tr>
             <tr>
               <th>Pos</th>

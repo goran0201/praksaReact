@@ -70,10 +70,10 @@ export default class DriverDetails extends React.Component {
             );
           })}
         </table>
-        <table className="table">
+        <table className="table-details">
           <thead>
             <tr>
-              <th colSpan="5">Formula 1 {this.state.seasons.season} Results</th>
+              <th colSpan="5" className="title-small">Formula 1 {this.state.seasons.season} Results</th>
             </tr>
             <tr>
               <th>Round</th>

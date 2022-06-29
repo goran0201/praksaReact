@@ -44,6 +44,7 @@ export default class TeamDetails extends React.Component {
     }
     return (
       <div className="table-container">
+        <div className="table-small-container">
         <table className="table-small">
           {this.state.details1.map((details1, i) => {
             return (
@@ -71,10 +72,11 @@ export default class TeamDetails extends React.Component {
             );
           })}
         </table>
-        <table className="table">
+        </div>
+        <table className="table-details">
           <thead>
             <tr>
-              <th colSpan="5">Formula 1 {this.state.seasons.season} Results</th>
+              <th colSpan="5" className="title-small">Formula 1 {this.state.seasons.season} Results</th>
             </tr>
             <tr >
               <th>Round</th>

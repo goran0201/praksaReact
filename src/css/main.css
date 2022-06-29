@@ -17,6 +17,7 @@ ul{
     margin: 0;
     padding: 0;
     width: 200px;
+    border-left: 1px solid black;
 }
 
 li a{
@@ -39,6 +40,7 @@ li a{
     width: 80%;
     justify-content: center;
     padding: 20px;
+    margin: 10px;
 }
 
 .title {
@@ -53,22 +55,24 @@ li a{
 .title-small {
     background-color: lightgrey;
     text-shadow: 2px 2px 8px white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
 }
 
 .table {
     padding: 20px;
-    margin: 0;
+    margin: 10px;
     width: 100%;
-    border-radius: 20px;
     border-collapse: collapse;
 }
 
 .table th {
     background-image: linear-gradient(#dedede, #c9c6c6);
+    text-align: left;
+    padding: 15px;
+    white-space: nowrap;
 }
 
-
-.table th,
 .table td {
     background-color: white;
     border: 1px solid #ddd;
@@ -77,20 +81,76 @@ li a{
     white-space: nowrap;
 }
 
-.table-small {
-    display: flex;
-    background-color: rgb(77, 75, 75);
-    border-collapse: collapse;
-    color: white;
-}
-
 .table-container {
     display: flex;
 }
 
+.table-small-container{
+    margin: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: rgb(77, 75, 75);
+}
+
+
+.table-small {
+    display: flex;
+    padding: 20px;
+    margin: 10px;
+    border-collapse: collapse;
+    color: white;
+    
+}
+
+.table-small th, 
 .table-small td {
+    text-align: center;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+.table-details {
+    padding: 20px;
+    margin: 10px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table-details th {
+    background-image: linear-gradient(#dedede, #c9c6c6);
     text-align: left;
     padding: 15px;
     white-space: nowrap;
-    height: 50px;
+}
+
+.table-details td {
+    background-color: white;
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 15px;
+    white-space: nowrap;
+    
+}
+
+.table-details-race {
+    padding: 20px;
+    margin: 10px;
+    width: 100%;
+    border-radius: 20px;
+    border-collapse: collapse;
+}
+
+.table-details-race th {
+    background-image: linear-gradient(#dedede, #c9c6c6);
+    text-align: left;
+    padding: 15px;
+    white-space: nowrap;
+}
+
+.table-details-race td {
+    background-color: white;
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 15px;
+    white-space: nowrap;
 }
