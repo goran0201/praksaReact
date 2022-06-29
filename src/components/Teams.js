@@ -40,12 +40,13 @@ export default class Teams extends React.Component {
   render() {
     return (
       <>
-        <h1>Constructors Campionship</h1>
-        <div >
+        
+        <div className="background">
+          <h1 className="title">Constructors Campionship</h1>
           <table className="table">
             <thead>
               <tr>
-                <th colSpan="4">Constructors Championship Standings - {this.state.seasons.season}</th>
+                <th colSpan="4" className="title-small">Constructors Championship Standings - {this.state.seasons.season}</th>
               </tr>
             </thead>
             {this.state.allTeams.map((team, i) => {

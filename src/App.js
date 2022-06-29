@@ -14,9 +14,9 @@ export default class App extends React.Component {
     
     render() {
         return (
-        
+            <div className="main">
                 <Router history = {history}>
-                    <nav>
+                    <nav className="navigation">
                         <ul>
                             <li>
                                 <Link to = "/">Drivers</Link>
@@ -34,7 +34,7 @@ export default class App extends React.Component {
                         <Route path = "/raceDetails/:raceId" exact component = {RaceDetails} />
                     </Switch>
                 </Router>
-
+            </div>
     );
     
     }

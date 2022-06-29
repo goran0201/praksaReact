@@ -39,12 +39,13 @@ export default class Drivers extends React.Component {
     render() {
         return (
             <>
-                <h1>Drivers Campionship</h1>
-                <div >
+                
+                <div className="background">
+                <h1 className="title">Drivers Campionship</h1>
                     <table className="table">
                         <thead>
                             <tr>
-                                <th colSpan="4">Drivers Championship Standings - {this.state.seasons.season}</th>
+                                <th colSpan="4" className="title-small">Drivers Championship Standings - {this.state.seasons.season}</th>
                             </tr>
                         </thead>
                         {this.state.allDrivers.map((driver, i) => {
