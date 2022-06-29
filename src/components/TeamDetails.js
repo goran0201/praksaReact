@@ -1,5 +1,5 @@
 import React from "react";
-import Pulseoader from "react-spinners/PulseLoader";
+import PulseLoader from "react-spinners/PulseLoader";
 
 export default class TeamDetails extends React.Component {
 
@@ -44,7 +44,7 @@ export default class TeamDetails extends React.Component {
       return (
         <div>
           <p>loading...</p>
-        <Pulseoader size={12} color="coral" />
+        <PulseLoader size={12} color="coral" />
         </div>
       );
     }
