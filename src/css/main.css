@@ -76,3 +76,21 @@ li a{
     padding: 15px;
     white-space: nowrap;
 }
+
+.table-small {
+    display: flex;
+    background-color: rgb(77, 75, 75);
+    border-collapse: collapse;
+    color: white;
+}
+
+.table-container {
+    display: flex;
+}
+
+.table-small td {
+    text-align: left;
+    padding: 15px;
+    white-space: nowrap;
+    height: 50px;
+}

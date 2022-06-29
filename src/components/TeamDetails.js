@@ -34,31 +34,38 @@ export default class TeamDetails extends React.Component {
   }
 
   render() {
-    if(this.state.isLoading) {
+    if (this.state.isLoading) {
       return (
         <div>
           <p>loading...</p>
-        <PulseLoader size={12} color="coral" />
+          <PulseLoader size={12} color="coral" />
         </div>
       );
     }
     return (
-      <div>
+      <div className="table-container">
         <table className="table-small">
-          <thead>
-            <tr>
-              <th>Team details</th>
-            </tr>
-          </thead>
           {this.state.details1.map((details1, i) => {
             return (
               <tbody key={i}>
                 <tr>
-                  <td>{details1.Constructor.constructorId}</td>
-                  <td>Country: {details1.Constructor.nationality}</td>
-                  <td>Position: {details1.position}</td>
-                  <td>Points: {details1.points}</td>
-                  <td>History:<a href={details1.Constructor.url}>link</a></td>
+                  <th colSpan="2">{details1.Constructor.name}</th>
+                </tr>
+                <tr>
+                  <th>Country: </th>
+                  <td>{details1.Constructor.nationality}</td>
+                </tr>
+                <tr>
+                  <th>Position: </th>
+                  <td>{details1.position}</td>
+                </tr>
+                <tr>
+                  <th>Points: </th>
+                  <td>{details1.points}</td>
+                </tr>
+                <tr>
+                  <th>History: </th>
+                  <td><a href={details1.Constructor.url}>link</a></td>
                 </tr>
               </tbody>
             );
@@ -79,15 +86,15 @@ export default class TeamDetails extends React.Component {
           </thead>
           {this.state.details2.map((details2, i) => {
             return (
-            <tbody key={i}>
-              <tr>
-                <td>{details2.round}</td>
-                <td>{details2.raceName}</td>
-                <td>{details2.Results[0].position}</td>
-                <td>{details2.Results[1].position}</td>
-                <td>{parseInt(details2.Results[0].points) + parseInt(details2.Results[1].points)}</td>
-              </tr>
-            </tbody>
+              <tbody key={i}>
+                <tr>
+                  <td>{details2.round}</td>
+                  <td>{details2.raceName}</td>
+                  <td>{details2.Results[0].position}</td>
+                  <td>{details2.Results[1].position}</td>
+                  <td>{parseInt(details2.Results[0].points) + parseInt(details2.Results[1].points)}</td>
+                </tr>
+              </tbody>
             );
           })}
         </table>

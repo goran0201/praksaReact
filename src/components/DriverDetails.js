@@ -42,22 +42,29 @@ export default class DriverDetails extends React.Component {
       );
     }
     return (
-      <div>
+      <div className="table-container">
         <table className="table-small">
-          <thead>
-            <tr>
-              <th>driver details</th>
-            </tr>
-          </thead>
           {this.state.driverDetails.map((driverDetail, i) => {
             return (
               <tbody key={i}>
                 <tr>
-                  <td>{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</td>
-                  <td>Country: {driverDetail.Driver.nationality}</td>
-                  <td>Team: {driverDetail.Constructors[0].name}</td>
-                  <td>Birth: {driverDetail.Driver.dateOfBirth}</td>
-                  <td>Biography: <a href={driverDetail.Driver.url}>Link</a></td>
+                  <th colSpan="2">{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</th>
+                </tr>
+                <tr>
+                  <th>Country: </th>
+                  <td>{driverDetail.Driver.nationality}</td>
+                </tr>
+                <tr>
+                  <th>Team: </th>
+                  <td>{driverDetail.Constructors[0].name}</td>
+                </tr>
+                <tr>
+                  <th>Birth: </th>
+                  <td>{driverDetail.Driver.dateOfBirth}</td>
+                </tr>
+                <tr>
+                  <th>Biography: </th>
+                  <td><a href={driverDetail.Driver.url}>Link</a></td>
                 </tr>
               </tbody>
             );

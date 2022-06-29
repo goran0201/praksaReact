@@ -42,22 +42,29 @@ export default class RaceDetails extends React.Component {
       );
     }
     return (
-      <div>
+      <div className="table-container">
         <table className="table-small">
-          <thead>
-            <tr>
-              <th></th>
-            </tr>
-          </thead>
           {this.state.raceLocation.map((location, i) => {
             return (
               <tbody key={i}>
                 <tr>
-                  <td>{location.raceName}</td>
-                  <td>Country: {location.Circuit.Location.country}</td>
-                  <td>Location: {location.Circuit.Location.locality}</td>
-                  <td>Date: {location.date}</td>
-                  <td>Full report:{location.Circuit.url}</td>
+                  <th colSpan="2">{location.raceName}</th>
+                </tr>
+                <tr>
+                  <th>Country: </th>
+                  <td>{location.Circuit.Location.country}</td>
+                </tr>
+                <tr>
+                  <th>Location: </th>
+                  <td>{location.Circuit.Location.locality}</td>
+                </tr>
+                <tr>
+                  <th>Date: </th>
+                  <td>{location.date}</td>
+                </tr>
+                <tr>
+                  <th>Full report: </th>
+                  <td><a href={location.Circuit.url}>link</a></td>
                 </tr>
               </tbody>
             );
