@@ -22,24 +22,18 @@ export default class TeamDetails extends React.Component {
     const response2 = await fetch(urlResults);
     const teams1 = await response1.json();
     const teams2 = await response2.json();
-    // console.log(response2);
     const details1 = teams1.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
     const details2 = teams2.MRData.RaceTable.Races;
-    console.log(details2);
     const seasons = teams1.MRData.StandingsTable;
-
-
     this.setState({
       details1: details1,
       details2: details2,
       seasons: seasons,
       isLoading: false
     });
-
   }
 
   render() {
-
     if(this.state.isLoading) {
       return (
         <div>
@@ -48,8 +42,6 @@ export default class TeamDetails extends React.Component {
         </div>
       );
     }
-
-    console.log("state", this.state.details2);
     return (
       <div>
         <table className="table-small">
@@ -77,7 +69,6 @@ export default class TeamDetails extends React.Component {
             <tr>
               <th colSpan="5">Formula 1 {this.state.seasons.season} Results</th>
             </tr>
-
             <tr >
               <th>Round</th>
               <th>Grand Prix</th>
@@ -86,10 +77,8 @@ export default class TeamDetails extends React.Component {
               <th>Points</th>
             </tr>
           </thead>
-
           {this.state.details2.map((details2, i) => {
             return (
-
             <tbody key={i}>
               <tr>
                 <td>{details2.round}</td>
@@ -99,13 +88,10 @@ export default class TeamDetails extends React.Component {
                 <td>{parseInt(details2.Results[0].points) + parseInt(details2.Results[1].points)}</td>
               </tr>
             </tbody>
-
             );
           })}
-
         </table>
       </div>
     );
   }
-
 }

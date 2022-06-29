@@ -1,59 +1,55 @@
 import React from "react";
-
-
+import PulseLoader from "react-spinners/PulseLoader";
 
 export default class RaceDetails extends React.Component {
-
   state = {
     qualifyngDetails: [],
     raceResults: [],
-    raceLocation: []
-   
+    raceLocation: [],
+    isLoading: true
   };
 
   componentDidMount() {
     this.getQualifiersDetails();
-
   }
 
   getQualifiersDetails = async () => {
-
     const raceId = this.props.match.params.raceId;
     const url = `http://ergast.com/api/f1/2013/${raceId}/qualifying.json`;
     const urlResults = `http://ergast.com/api/f1/2013/${raceId}/results.json`;
- 
-   // console.log("raceId", raceId);
     const response = await fetch(url);
     const response2 = await fetch(urlResults);
-   // console.log("response", response);
     const qualifiers = await response.json();
     const results = await response2.json();
-    console.log("json",results);
-   // console.log("qualifiers", qualifiers);
     const qualifiersDetails = qualifiers.MRData.RaceTable.Races[0].QualifyingResults;
-   // console.log("qualifiersDetails", qualifiersDetails);
-   const location =qualifiers.MRData.RaceTable.Races;
+    const location = qualifiers.MRData.RaceTable.Races;
     const raceResults = results.MRData.RaceTable.Races[0].Results;
- console.log("raceResults",raceResults);
     this.setState({
       qualifyngDetails: qualifiersDetails,
       raceResults: raceResults,
-      raceLocation: location
+      raceLocation: location,
+      isLoading: false
     });
   };
 
   render() {
-
+    if (this.state.isLoading) {
+      return (
+        <div>
+          <p>loading...</p>
+          <PulseLoader size={12} color="coral" />
+        </div>
+      );
+    }
     return (
       <div>
-<table className="table-small">
+        <table className="table-small">
           <thead>
             <tr>
               <th></th>
             </tr>
           </thead>
           {this.state.raceLocation.map((location, i) => {
-               console.log("location.Circuit", location)
             return (
               <tbody key={i}>
                 <tr>
@@ -67,7 +63,6 @@ export default class RaceDetails extends React.Component {
             );
           })}
         </table>
-        
         <table className="table-race-details">
           <thead>
             <tr>
@@ -81,13 +76,11 @@ export default class RaceDetails extends React.Component {
             </tr>
           </thead>
           {this.state.qualifyngDetails.map((qualifying, i) => {
-                let times = [];
-                times.push(qualifying.Q1);
-                times.push(qualifying.Q2);
-                times.push(qualifying.Q3);
-                times.sort();
-               // console.log("times", times);
-                
+            let times = [];
+            times.push(qualifying.Q1);
+            times.push(qualifying.Q2);
+            times.push(qualifying.Q3);
+            times.sort();
             return (
               <tbody key={i}>
                 <tr>
@@ -100,7 +93,6 @@ export default class RaceDetails extends React.Component {
             );
           })}
         </table>
-
         <table className="table-race-details">
           <thead>
             <tr>
@@ -114,9 +106,8 @@ export default class RaceDetails extends React.Component {
               <th>Points</th>
             </tr>
           </thead>
-
           {this.state.raceResults.map((result, index) => {
-            console.log("time", result.Time)
+            console.log("time", result.Time);
             return (
               <tbody key={index}>
                 <tr>
@@ -134,5 +125,4 @@ export default class RaceDetails extends React.Component {
       </div>
     );
   }
-
 }

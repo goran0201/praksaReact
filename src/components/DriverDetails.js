@@ -1,7 +1,6 @@
 import React from "react";
 import PulseLoader from "react-spinners/PulseLoader";
 
-
 export default class DriverDetails extends React.Component {
   state = {
     driverDetails: [],
@@ -25,14 +24,12 @@ export default class DriverDetails extends React.Component {
     const driverDetails = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const racesDetails = races.MRData.RaceTable.Races;
     const seasons = drivers.MRData.StandingsTable;
-
     this.setState({
       driverDetails: driverDetails,
       racesDetails: racesDetails,
       seasons: seasons,
       isLoading: false
     });
-
   };
 
   render() {
