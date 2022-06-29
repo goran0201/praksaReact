@@ -6,7 +6,9 @@ export default class RaceDetails extends React.Component {
 
   state = {
     qualifyngDetails: [],
-    raceResults: []
+    raceResults: [],
+    raceLocation: []
+   
   };
 
   componentDidMount() {
@@ -19,6 +21,7 @@ export default class RaceDetails extends React.Component {
     const raceId = this.props.match.params.raceId;
     const url = `http://ergast.com/api/f1/2013/${raceId}/qualifying.json`;
     const urlResults = `http://ergast.com/api/f1/2013/${raceId}/results.json`;
+ 
    // console.log("raceId", raceId);
     const response = await fetch(url);
     const response2 = await fetch(urlResults);
@@ -29,17 +32,42 @@ export default class RaceDetails extends React.Component {
    // console.log("qualifiers", qualifiers);
     const qualifiersDetails = qualifiers.MRData.RaceTable.Races[0].QualifyingResults;
    // console.log("qualifiersDetails", qualifiersDetails);
+   const location =qualifiers.MRData.RaceTable.Races;
     const raceResults = results.MRData.RaceTable.Races[0].Results;
  console.log("raceResults",raceResults);
     this.setState({
       qualifyngDetails: qualifiersDetails,
-      raceResults: raceResults
+      raceResults: raceResults,
+      raceLocation: location
     });
   };
 
   render() {
+
     return (
       <div>
+<table className="table-small">
+          <thead>
+            <tr>
+              <th></th>
+            </tr>
+          </thead>
+          {this.state.raceLocation.map((location, i) => {
+               console.log("location.Circuit", location)
+            return (
+              <tbody key={i}>
+                <tr>
+                  <td>{location.raceName}</td>
+                  <td>Country: {location.Circuit.Location.country}</td>
+                  <td>Location: {location.Circuit.Location.locality}</td>
+                  <td>Date: {location.date}</td>
+                  <td>Full report:{location.Circuit.url}</td>
+                </tr>
+              </tbody>
+            );
+          })}
+        </table>
+        
         <table className="table-race-details">
           <thead>
             <tr>
