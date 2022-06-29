@@ -52,6 +52,7 @@ li a{
 
 .title-small {
     background-color: lightgrey;
+    text-shadow: 2px 2px 8px white;
 }
 
 .table {
@@ -62,6 +63,10 @@ li a{
     border-collapse: collapse;
 }
 
+.table th {
+    background-image: linear-gradient(#dedede, #c9c6c6);
+}
+
 
 .table th,
 .table td {
@@ -69,4 +74,5 @@ li a{
     border: 1px solid #ddd;
     text-align: left;
     padding: 15px;
+    white-space: nowrap;
 }
