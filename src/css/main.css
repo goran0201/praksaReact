@@ -98,8 +98,7 @@ li a{
     padding: 20px;
     margin: 10px;
     border-collapse: collapse;
-    color: white;
-    
+    color: white;  
 }
 
 .table-small th, 
@@ -129,7 +128,6 @@ li a{
     text-align: left;
     padding: 15px;
     white-space: nowrap;
-    
 }
 
 .table-details-race {
