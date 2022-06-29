@@ -11,6 +11,7 @@ export default class RaceDetails extends React.Component {
 
   componentDidMount() {
     this.getQualifiersDetails();
+
   }
 
   getQualifiersDetails = async () => {
