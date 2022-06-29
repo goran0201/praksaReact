@@ -1,5 +1,5 @@
 import React from "react";
-import PulseLoader from "react-spinners/Pulseloader";
+import PulseLoader from "react-spinners/PulseLoader";
 
 
 export default class DriverDetails extends React.Component {
