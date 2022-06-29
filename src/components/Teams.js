@@ -1,7 +1,7 @@
 import React from "react";
 import history from "./../history";
 import TeamDetails from "./TeamDetails";
-
+import Flag from 'react-flagkit';
 
 export default class Teams extends React.Component {
 

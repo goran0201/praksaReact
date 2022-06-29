@@ -9,7 +9,7 @@ html, body{
 }
 
 .navigation {
-    width: 20%;
+    width: 10vw;
 }
 
 ul{
@@ -112,7 +112,7 @@ li a{
 .table-details {
     padding: 20px;
     margin: 10px;
-    width: 100%;
+    width: 60vw;
     border-collapse: collapse;
 }
 
