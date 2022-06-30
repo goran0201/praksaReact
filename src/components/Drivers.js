@@ -1,7 +1,7 @@
 import React from "react";
 import history from "./../history";
 import DriverDetails from "./DriverDetails";
-import Flag from 'react-flagkit';
+
 
 
 export default class Drivers extends React.Component {

@@ -1,5 +1,4 @@
 import React from "react";
-import PulseLoader from "react-spinners/PulseLoader";
 import Loader from "./Loader";
 import Flag from 'react-flagkit';
 
@@ -8,6 +7,7 @@ export default class RaceDetails extends React.Component {
     qualifyngDetails: [],
     raceResults: [],
     raceLocation: [],
+    flags: [],
     isLoading: true
   };
 
@@ -19,17 +19,22 @@ export default class RaceDetails extends React.Component {
     const raceId = this.props.match.params.raceId;
     const url = `http://ergast.com/api/f1/2013/${raceId}/qualifying.json`;
     const urlResults = `http://ergast.com/api/f1/2013/${raceId}/results.json`;
+    const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response = await fetch(url);
     const response2 = await fetch(urlResults);
+    const responseFlags = await fetch(responseFlags);
     const qualifiers = await response.json();
     const results = await response2.json();
     const qualifiersDetails = qualifiers.MRData.RaceTable.Races[0].QualifyingResults;
     const location = qualifiers.MRData.RaceTable.Races;
     const raceResults = results.MRData.RaceTable.Races[0].Results;
+    const flags = flags;
+    
     this.setState({
       qualifyngDetails: qualifiersDetails,
       raceResults: raceResults,
       raceLocation: location,
+      flags: flags,
       isLoading: false
     });
   };
@@ -51,7 +56,9 @@ export default class RaceDetails extends React.Component {
               return (
                 <tbody key={i}>
                   <tr>
-                    <th className="table-small-header" colSpan="2">{location.raceName}</th>
+                    <th className="table-small-header" colSpan="2">{location.raceName}
+                   
+                    </th>
                   </tr>
                   <tr>
                     <th>Country: </th>

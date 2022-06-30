@@ -2,13 +2,14 @@ import React from "react";
 import RaceDetails from "./RaceDetails";
 import Flag from 'react-flagkit';
 import history from "./../history";
-import Flag from 'react-flagkit';
+
 
 export default class Races extends React.Component {
 
   state = {
     races: [],
-    seasons: {}
+    seasons: {},
+    flags: []
   
   }
 
@@ -20,20 +21,26 @@ export default class Races extends React.Component {
 
   getRaces = async () => {
     const url = "http://ergast.com/api/f1/2013/results/1.json";
+    const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response = await fetch(url);
+    const responseFlags = await fetch(urlFlags);
     const races = await response.json();
-    console.log("races", races.MRData.RaceTable.Races);
+    const flags = await responseFlags.json();
+    
+    // console.log("races", races.MRData.RaceTable.Races);
     const allRaces = races.MRData.RaceTable.Races;
     const seasons = races.MRData.RaceTable;
+    console.log("flags", this.state.flags);
     this.setState({
       races: allRaces,
-      seasons: seasons
+      seasons: seasons,
+      flags: flags
     });
 
   }
 
   handleQualifyng = (raceId) => {
-    console.log("raceID", raceId);
+    // console.log("raceID", raceId);
     const linkTo = "/raceDetails/" + raceId;
     history.push(linkTo);
   }
@@ -63,8 +70,11 @@ export default class Races extends React.Component {
 
             <tbody >
               {this.state.races.map((race, i) => {
+               
                 console.log("race", race);
+                
                 return (
+                  
                   <tr key={i} onClick={() => this.handleQualifyng(race.round)}>
                     <td>{race.round}</td>
                     <td>{race.raceName}</td>
