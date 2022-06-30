@@ -7,7 +7,8 @@ export default class Teams extends React.Component {
 
   state = {
     allTeams: [],
-    seasons: {}
+    seasons: {},
+    flags: []
   };
 
   componentDidMount() {
@@ -16,9 +17,12 @@ export default class Teams extends React.Component {
 
   getTeams = async () => {
     const url = "http://ergast.com/api/f1/2013/constructorStandings.json";
+    const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const data = await fetch(url);
+    const dataFlags = await fetch(urlFlags);
     console.log("data", data);
     const teams = await data.json();
+    const flags = await dataFlags.json();
     console.log("teams", teams);
     const allTeams = teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
     console.log("allTeams", allTeams);
@@ -27,20 +31,21 @@ export default class Teams extends React.Component {
 
     this.setState({
       allTeams: allTeams,
-      seasons: seasons
+      seasons: seasons,
+      flags: flags
     });
   };
+
 
   handleTeams = (constructorId) => {
     const linkTo = "/teams/details/" + constructorId;
     history.push(linkTo);
-}
+  }
 
 
   render() {
     return (
       <>
-        
         <div className="background">
           <h1 className="title">Constructors Campionship</h1>
           <table className="table">
@@ -54,7 +59,16 @@ export default class Teams extends React.Component {
                 <tbody key={i} onClick={() => this.handleTeams(team.Constructor.constructorId)}>
                   <tr>
                     <td>{team.position}</td>
-                    <td>{team.Constructor.name}</td>
+                    <td>
+                      {this.state.flags.map((flag, index) => {
+                        if (team.Constructor.nationality === flag.nationality) {
+                          return (<Flag key={index} country={flag.alpha_2_code} />);
+                        } else if (team.Constructor.nationality === "British" && flag.nationality === "British, UK") {
+                          return (<Flag key={index} country="GB" />);
+                        }
+                })}
+                      {team.Constructor.name}
+                    </td>
                     <td><a href={team.Constructor.url}>Details</a></td>
                     <td>{team.points}</td>
                   </tr>
