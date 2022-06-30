@@ -52,7 +52,10 @@ export default class TeamDetails extends React.Component {
               return (
                 <tbody key={i}>
                   <tr>
-                    <th className="table-small-header" colSpan="2">{details1.Constructor.name}</th>
+                    <th className="table-small-header" colSpan="2">
+                    <img
+                      src={require(`./../img/teams/${details1.Constructor.constructorId}.png`).default} />
+                      {details1.Constructor.name}</th>
                   </tr>
                   <tr>
                     <th>Country: </th>

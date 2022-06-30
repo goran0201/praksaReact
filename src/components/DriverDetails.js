@@ -26,6 +26,7 @@ export default class DriverDetails extends React.Component {
     const driverDetails = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const racesDetails = races.MRData.RaceTable.Races;
     const seasons = drivers.MRData.StandingsTable;
+    
     this.setState({
       driverDetails: driverDetails,
       racesDetails: racesDetails,
@@ -51,7 +52,10 @@ export default class DriverDetails extends React.Component {
             return (
               <tbody key={i}>
                 <tr>
-                  <th colSpan="2">{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</th>
+                  <th colSpan="2"><img 
+                  src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
+                  
+                  {driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</th>
                 </tr>
                 <tr>
                   <th>Country: </th>
