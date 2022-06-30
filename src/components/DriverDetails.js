@@ -1,5 +1,4 @@
 import React from "react";
-import PulseLoader from "react-spinners/PulseLoader";
 import Loader from "./Loader";
 import Flag from 'react-flagkit';
 
@@ -8,7 +7,8 @@ export default class DriverDetails extends React.Component {
     driverDetails: [],
     racesDetails: [],
     seasons: {},
-    isLoading: true
+    isLoading: true,
+    flags: []
   };
 
   componentDidMount() {
@@ -19,10 +19,13 @@ export default class DriverDetails extends React.Component {
     const driverId = this.props.match.params.driverId;
     const url = `http://ergast.com/api/f1/2013/drivers/${driverId}/driverStandings.json`;
     const urlRaces = `https://ergast.com/api/f1/2013/drivers/${driverId}/results.json`;
+    const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response = await fetch(url);
     const responseRaces = await fetch(urlRaces);
+    const responseFlags = await fetch(urlFlags);
     const drivers = await response.json();
     const races = await responseRaces.json();
+    const flags = await responseFlags.json();
     const driverDetails = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const racesDetails = races.MRData.RaceTable.Races;
     const seasons = drivers.MRData.StandingsTable;
@@ -31,7 +34,8 @@ export default class DriverDetails extends React.Component {
       driverDetails: driverDetails,
       racesDetails: racesDetails,
       seasons: seasons,
-      isLoading: false
+      isLoading: false,
+      flags: flags
     });
   };
 
@@ -111,3 +115,4 @@ export default class DriverDetails extends React.Component {
     );
   }
 }
+
