@@ -52,11 +52,12 @@ export default class DriverDetails extends React.Component {
         <div className="table-small-container">
           <table className="table-small">
             {this.state.driverDetails.map((driverDetail, i) => {
-              //console.log(driverDetail)
+              console.log(driverDetail.Driver.driverId)
               return (
                 <tbody key={i}>
                   <tr>
-                    <th colSpan="2">{driverDetail.Driver.givenName} {driverDetail.Driver.familyName}
+                    <th colSpan="2">
+                    <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
                       {this.state.flags.map((flag,i) => {
                         if( driverDetail.Driver.nationality === flag.nationality ) {
                           return( <Flag key={i} country={flag.alpha_2_code} /> );
@@ -66,6 +67,7 @@ export default class DriverDetails extends React.Component {
                           return (<Flag key={i} country="NL" /> );
                         }
                       })}
+                      {driverDetail.Driver.givenName} {driverDetail.Driver.familyName}
                     </th>
                   </tr>
                   <tr>
