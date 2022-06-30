@@ -1,5 +1,7 @@
 import React from "react";
 import PulseLoader from "react-spinners/PulseLoader";
+import Loader from "./Loader";
+import Flag from 'react-flagkit';
 
 export default class TeamDetails extends React.Component {
 
@@ -31,75 +33,77 @@ export default class TeamDetails extends React.Component {
       seasons: seasons,
       isLoading: false
     });
-  }
+  };
 
   render() {
     if (this.state.isLoading) {
       return (
         <div>
           <p>loading...</p>
-          <PulseLoader size={12} color="coral" />
+          <Loader />
         </div>
       );
     }
     return (
       <div className="table-container">
         <div className="table-small-container">
-        <table className="table-small">
-          {this.state.details1.map((details1, i) => {
-            return (
-              <tbody key={i}>
-                <tr>
-                  <th colSpan="2">{details1.Constructor.name}</th>
-                </tr>
-                <tr>
-                  <th>Country: </th>
-                  <td>{details1.Constructor.nationality}</td>
-                </tr>
-                <tr>
-                  <th>Position: </th>
-                  <td>{details1.position}</td>
-                </tr>
-                <tr>
-                  <th>Points: </th>
-                  <td>{details1.points}</td>
-                </tr>
-                <tr>
-                  <th>History: </th>
-                  <td><a href={details1.Constructor.url}>link</a></td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
+          <table className="table-small">
+            {this.state.details1.map((details1, i) => {
+              return (
+                <tbody key={i}>
+                  <tr>
+                    <th className="table-small-header" colSpan="2">{details1.Constructor.name}</th>
+                  </tr>
+                  <tr>
+                    <th>Country: </th>
+                    <td>{details1.Constructor.nationality}</td>
+                  </tr>
+                  <tr>
+                    <th>Position: </th>
+                    <td>{details1.position}</td>
+                  </tr>
+                  <tr>
+                    <th>Points: </th>
+                    <td>{details1.points}</td>
+                  </tr>
+                  <tr>
+                    <th>History: </th>
+                    <td><a href={details1.Constructor.url}>link</a></td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </table>
         </div>
-        <table className="table-details">
-          <thead>
-            <tr>
-              <th colSpan="5" className="title-small">Formula 1 {this.state.seasons.season} Results</th>
-            </tr>
-            <tr >
-              <th>Round</th>
-              <th>Grand Prix</th>
-              <th>{this.state.details2[0].Results[0].Driver.familyName}</th>
-              <th>{this.state.details2[0].Results[1].Driver.familyName}</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          {this.state.details2.map((details2, i) => {
-            return (
-              <tbody key={i}>
-                <tr>
-                  <td>{details2.round}</td>
-                  <td>{details2.raceName}</td>
-                  <td>{details2.Results[0].position}</td>
-                  <td>{details2.Results[1].position}</td>
-                  <td>{parseInt(details2.Results[0].points) + parseInt(details2.Results[1].points)}</td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
+        <div className="background-details">
+          <table className="table-details">
+            <thead>
+              <tr>
+                <th colSpan="5" className="title-small">Formula 1 {this.state.seasons.season} Results</th>
+              </tr>
+              <tr >
+                <th>Round</th>
+                <th>Grand Prix</th>
+                <th>{this.state.details2[0].Results[0].Driver.familyName}</th>
+                <th>{this.state.details2[0].Results[1].Driver.familyName}</th>
+                <th>Points</th>
+              </tr>
+            </thead>
+            {this.state.details2.map((details2, i) => {
+              return (
+                <tbody key={i}>
+                  <tr>
+                    <td>{details2.round}</td>
+                    <td>{details2.raceName}</td>
+                    <td>{details2.Results[0].position}</td>
+                    <td>{details2.Results[1].position}</td>
+                    <td>{parseInt(details2.Results[0].points) + parseInt(details2.Results[1].points)}</td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </table>
+        </div>
       </div>
     );
   }
