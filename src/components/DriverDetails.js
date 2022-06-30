@@ -29,6 +29,7 @@ export default class DriverDetails extends React.Component {
     const driverDetails = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const racesDetails = races.MRData.RaceTable.Races;
     const seasons = drivers.MRData.StandingsTable;
+    
     this.setState({
       driverDetails: driverDetails,
       racesDetails: racesDetails,
