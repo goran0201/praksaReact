@@ -1,5 +1,6 @@
 import React from "react";
 import PulseLoader from "react-spinners/PulseLoader";
+import Loader from "./Loader";
 import Flag from 'react-flagkit';
 
 export default class DriverDetails extends React.Component {
@@ -38,12 +39,13 @@ export default class DriverDetails extends React.Component {
       return (
         <div>
           <p>loading...</p>
-          <PulseLoader size={12} color="coral" />
+          <Loader />
         </div>
       );
     }
     return (
       <div className="table-container">
+        <div className="table-small-container">
         <table className="table-small">
           {this.state.driverDetails.map((driverDetail, i) => {
             return (
@@ -71,33 +73,36 @@ export default class DriverDetails extends React.Component {
             );
           })}
         </table>
-        <table className="table-details">
-          <thead>
-            <tr>
-              <th colSpan="5" className="title-small">Formula 1 {this.state.seasons.season} Results</th>
-            </tr>
-            <tr>
-              <th>Round</th>
-              <th>Grand Prix</th>
-              <th>Teams</th>
-              <th>Grid</th>
-              <th>Race</th>
-            </tr>
-          </thead>
-          {this.state.racesDetails.map((raceDetail, i) => {
-            return (
-              <tbody key={i}>
-                <tr>
-                  <td>{raceDetail.round}</td>
-                  <td>{raceDetail.raceName}</td>
-                  <td>{raceDetail.Results[0].Constructor.name}</td>
-                  <td>{raceDetail.Results[0].grid}</td>
-                  <td>{raceDetail.Results[0].position}</td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
+        </div>
+        <div className="background-details">
+          <table className="table-details">
+            <thead>
+              <tr>
+                <th className="table-small-header title-small" colSpan="5" >Formula 1 {this.state.seasons.season} Results</th>
+              </tr>
+              <tr>
+                <th>Round</th>
+                <th>Grand Prix</th>
+                <th>Teams</th>
+                <th>Grid</th>
+                <th>Race</th>
+              </tr>
+            </thead>
+            {this.state.racesDetails.map((raceDetail, i) => {
+              return (
+                <tbody key={i}>
+                  <tr>
+                    <td>{raceDetail.round}</td>
+                    <td>{raceDetail.raceName}</td>
+                    <td>{raceDetail.Results[0].Constructor.name}</td>
+                    <td>{raceDetail.Results[0].grid}</td>
+                    <td>{raceDetail.Results[0].position}</td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </table>
+        </div>
       </div>
     );
   }
