@@ -1,5 +1,6 @@
 import React from "react";
 import RaceDetails from "./RaceDetails";
+import Flag from 'react-flagkit';
 import history from "./../history";
 
 export default class Races extends React.Component {
@@ -7,6 +8,7 @@ export default class Races extends React.Component {
   state = {
     races: [],
     seasons: {}
+  
   }
 
 
