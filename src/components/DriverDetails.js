@@ -51,36 +51,46 @@ export default class DriverDetails extends React.Component {
     return (
       <div className="table-container">
         <div className="table-small-container">
-        <table className="table-small">
-          {this.state.driverDetails.map((driverDetail, i) => {
-            return (
-              <tbody key={i}>
-                <tr>
-                  <th colSpan="2"><img 
-                  src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
-                  
-                  {driverDetail.Driver.givenName} {driverDetail.Driver.familyName}</th>
-                </tr>
-                <tr>
-                  <th>Country: </th>
-                  <td>{driverDetail.Driver.nationality}</td>
-                </tr>
-                <tr>
-                  <th>Team: </th>
-                  <td>{driverDetail.Constructors[0].name}</td>
-                </tr>
-                <tr>
-                  <th>Birth: </th>
-                  <td>{driverDetail.Driver.dateOfBirth}</td>
-                </tr>
-                <tr>
-                  <th>Biography: </th>
-                  <td><a href={driverDetail.Driver.url}>Link</a></td>
-                </tr>
-              </tbody>
-            );
-          })}
-        </table>
+          <table className="table-small">
+            {this.state.driverDetails.map((driverDetail, i) => {
+              console.log(driverDetail.Driver.driverId)
+              return (
+                <tbody key={i}>
+                  <tr>
+                    <th colSpan="2">
+                    <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
+                      {this.state.flags.map((flag,i) => {
+                        if( driverDetail.Driver.nationality === flag.nationality ) {
+                          return( <Flag key={i} country={flag.alpha_2_code} /> );
+                        } else if (driverDetail.Driver.nationality === "British" && flag.nationality === "British, UK") {
+                          return (<Flag key={i} country="GB" /> );
+                        } else if (driverDetail.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
+                          return (<Flag key={i} country="NL" /> );
+                        }
+                      })}
+                      {driverDetail.Driver.givenName} {driverDetail.Driver.familyName}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th>Country: </th>
+                    <td>{driverDetail.Driver.nationality}</td>
+                  </tr>
+                  <tr>
+                    <th>Team: </th>
+                    <td>{driverDetail.Constructors[0].name}</td>
+                  </tr>
+                  <tr>
+                    <th>Birth: </th>
+                    <td>{driverDetail.Driver.dateOfBirth}</td>
+                  </tr>
+                  <tr>
+                    <th>Biography: </th>
+                    <td><a href={driverDetail.Driver.url}>Link</a></td>
+                  </tr>
+                </tbody>
+              );
+            })}
+          </table>
         </div>
         <div className="background-details">
           <table className="table-details">
