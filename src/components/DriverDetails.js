@@ -58,7 +58,7 @@ export default class DriverDetails extends React.Component {
         color = "lightblue";
         break;
       default:
-        color = "lightgray";
+        color = "darkgray";
         break;
     }
     return color;
