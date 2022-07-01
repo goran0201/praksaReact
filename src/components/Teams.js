@@ -1,6 +1,6 @@
 import React from "react";
 import history from "./../history";
-import TeamDetails from "./TeamDetails";
+import Loader from "./Loader";
 import Flag from 'react-flagkit';
 
 export default class Teams extends React.Component {
@@ -8,6 +8,7 @@ export default class Teams extends React.Component {
   state = {
     allTeams: [],
     seasons: {},
+    isLoading: true,
     flags: []
   };
 
@@ -20,30 +21,32 @@ export default class Teams extends React.Component {
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const data = await fetch(url);
     const dataFlags = await fetch(urlFlags);
-    console.log("data", data);
     const teams = await data.json();
     const flags = await dataFlags.json();
-    console.log("teams", teams);
     const allTeams = teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
-    console.log("allTeams", allTeams);
     const seasons = teams.MRData.StandingsTable;
-    console.log("seasons", seasons);
-
     this.setState({
       allTeams: allTeams,
       seasons: seasons,
+      isLoading: false,
       flags: flags
     });
   };
 
-
   handleTeams = (constructorId) => {
     const linkTo = "/teams/details/" + constructorId;
     history.push(linkTo);
-  }
-
+  };
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <div className="loading-div">
+          <p className="loading">loading...</p>
+          <Loader />
+        </div>
+      );
+    }
     return (
       <>
         <div className="background">
@@ -60,14 +63,20 @@ export default class Teams extends React.Component {
                   <tr>
                     <td>{team.position}</td>
                     <td>
-                      {this.state.flags.map((flag, index) => {
-                        if (team.Constructor.nationality === flag.nationality) {
-                          return (<Flag key={index} country={flag.alpha_2_code} />);
-                        } else if (team.Constructor.nationality === "British" && flag.nationality === "British, UK") {
-                          return (<Flag key={index} country="GB" />);
-                        }
-                })}
-                      {team.Constructor.name}
+                      <div className="flag-container">
+                        <div className="flag">
+                          {this.state.flags.map((flag, index) => {
+                            if (team.Constructor.nationality === flag.nationality) {
+                              return (<Flag key={index} country={flag.alpha_2_code} />);
+                            } else if (team.Constructor.nationality === "British" && flag.nationality === "British, UK") {
+                              return (<Flag key={index} country="GB" />);
+                            }
+                          })}
+                        </div>
+                        <div className="flag-text">
+                          {team.Constructor.name}
+                        </div>
+                      </div>
                     </td>
                     <td><a href={team.Constructor.url}>Details</a></td>
                     <td>{team.points}</td>

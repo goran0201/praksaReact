@@ -1,19 +1,15 @@
 import React from "react";
-import RaceDetails from "./RaceDetails";
-import Flag from 'react-flagkit';
 import history from "./../history";
-
+import Loader from "./Loader";
+import Flag from 'react-flagkit';
 
 export default class Races extends React.Component {
-
   state = {
     races: [],
     seasons: {},
+    isLoading: true,
     flags: []
-
-  }
-
-
+  };
 
   componentDidMount() {
     this.getRaces();
@@ -23,40 +19,39 @@ export default class Races extends React.Component {
     const url = "http://ergast.com/api/f1/2013/results/1.json";
     const response = await fetch(url);
     const races = await response.json();
-
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const responseFlags = await fetch(urlFlags);
     const flagsConvert = await responseFlags.json();
-
-    // console.log("races", races.MRData.RaceTable.Races);
     const allRaces = races.MRData.RaceTable.Races;
     const seasons = races.MRData.RaceTable;
-    console.log("FlagsConvert is: ", flagsConvert);
-    console.log("Season is: ", seasons);
     this.setState({
       races: allRaces,
       seasons: seasons,
+      isLoading: false,
       flags: flagsConvert
     });
 
-  }
+  };
 
   handleQualifyng = (raceId) => {
-    // console.log("raceID", raceId);
     const linkTo = "/raceDetails/" + raceId;
     history.push(linkTo);
-  }
-
+  };
 
   render() {
-
+    if (this.state.isLoading) {
+      return (
+        <div className="loading-div">
+          <p className="loading">loading...</p>
+          <Loader />
+        </div>
+      );
+    }
     return (
       <>
-
         <div className="background">
           <h1 className="title">Race calendar</h1>
           <table className="table">
-
             <thead>
               <tr>
                 <th colSpan="5" className="title-small" >Race callendar - {this.state.seasons.season}</th>
@@ -69,57 +64,58 @@ export default class Races extends React.Component {
                 <th>Winner</th>
               </tr>
             </thead>
-
             <tbody >
               {this.state.races.map((race, i) => {
-
-                //console.log("race", race);
-
                 return (
-
                   <tr key={i} onClick={() => this.handleQualifyng(race.round)}>
                     <td>{race.round}</td>
-                    
                     <td>
-                    {this.state.flags.map((flag, index) => {
-                     
-                        if (race.Circuit.Location.country === flag.en_short_name) {
-                          return (<Flag key={index} country={flag.alpha_2_code} />);
-                        } else if (race.Circuit.Location.country === "UK" && flag.nationality === "British, UK") {
-                          return (<Flag key={index} country="GB" />);
-                        }else if (race.Circuit.Location.country === "UAE" && flag.nationality === "Emirati, Emirian, Emiri") {
-                          return (<Flag key={index} country="AE" />);
-                        }else if (race.Circuit.Location.country === "Korea" && flag.nationality === "North Korean") {
-                          return (<Flag key={index} country="KP" />);
-                        }
-
-                      })}
-                      {race.raceName}</td>
+                      <div className="flag-container">
+                        <div className="flag">
+                          {this.state.flags.map((flag, index) => {
+                            if (race.Circuit.Location.country === flag.en_short_name) {
+                              return (<Flag key={index} country={flag.alpha_2_code} />);
+                            } else if (race.Circuit.Location.country === "UK" && flag.en_short_name === "United Kingdom of Great Britain and Northern Ireland") {
+                              return (<Flag key={index} country="GB" />);
+                            } else if (race.Circuit.Location.country === "UAE" && flag.en_short_name === "United Arab Emirates") {
+                              return (<Flag key={index} country="AE" />);
+                            } else if (race.Circuit.Location.country === "Korea" && flag.en_short_name === "Korea (Democratic People's Republic of)") {
+                              return (<Flag key={index} country="KR" />);
+                            } else if (race.Circuit.Location.country === "USA" && flag.en_short_name === "United States of America") {
+                              return (<Flag key={i} country="US" />);
+                            }
+                          })}
+                        </div>
+                        <div className="flag-text">
+                          {race.raceName}
+                        </div>
+                      </div>
+                    </td>
                     <td>{race.Circuit.circuitName}</td>
                     <td>{race.date}</td>
                     <td>
-                    {this.state.flags.map((flag, index) => {
-                        if (race.Results[0].Driver.nationality === flag.nationality) {
-                          return (<Flag key={index} country={flag.alpha_2_code} />);
-                        } else if (race.Results[0].Driver.nationality === "UK" && flag.nationality === "British, UK") {
-                          return (<Flag key={index} country="GB" />);
-                        }
-                       
-
-                      })}
-                      {race.Results[0].Driver.familyName}</td>
+                      <div className="flag-container">
+                        <div className="flag">
+                          {this.state.flags.map((flag, index) => {
+                            if (race.Results[0].Driver.nationality === flag.nationality) {
+                              return (<Flag key={index} country={flag.alpha_2_code} />);
+                            } else if (race.Results[0].Driver.nationality === "British" && flag.nationality === "British, UK") {
+                              return (<Flag key={index} country="GB" />);
+                            }
+                          })}
+                        </div>
+                        <div className="flag-text">
+                          {race.Results[0].Driver.familyName}
+                        </div>
+                      </div>
+                    </td>
                   </tr>
                 );
               })}
             </tbody>
-
           </table>
         </div>
-
-
-
       </>
     );
   }
-
-}
+};
