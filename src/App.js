@@ -23,11 +23,8 @@ export default class App extends React.Component {
                         <nav className="navigation">
                             <ul>
                                 <li>
-                                    <img src={require("./img/nav/helmet.png").default} width={50} height={50}/>
                                     <Link to="/">Drivers</Link>
-                                    <img src={require("./img/nav/car.png").default} width={100} height={30}/>
                                     <Link to="/teams">Teams</Link>
-                                    <img src={require("./img/nav/flag.png").default} width={50} height={50}/>
                                     <Link to="/races">Races</Link>
                                 </li>
                             </ul>
