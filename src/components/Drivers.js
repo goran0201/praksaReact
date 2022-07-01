@@ -1,14 +1,14 @@
 import React from "react";
 import history from "./../history";
-import DriverDetails from "./DriverDetails";
-
-
+import Loader from "./Loader";
+import Flag from 'react-flagkit';
 
 export default class Drivers extends React.Component {
     state = {
         allDrivers: [],
-        seasons: {}
-
+        seasons: {},
+        isLoading: true,
+        flags: []
     };
 
     componentDidMount() {
@@ -17,32 +17,39 @@ export default class Drivers extends React.Component {
 
     getDrivers = async () => {
         const url = "http://ergast.com/api/f1/2013/driverStandings.json";
+        const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
         const response = await fetch(url);
-        console.log("resp", response);
+        const responseFlags = await fetch(urlFlags);
         const drivers = await response.json();
-        console.log("drivers",drivers);
+        const flags = await responseFlags.json();
         const allDrivers = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-        console.log("drivers resp", allDrivers);
         const seasons = drivers.MRData.StandingsTable;
-        console.log("seasons", seasons);
         this.setState({
             allDrivers: allDrivers,
-            seasons: seasons
+            seasons: seasons,
+            isLoading: false,
+            flags: flags
         });
     };
 
     handleDrivers = (driverId) => {
-        console.log("driverID",driverId);
         const linkTo = "/driverDetails/" + driverId;
         history.push(linkTo);
-    }
+    };
 
     render() {
+        if (this.state.isLoading) {
+            return (
+                <div className="loading-div">
+                    <p className="loading">loading...</p>
+                    <Loader />
+                </div>
+            );
+        }
         return (
             <>
-                
                 <div className="background">
-                <h1 className="title">Drivers Campionship</h1>
+                    <h1 className="title">Drivers Campionship</h1>
                     <table className="table">
                         <thead>
                             <tr>
@@ -50,12 +57,28 @@ export default class Drivers extends React.Component {
                             </tr>
                         </thead>
                         {this.state.allDrivers.map((driver, i) => {
-                            console.log("driverlog",driver);
                             return (
                                 <tbody key={i} onClick={() => this.handleDrivers(driver.Driver.driverId)}>
                                     <tr>
                                         <td>{driver.position}</td>
-                                        <td>{driver.Driver.givenName} {driver.Driver.familyName}</td>
+                                        <td>
+                                            <div className="flag-container">
+                                                <div className="flag">
+                                                    {this.state.flags.map((flag, i) => {
+                                                        if (driver.Driver.nationality === flag.nationality) {
+                                                            return (<Flag key={i} country={flag.alpha_2_code} />);
+                                                        } else if (driver.Driver.nationality === "British" && flag.nationality === "British, UK") {
+                                                            return (<Flag key={i} country="GB" />);
+                                                        } else if (driver.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
+                                                            return (<Flag key={i} country="NL" />);
+                                                        }
+                                                    })}
+                                                </div>
+                                                <div className="flag-text">
+                                                    {driver.Driver.givenName} {driver.Driver.familyName}
+                                                </div>
+                                            </div>
+                                        </td>
                                         <td>{driver.Constructors[0].name}</td>
                                         <td>{driver.points}</td>
                                     </tr>

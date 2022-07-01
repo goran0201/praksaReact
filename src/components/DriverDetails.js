@@ -29,7 +29,6 @@ export default class DriverDetails extends React.Component {
     const driverDetails = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const racesDetails = races.MRData.RaceTable.Races;
     const seasons = drivers.MRData.StandingsTable;
-    
     this.setState({
       driverDetails: driverDetails,
       racesDetails: racesDetails,
@@ -42,8 +41,8 @@ export default class DriverDetails extends React.Component {
   render() {
     if (this.state.isLoading) {
       return (
-        <div>
-          <p>loading...</p>
+        <div className="loading-div">
+          <p className="loading">loading...</p>
           <Loader />
         </div>
       );
@@ -53,22 +52,31 @@ export default class DriverDetails extends React.Component {
         <div className="table-small-container">
           <table className="table-small">
             {this.state.driverDetails.map((driverDetail, i) => {
-              console.log(driverDetail.Driver.driverId)
               return (
                 <tbody key={i}>
                   <tr>
                     <th colSpan="2">
-                    <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
-                      {this.state.flags.map((flag,i) => {
-                        if( driverDetail.Driver.nationality === flag.nationality ) {
-                          return( <Flag key={i} country={flag.alpha_2_code} /> );
-                        } else if (driverDetail.Driver.nationality === "British" && flag.nationality === "British, UK") {
-                          return (<Flag key={i} country="GB" /> );
-                        } else if (driverDetail.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
-                          return (<Flag key={i} country="NL" /> );
-                        }
-                      })}
-                      {driverDetail.Driver.givenName} {driverDetail.Driver.familyName}
+                      <div className="image-container">
+                        <div className="img-div">
+                          <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
+                        </div>
+                        <div className="flag-name-container">
+                          <div className="flag-div">
+                            {this.state.flags.map((flag, i) => {
+                              if (driverDetail.Driver.nationality === flag.nationality) {
+                                return (<Flag key={i} country={flag.alpha_2_code} />);
+                              } else if (driverDetail.Driver.nationality === "British" && flag.nationality === "British, UK") {
+                                return (<Flag key={i} country="GB" />);
+                              } else if (driverDetail.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
+                                return (<Flag key={i} country="NL" />);
+                              }
+                            })}
+                          </div>
+                          <div className="name-div">
+                            {driverDetail.Driver.givenName} {driverDetail.Driver.familyName}
+                          </div>
+                        </div>
+                      </div>
                     </th>
                   </tr>
                   <tr>
@@ -85,7 +93,7 @@ export default class DriverDetails extends React.Component {
                   </tr>
                   <tr>
                     <th>Biography: </th>
-                    <td><a href={driverDetail.Driver.url}>Link</a></td>
+                    <td><a href={driverDetail.Driver.url} target="_blank" style={{color: "white"}} >link</a></td>
                   </tr>
                 </tbody>
               );
@@ -96,7 +104,7 @@ export default class DriverDetails extends React.Component {
           <table className="table-details">
             <thead>
               <tr>
-                <th className="table-small-header title-small" colSpan="5" >Formula 1 {this.state.seasons.season} Results</th>
+                <th className="title-small" colSpan="5" >Formula 1 {this.state.seasons.season} Results</th>
               </tr>
               <tr>
                 <th>Round</th>
@@ -111,7 +119,28 @@ export default class DriverDetails extends React.Component {
                 <tbody key={i}>
                   <tr>
                     <td>{raceDetail.round}</td>
-                    <td>{raceDetail.raceName}</td>
+                    <td>
+                      <div className="flag-container">
+                        <div className="flag">
+                          {this.state.flags.map((flag, i) => {
+                            if (raceDetail.Circuit.Location.country === flag.en_short_name) {
+                              return (<Flag key={i} country={flag.alpha_2_code} />);
+                            } else if (raceDetail.Circuit.Location.country === "UK" && flag.en_short_name === "United Kingdom of Great Britain and Northern Ireland") {
+                              return (<Flag key={i} country="GB" />);
+                            } else if (raceDetail.Circuit.Location.country === "Korea" && flag.en_short_name === "Korea (Democratic People's Republic of)") {
+                              return (<Flag key={i} country="KR" />);
+                            } else if (raceDetail.Circuit.Location.country === "UAE" && flag.en_short_name === "United Arab Emirates") {
+                              return (<Flag key={i} country="AE" />);
+                            } else if (raceDetail.Circuit.Location.country === "USA" && flag.en_short_name === "United States of America") {
+                              return (<Flag key={i} country="US" />);
+                            }
+                          })}
+                        </div>
+                        <div className="flag-text">
+                          {raceDetail.raceName}
+                        </div>
+                      </div>
+                    </td>
                     <td>{raceDetail.Results[0].Constructor.name}</td>
                     <td>{raceDetail.Results[0].grid}</td>
                     <td>{raceDetail.Results[0].position}</td>
