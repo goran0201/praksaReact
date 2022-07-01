@@ -57,22 +57,22 @@ export default class RaceDetails extends React.Component {
         color = "lightgreen";
         break;
       case "10":
-        color = "lightblue";
+        color = "#81c784";
         break;
       case "8":
-        color = "lightblue";
+        color = "#c8e6c9";
         break;
       case "6":
-        color = "lightblue";
+        color = "#b2dfdb";
         break;
       case "4":
-        color = "lightblue";
+        color = "#c5cae9";
         break;
       case "2":
-        color = "lightblue";
+        color = "#A3CFCB";
         break;
       case "1":
-        color = "lightblue";
+        color = "#b3e5fc";
         break;
       default:
         color = "lightgray";
