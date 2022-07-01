@@ -120,7 +120,7 @@ export default class DriverDetails extends React.Component {
                   </tr>
                   <tr>
                     <th>Biography: </th>
-                    <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} >link</a></td>
+                    <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16}/></a></td>
                   </tr>
                 </tbody>
               );
