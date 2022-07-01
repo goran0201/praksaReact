@@ -11,6 +11,8 @@ export default class RaceDetails extends React.Component {
     isLoading: true
   };
 
+  
+
   componentDidMount() {
     this.getQualifiersDetails();
   }
@@ -36,6 +38,32 @@ export default class RaceDetails extends React.Component {
       flags: flagsConvert,
       isLoading: false
     });
+  };
+
+  changeColor = (points) => {
+
+    let color = "";
+    switch (points) {
+      case "1":
+        color = "yellow";
+        break;
+      case "2":
+        color = "gray";
+        break;
+      case "3":
+        color = "orange";
+        break;
+      case "4":
+        color = "lightgreen";
+        break;
+      case "5":
+        color = "lightblue";
+        break;
+      default:
+        color = "lightgray";
+        break;
+    }
+    return color;
   };
 
   render() {
@@ -186,7 +214,7 @@ export default class RaceDetails extends React.Component {
                     <td>{result.Constructor.name}</td>
                     {/* <td>{result.Time !== undefined ? result.Time.time: ""}</td> */}
                     <td>{result.Time?.time}</td>
-                    <td>{result.points}</td>
+                    <td style={{ "backgroundColor": this.changeColor(result.points) }}>{result.points}</td>
                   </tr>
                 </tbody>
               );
