@@ -38,6 +38,32 @@ export default class DriverDetails extends React.Component {
     });
   };
 
+  changeColor = (position) => {
+
+    let color = "";
+    switch (position) {
+      case "1":
+        color = "yellow";
+        break;
+      case "2":
+        color = "gray";
+        break;
+      case "3":
+        color = "orange";
+        break;
+      case "4":
+        color = "lightgreen";
+        break;
+      case "5":
+        color = "lightblue";
+        break;
+      default:
+        color = "lightgray";
+        break;
+    }
+    return color;
+  };
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -47,6 +73,7 @@ export default class DriverDetails extends React.Component {
         </div>
       );
     }
+
     return (
       <div className="table-container">
         <div className="table-small-container">
@@ -93,7 +120,7 @@ export default class DriverDetails extends React.Component {
                   </tr>
                   <tr>
                     <th>Biography: </th>
-                    <td><a href={driverDetail.Driver.url} target="_blank" style={{color: "white"}} >link</a></td>
+                    <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} >link</a></td>
                   </tr>
                 </tbody>
               );
@@ -143,7 +170,9 @@ export default class DriverDetails extends React.Component {
                     </td>
                     <td>{raceDetail.Results[0].Constructor.name}</td>
                     <td>{raceDetail.Results[0].grid}</td>
-                    <td>{raceDetail.Results[0].position}</td>
+                    <td className="demo" style={{ "backgroundColor": this.changeColor(raceDetail.Results[0].position) }} >
+                      {raceDetail.Results[0].position}
+                    </td>
                   </tr>
                 </tbody>
               );
@@ -154,4 +183,3 @@ export default class DriverDetails extends React.Component {
     );
   }
 }
-
