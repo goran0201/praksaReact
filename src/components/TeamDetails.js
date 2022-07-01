@@ -40,6 +40,35 @@ export default class TeamDetails extends React.Component {
     });
   };
 
+
+  changeColor = (position) => {
+
+    let color = "";
+    switch (position) {
+      case "1":
+        color = "yellow";
+        break;
+      case "2":
+        color = "gray";
+        break;
+      case "3":
+        color = "orange";
+        break;
+      case "4":
+        color = "lightgreen";
+        break;
+      case "5":
+        color = "lightblue";
+        break;
+      default:
+        color = "lightgray";
+        break;
+    }
+    return color;
+  };
+
+
+  
   render() {
     if (this.state.isLoading) {
       return (
@@ -137,8 +166,8 @@ export default class TeamDetails extends React.Component {
                         </div>
                       </div>
                     </td>
-                    <td>{details2.Results[0].position}</td>
-                    <td>{details2.Results[1].position}</td>
+                    <td style={{"backgroundColor": this.changeColor(details2.Results[0].position)}}>{details2.Results[0].position}</td>
+                    <td style={{"backgroundColor": this.changeColor(details2.Results[0].position)}}>{details2.Results[1].position}</td>
                     <td>{parseInt(details2.Results[0].points) + parseInt(details2.Results[1].points)}</td>
                   </tr>
                 </tbody>
