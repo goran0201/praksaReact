@@ -21,16 +21,18 @@ export default class Races extends React.Component {
 
   getRaces = async () => {
     const url = "http://ergast.com/api/f1/2013/results/1.json";
-    const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response = await fetch(url);
-    const responseFlags = await fetch(urlFlags);
     const races = await response.json();
+
+    const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
+    const responseFlags = await fetch(urlFlags);
     const flagsConvert = await responseFlags.json();
 
     // console.log("races", races.MRData.RaceTable.Races);
     const allRaces = races.MRData.RaceTable.Races;
     const seasons = races.MRData.RaceTable;
-    console.log("flags", this.state.flags);
+    console.log("FlagsConvert is: ", flagsConvert);
+    console.log("Season is: ", seasons);
     this.setState({
       races: allRaces,
       seasons: seasons,
@@ -71,7 +73,7 @@ export default class Races extends React.Component {
             <tbody >
               {this.state.races.map((race, i) => {
 
-                console.log("race", race);
+                //console.log("race", race);
 
                 return (
 
@@ -80,12 +82,16 @@ export default class Races extends React.Component {
                     
                     <td>
                     {this.state.flags.map((flag, index) => {
+                     
                         if (race.Circuit.Location.country === flag.en_short_name) {
                           return (<Flag key={index} country={flag.alpha_2_code} />);
                         } else if (race.Circuit.Location.country === "UK" && flag.nationality === "British, UK") {
                           return (<Flag key={index} country="GB" />);
+                        }else if (race.Circuit.Location.country === "UAE" && flag.nationality === "Emirati, Emirian, Emiri") {
+                          return (<Flag key={index} country="AE" />);
+                        }else if (race.Circuit.Location.country === "Korea" && flag.nationality === "North Korean") {
+                          return (<Flag key={index} country="KP" />);
                         }
-                       
 
                       })}
                       {race.raceName}</td>

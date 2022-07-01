@@ -53,7 +53,7 @@ export default class TeamDetails extends React.Component {
       <div className="table-container">
         <div className="table-small-container">
           <table className="table-small">
-            {this.state.details1.map((details1, i) => {
+            {this.state.details1.map((details1, seasons, i) => {
               return (
                 <tbody key={i}>
                   <tr>
