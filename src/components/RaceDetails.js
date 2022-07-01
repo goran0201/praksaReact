@@ -11,7 +11,7 @@ export default class RaceDetails extends React.Component {
     isLoading: true
   };
 
-  
+
 
   componentDidMount() {
     this.getQualifiersDetails();
@@ -44,19 +44,34 @@ export default class RaceDetails extends React.Component {
 
     let color = "";
     switch (points) {
-      case "1":
+      case "25":
         color = "yellow";
         break;
-      case "2":
+      case "18":
         color = "gray";
         break;
-      case "3":
+      case "15":
         color = "orange";
         break;
-      case "4":
+      case "12":
         color = "lightgreen";
         break;
-      case "5":
+      case "10":
+        color = "lightblue";
+        break;
+      case "8":
+        color = "lightblue";
+        break;
+      case "6":
+        color = "lightblue";
+        break;
+      case "4":
+        color = "lightblue";
+        break;
+      case "2":
+        color = "lightblue";
+        break;
+      case "1":
         color = "lightblue";
         break;
       default:
@@ -120,7 +135,7 @@ export default class RaceDetails extends React.Component {
                   </tr>
                   <tr>
                     <th>Full report: </th>
-                    <td><a href={location.Circuit.url} target="_blank" style={{color: "white"}} ><img src={require("./../img/link-white.png").default} width={16} height={16}/></a></td>
+                    <td><a href={location.Circuit.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
                   </tr>
                 </tbody>
               );
