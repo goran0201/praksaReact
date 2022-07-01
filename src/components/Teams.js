@@ -78,7 +78,7 @@ export default class Teams extends React.Component {
                         </div>
                       </div>
                     </td>
-                    <td><a href={team.Constructor.url}>Details</a></td>
+                    <td>Details   <a href={team.Constructor.url}><img src={require("./../img/link-black.png").default} width={16} height={16}/></a></td>
                     <td>{team.points}</td>
                   </tr>
                 </tbody>

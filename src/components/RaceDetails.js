@@ -92,7 +92,7 @@ export default class RaceDetails extends React.Component {
                   </tr>
                   <tr>
                     <th>Full report: </th>
-                    <td><a href={location.Circuit.url} target="_blank" style={{color: "white"}} >link</a></td>
+                    <td><a href={location.Circuit.url} target="_blank" style={{color: "white"}} ><img src={require("./../img/link-white.png").default} width={16} height={16}/></a></td>
                   </tr>
                 </tbody>
               );

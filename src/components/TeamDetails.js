@@ -93,7 +93,7 @@ export default class TeamDetails extends React.Component {
                   </tr>
                   <tr>
                     <th>History: </th>
-                    <td><a href={details1.Constructor.url} target="_blank" style={{color: "white"}} >link</a></td>
+                    <td><a href={details1.Constructor.url} target="_blank" style={{color: "white"}} ><img src={require("./../img/link-white.png").default} width={16} height={16}/></a></td>
                   </tr>
                 </tbody>
               );

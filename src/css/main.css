@@ -29,6 +29,7 @@ ul{
     margin: 0;
     padding: 0;
     width: 10vw;
+    border-top: 1px solid black;
 }
 
 li a{
@@ -41,6 +42,8 @@ li a{
     padding: 15px 0;
     text-align: center;
     width: 10vw;
+    border-bottom: 1px solid black;
+    text-shadow: 2px 2px 2px black, 0 0 5px white, 0 0 15px rgb(202, 200, 200);
 }
 
 li a:hover {
@@ -80,7 +83,7 @@ li a:active {
     margin: 0;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     color: white;
-    text-shadow: 2px 2px 8px black;
+    text-shadow: 2px 2px 2px black, 0 0 5px white, 0 0 15px rgb(202, 200, 200);
     padding: 20px;
     font-size: 40px;
 }
@@ -254,7 +257,7 @@ li a:active {
 }
 
 .logo {  
-    width: 10vw;
+    width: 10vw;  
 }
 
 .logo-img {
@@ -263,6 +266,7 @@ li a:active {
     margin-top: 10px;
     margin-bottom: 20px;
     margin-left: 3px;
+    filter: drop-shadow(5px 5px 10px black);
 }
 
 .main-container {
