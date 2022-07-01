@@ -11,31 +11,36 @@ import history from "./history";
 
 
 export default class App extends React.Component {
-    
+
     render() {
         return (
             <div className="main">
-                <Router history = {history}>
-                    <nav className="navigation">
-                        <ul>
-                            <li>
-                                <Link to = "/">Drivers</Link>
-                                <Link to = "/teams">Teams</Link>
-                                <Link to = "/races">Races</Link>
-                            </li>
-                        </ul>
-                    </nav>
+                <Router history={history}>
+                    <div className="main-container">
+                        <div className="logo">
+                            <img className="logo-img" src={require(`./img/F1-logo.png`).default} />
+                        </div>
+                        <nav className="navigation">
+                            <ul>
+                                <li>
+                                    <Link to="/">Drivers</Link>
+                                    <Link to="/teams">Teams</Link>
+                                    <Link to="/races">Races</Link>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
                     <Switch>
-                        <Route path = "/" exact component = {Drivers} />
-                        <Route path = "/teams" exact component = {Teams} />
-                        <Route path = "/races" exact component = {Races} />
-                        <Route path = "/driverDetails/:driverId" exact component = {DriverDetails} />
-                        <Route path = "/teams/details/:constructorId" exact component = {TeamDetails} />
-                        <Route path = "/raceDetails/:raceId" exact component = {RaceDetails} />
+                        <Route path="/" exact component={Drivers} />
+                        <Route path="/teams" exact component={Teams} />
+                        <Route path="/races" exact component={Races} />
+                        <Route path="/driverDetails/:driverId" exact component={DriverDetails} />
+                        <Route path="/teams/details/:constructorId" exact component={TeamDetails} />
+                        <Route path="/raceDetails/:raceId" exact component={RaceDetails} />
                     </Switch>
                 </Router>
             </div>
-    );
-    
+        );
+
     }
 }
