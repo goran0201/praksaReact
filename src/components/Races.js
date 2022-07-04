@@ -56,7 +56,7 @@ export default class Races extends React.Component {
               <tr>
                 <th colSpan="5" className="title-small" >Race callendar - {this.state.seasons.season}</th>
               </tr>
-              <tr>
+              <tr className="race-th">
                 <th>Round</th>
                 <th>Grand Prix</th>
                 <th>Circuit</th>
@@ -74,18 +74,18 @@ export default class Races extends React.Component {
                         <div className="flag">
                           {this.state.flags.map((flag, index) => {
                             if (race.Circuit.Location.country === flag.en_short_name) {
-                              return (<Flag key={index} country={flag.alpha_2_code} />);
+                              return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
                             } else if (race.Circuit.Location.country === "UK" && flag.en_short_name === "United Kingdom of Great Britain and Northern Ireland") {
-                              return (<Flag key={index} country="GB" />);
+                              return (<Flag className="flag-size" key={index} country="GB" />);
                             } else if (race.Circuit.Location.country === "UAE" && flag.en_short_name === "United Arab Emirates") {
-                              return (<Flag key={index} country="AE" />);
+                              return (<Flag className="flag-size" key={index} country="AE" />);
                             } else if (race.Circuit.Location.country === "Korea" && flag.en_short_name === "Korea (Democratic People's Republic of)") {
-                              return (<Flag key={index} country="KR" />);
+                              return (<Flag className="flag-size" key={index} country="KR" />);
                             } else if (race.Circuit.Location.country === "USA" && flag.en_short_name === "United States of America") {
-                              return (<Flag key={i} country="US" />);
+                              return (<Flag className="flag-size" key={i} country="US" />);
                             }
                           })}
-                        </div>
+                        </div> 
                         <div className="flag-text">
                           {race.raceName}
                         </div>
@@ -98,9 +98,9 @@ export default class Races extends React.Component {
                         <div className="flag">
                           {this.state.flags.map((flag, index) => {
                             if (race.Results[0].Driver.nationality === flag.nationality) {
-                              return (<Flag key={index} country={flag.alpha_2_code} />);
+                              return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
                             } else if (race.Results[0].Driver.nationality === "British" && flag.nationality === "British, UK") {
-                              return (<Flag key={index} country="GB" />);
+                              return (<Flag className="flag-size" key={index} country="GB" />);
                             }
                           })}
                         </div>

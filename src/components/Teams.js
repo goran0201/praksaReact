@@ -67,9 +67,9 @@ export default class Teams extends React.Component {
                         <div className="flag">
                           {this.state.flags.map((flag, index) => {
                             if (team.Constructor.nationality === flag.nationality) {
-                              return (<Flag key={index} country={flag.alpha_2_code} />);
+                              return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
                             } else if (team.Constructor.nationality === "British" && flag.nationality === "British, UK") {
-                              return (<Flag key={index} country="GB" />);
+                              return (<Flag className="flag-size" key={index} country="GB" />);
                             }
                           })}
                         </div>

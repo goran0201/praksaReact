@@ -66,11 +66,11 @@ export default class Drivers extends React.Component {
                                                 <div className="flag">
                                                     {this.state.flags.map((flag, i) => {
                                                         if (driver.Driver.nationality === flag.nationality) {
-                                                            return (<Flag key={i} country={flag.alpha_2_code} />);
+                                                            return (<Flag className="flag-size" key={i} country={flag.alpha_2_code} />);
                                                         } else if (driver.Driver.nationality === "British" && flag.nationality === "British, UK") {
-                                                            return (<Flag key={i} country="GB" />);
+                                                            return (<Flag className="flag-size" key={i} country="GB" />);
                                                         } else if (driver.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
-                                                            return (<Flag key={i} country="NL" />);
+                                                            return (<Flag className="flag-size" key={i} country="NL" />);
                                                         }
                                                     })}
                                                 </div>
