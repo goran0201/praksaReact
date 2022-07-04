@@ -297,8 +297,7 @@ li a:active {
 
     .main {
         flex-direction: column;
-        /* align-items: stretch;
-        width: 100%; */
+        width: 100%;
     }
 
     .navigation {
@@ -412,8 +411,7 @@ li a:active {
 
     .main {
         flex-direction: column;
-        /* align-items: stretch;
-        width: 100%; */
+        width: 100%;
     }
 
     .navigation {
@@ -493,10 +491,10 @@ li a:active {
         width: 100%;
     }
 
-    /*  .main {
+     .main {
         flex-direction: column;
-        align-items: stretch;
-    } */
+        width: 100%;
+    }
 
     .navigation {
         display: flex;
