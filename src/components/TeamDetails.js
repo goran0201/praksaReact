@@ -95,9 +95,9 @@ export default class TeamDetails extends React.Component {
                           <div className="flag-div">
                             {this.state.flags.map((flag, index) => {
                               if (details1.Constructor.nationality === flag.nationality) {
-                                return (<Flag key={index} country={flag.alpha_2_code} />);
+                                return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
                               } else if (details1.Constructor.nationality === "British" && flag.nationality === "British, UK") {
-                                return (<Flag key={index} country="GB" />);
+                                return (<Flag className="flag-size" key={index} country="GB" />);
                               }
                             })}
                           </div>
@@ -153,11 +153,11 @@ export default class TeamDetails extends React.Component {
                         <div className="flag">
                           {this.state.flags.map((flag, index) => {
                             if (details2.Circuit.Location.country === flag.en_short_name) {
-                              return (<Flag key={index} country={flag.alpha_2_code} />);
+                              return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
                             } else if (details2.Circuit.Location.country === "UK" && flag.nationality === "British, UK") {
-                              return (<Flag key={index} country="GB" />);
+                              return (<Flag className="flag-size" key={index} country="GB" />);
                             } else if (details2.Circuit.Location.country === "Korea" && flag.en_short_name === "Korea (Democratic People's Republic of)") {
-                              return (<Flag key={index} country="KR" />);
+                              return (<Flag className="flag-size" key={index} country="KR" />);
                             }
                           })}
                         </div>

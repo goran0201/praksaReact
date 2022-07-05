@@ -129,98 +129,100 @@ export default class RaceDetails extends React.Component {
           </table>
         </div>
         <div className="background-details">
-          <table className="table-details-race">
-            <thead>
-              <tr>
-                <th colSpan="4" className="title-small">Qualifying results</th>
-              </tr>
-              <tr>
-                <th>Pos</th>
-                <th>Driver</th>
-                <th>Team</th>
-                <th>Best time</th>
-              </tr>
-            </thead>
-            {this.state.qualifyngDetails.map((qualifying, i) => {
-              let times = [];
-              times.push(qualifying.Q1);
-              times.push(qualifying.Q2);
-              times.push(qualifying.Q3);
-              times.sort();
-              return (
-                <tbody key={i}>
-                  <tr>
-                    <td>{qualifying.position}</td>
-                    <td>
-                      <div className="flag-container">
-                        <div className="flag">
-                          {this.state.flags.map((flag, index) => {
-                            if (qualifying.Driver.nationality === flag.nationality) {
-                              return (<Flag key={index} country={flag.alpha_2_code} />);
-                            } else if (qualifying.Driver.nationality === "British" && flag.nationality === "British, UK") {
-                              return (<Flag key={index} country="GB" />);
-                            } else if (qualifying.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
-                              return (<Flag key={index} country="NL" />);
-                            }
-                          })}
+          <div className="master-race">
+            <table className="table-details-race">
+              <thead>
+                <tr>
+                  <th colSpan="4" className="title-small">Qualifying results</th>
+                </tr>
+                <tr className="subtitle-details">
+                  <th>Pos</th>
+                  <th>Driver</th>
+                  <th>Team</th>
+                  <th>Best time</th>
+                </tr>
+              </thead>
+              {this.state.qualifyngDetails.map((qualifying, i) => {
+                let times = [];
+                times.push(qualifying.Q1);
+                times.push(qualifying.Q2);
+                times.push(qualifying.Q3);
+                times.sort();
+                return (
+                  <tbody key={i}>
+                    <tr>
+                      <td>{qualifying.position}</td>
+                      <td>
+                        <div className="flag-container">
+                          <div className="flag">
+                            {this.state.flags.map((flag, index) => {
+                              if (qualifying.Driver.nationality === flag.nationality) {
+                                return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
+                              } else if (qualifying.Driver.nationality === "British" && flag.nationality === "British, UK") {
+                                return (<Flag className="flag-size" key={index} country="GB" />);
+                              } else if (qualifying.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
+                                return (<Flag className="flag-size" key={index} country="NL" />);
+                              }
+                            })}
+                          </div>
+                          <div className="flag-text">
+                            {qualifying.Driver.familyName}
+                          </div>
                         </div>
-                        <div className="flag-text">
-                          {qualifying.Driver.familyName}
+                      </td>
+                      <td> {qualifying.Constructor.name}</td>
+                      <td> {times[0]}</td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+            </table>
+            <table className="table-details-race">
+              <thead>
+                <tr>
+                  <th colSpan="5" className="title-small">Race results</th>
+                </tr>
+                <tr className="subtitle-details">
+                  <th>Pos</th>
+                  <th>Driver</th>
+                  <th>Team</th>
+                  <th>Result</th>
+                  <th>Points</th>
+                </tr>
+              </thead>
+              {this.state.raceResults.map((result, index) => {
+                return (
+                  <tbody key={index}>
+                    <tr>
+                      <td>{result.position}</td>
+                      <td>
+                        <div className="flag-container">
+                          <div className="flag">
+                            {this.state.flags.map((flag, index) => {
+                              if (result.Driver.nationality === flag.nationality) {
+                                return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
+                              } else if (result.Driver.nationality === "British" && flag.nationality === "British, UK") {
+                                return (<Flag className="flag-size" key={index} country="GB" />);
+                              } else if (result.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
+                                return (<Flag className="flag-size" key={index} country="NL" />);
+                              }
+                            })}
+                          </div>
+                          <div className="flag-text">
+                            {result.Driver.familyName}
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                    <td> {qualifying.Constructor.name}</td>
-                    <td> {times[0]}</td>
-                  </tr>
-                </tbody>
-              );
-            })}
-          </table>
-          <table className="table-details-race">
-            <thead>
-              <tr>
-                <th colSpan="5" className="title-small">Race results</th>
-              </tr>
-              <tr>
-                <th>Pos</th>
-                <th>Driver</th>
-                <th>Team</th>
-                <th>Result</th>
-                <th>Points</th>
-              </tr>
-            </thead>
-            {this.state.raceResults.map((result, index) => {
-              return (
-                <tbody key={index}>
-                  <tr>
-                    <td>{result.position}</td>
-                    <td>
-                      <div className="flag-container">
-                        <div className="flag">
-                          {this.state.flags.map((flag, index) => {
-                            if (result.Driver.nationality === flag.nationality) {
-                              return (<Flag key={index} country={flag.alpha_2_code} />);
-                            } else if (result.Driver.nationality === "British" && flag.nationality === "British, UK") {
-                              return (<Flag key={index} country="GB" />);
-                            } else if (result.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
-                              return (<Flag key={index} country="NL" />);
-                            }
-                          })}
-                        </div>
-                        <div className="flag-text">
-                          {result.Driver.familyName}
-                        </div>
-                      </div>
-                    </td>
-                    <td>{result.Constructor.name}</td>
-                    {/* <td>{result.Time !== undefined ? result.Time.time: ""}</td> */}
-                    <td>{result.Time?.time}</td>
-                    <td style={{ "backgroundColor": this.changeColor(result.position) }}>{result.points}</td>
-                  </tr>
-                </tbody>
-              );
-            })}
-          </table>
+                      </td>
+                      <td>{result.Constructor.name}</td>
+                      {/* <td>{result.Time !== undefined ? result.Time.time: ""}</td> */}
+                      <td>{result.Time?.time}</td>
+                      <td style={{ "backgroundColor": this.changeColor(result.position) }}>{result.points}</td>
+                    </tr>
+                  </tbody>
+                );
+              })}
+            </table>
+          </div>
         </div>
       </div>
     );

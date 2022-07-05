@@ -92,11 +92,11 @@ export default class DriverDetails extends React.Component {
                             <div className="flag-div">
                               {this.state.flags.map((flag, i) => {
                                 if (driverDetail.Driver.nationality === flag.nationality) {
-                                  return (<Flag key={i} country={flag.alpha_2_code} />);
+                                  return (<Flag className="flag-size" key={i} country={flag.alpha_2_code} />);
                                 } else if (driverDetail.Driver.nationality === "British" && flag.nationality === "British, UK") {
-                                  return (<Flag key={i} country="GB" />);
+                                  return (<Flag className="flag-size" key={i} country="GB" />);
                                 } else if (driverDetail.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
-                                  return (<Flag key={i} country="NL" />);
+                                  return (<Flag className="flag-size" key={i} country="NL" />);
                                 }
                               })}
                             </div>
@@ -153,15 +153,15 @@ export default class DriverDetails extends React.Component {
                         <div className="flag">
                           {this.state.flags.map((flag, i) => {
                             if (raceDetail.Circuit.Location.country === flag.en_short_name) {
-                              return (<Flag key={i} country={flag.alpha_2_code} />);
+                              return (<Flag className="flag-size" key={i} country={flag.alpha_2_code} />);
                             } else if (raceDetail.Circuit.Location.country === "UK" && flag.en_short_name === "United Kingdom of Great Britain and Northern Ireland") {
-                              return (<Flag key={i} country="GB" />);
+                              return (<Flag className="flag-size" key={i} country="GB" />);
                             } else if (raceDetail.Circuit.Location.country === "Korea" && flag.en_short_name === "Korea (Democratic People's Republic of)") {
-                              return (<Flag key={i} country="KR" />);
+                              return (<Flag className="flag-size" key={i} country="KR" />);
                             } else if (raceDetail.Circuit.Location.country === "UAE" && flag.en_short_name === "United Arab Emirates") {
-                              return (<Flag key={i} country="AE" />);
+                              return (<Flag className="flag-size" key={i} country="AE" />);
                             } else if (raceDetail.Circuit.Location.country === "USA" && flag.en_short_name === "United States of America") {
-                              return (<Flag key={i} country="US" />);
+                              return (<Flag className="flag-size" key={i} country="US" />);
                             }
                           })}
                         </div>

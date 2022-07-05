@@ -149,7 +149,6 @@ li a:active {
 .subtitle-details th {
     background-color: lightgrey;
     text-shadow: 2px 2px 8px white;
-    border-radius: 5px 5px 0 0;
     color: rgb(65, 64, 64);
     font-size: 15px;
 }
@@ -188,6 +187,10 @@ li a:active {
 .master {
     display: flex;
     flex-direction: column;
+}
+
+.master-race {
+    display: flex;
 }
 
 .table-small th,
@@ -323,6 +326,7 @@ li a:active {
 @media screen and (max-width:1400px) {
 
     .background-details {
+        padding: 0;
         margin: 0;
     }
 
@@ -339,8 +343,46 @@ li a:active {
         height: fit-content;
     }
 
-    .table-details tr {
+    .title-small {
+        font-size: 16px;
+    }
+
+    .table-details-race {
+        padding: 2px;
+        margin: 2px;
+    }
+
+    .table-details-race td {
+        font-size: 14px;
+    }
+
+    .table-details tr,
+    .table-details-race tr {
         height: fit-content;
+    }
+
+    .subtitle-details th {
+        font-size: 14px;
+    }
+
+    .table-small-header {
+        font-size: 16px;
+    }
+
+    .title-small th {
+        font-size: 14px;
+        padding: 4px;
+    }
+
+    .title-small td {
+        font-size: 10px;
+        padding: 4px;
+    }
+
+    .flag-size {
+        width: 22px;
+        height: 22px;
+        padding-left: 3px;
     }
 }
 
@@ -463,6 +505,12 @@ li a:active {
         height: 11px;
     }
 
+    .flag-size {
+        width: 22px;
+        height: 22px;
+        padding-left: 3px;
+    }
+
     /* details media query */
     .table-container {
         display: flex;
@@ -481,6 +529,11 @@ li a:active {
         flex-direction: row;
     }
 
+    .master-race {
+        display: flex;
+        flex-direction: column;
+    }
+
     .image-container {
         display: flex;
         width: 100%;
@@ -490,21 +543,25 @@ li a:active {
         width: 100%;
     }
 
-    .table-details {
+    .table-details,
+    .table-details-race {
         padding: 0;
         margin: 0 4px;
     }
 
-    .table-details th {
+    .table-details th,
+    .table-details-race th {
         padding: 4px;
     }
 
-    .table-details td {
+    .table-details td,
+    .table-details-race td {
         padding: 3px 5px;
         font-size: 13px;
     }
 
-    .table-details tr {
+    .table-details tr
+    .table-details-race tr {
         height: fit-content;
     }
 
@@ -644,21 +701,25 @@ li a:active {
         border-right: none;
     }
 
-    .table-details {
+    .table-details,
+    .table-details-race {
         padding: 0 2px;
         margin: 0;
     }
 
-    .table-details th {
+    .table-details th
+    .table-details-race th {
         padding: 2px;
     }
 
-    .table-details td {
+    .table-details td,
+    .table-details-race td {
         padding: 1px;
         font-size: 11px;
     }
 
-    .table-details tr {
+    .table-details tr,
+    .table-details-race tr {
         height: fit-content;
     }
 }
@@ -776,8 +837,8 @@ li a:active {
     }
 
     .flag-size {
-        width: 15px;
-        height: 15px;
+        width: 16px;
+        height: 16px;
         padding-left: 2px;
     }
 
@@ -804,21 +865,25 @@ li a:active {
         border-right: none;
     }
 
-    .table-details {
+    .table-details,
+    .table-details-race {
         padding: 0 2px;
         margin: 0;
     }
 
-    .table-details th {
+    .table-details th,
+    .table-details-race th {
         padding: 2px;
     }
 
-    .table-details td {
+    .table-details td,
+    .table-details-race td {
         padding: 1px;
         font-size: 11px;
     }
 
-    .table-details tr {
+    .table-details tr,
+    .table-details-race tr {
         height: fit-content;
     }
 
