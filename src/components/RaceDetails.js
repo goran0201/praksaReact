@@ -59,7 +59,7 @@ export default class RaceDetails extends React.Component {
       case "5":
         color = "lightblue";
         break;
-     
+
       default:
         color = "lightgray";
         break;
@@ -79,54 +79,56 @@ export default class RaceDetails extends React.Component {
     return (
       <div className="table-container">
         <div className="table-small-container">
-          <table className="table-small">
-            {this.state.raceLocation.map((location, i) => {
-              return (
-                <tbody key={i}>
-                  <tr>
-                    <th className="table-small-header" colSpan="2">
-                      <div className="flag-container-raceDetails">
-                        <div className="name-div-raceDetails">
-                          {location.raceName}
+          {this.state.raceLocation.map((location, i) => {
+            return (
+                <div className="master">
+                  <div className="flag-raceDetails">
+                            {this.state.flags.map((flag, index) => {
+                              if (location.Circuit.Location.country === flag.en_short_name) {
+                                return (<Flag className="large-flag" key={index} country={flag.alpha_2_code} size={84} />);
+                              } else if (location.Circuit.Location.country === "UK" && flag.en_short_name === "United Kingdom of Great Britain and Northern Ireland") {
+                                return (<Flag className="large-flag" key={index} country="GB" size={84} />);
+                              } else if (location.Circuit.Location.country === "UAE" && flag.en_short_name === "United Arab Emirates") {
+                                return (<Flag className="large-flag" key={index} country="AE" size={84} />);
+                              } else if (location.Circuit.Location.country === "Korea" && flag.en_short_name === "Korea (Democratic People's Republic of)") {
+                                return (<Flag className="large-flag" key={index} country="KR" />);
+                              } else if (location.Circuit.Location.country === "USA" && flag.en_short_name === "United States of America") {
+                                return (<Flag className="large-flag" key={i} country="US" size={84} />);
+                              }
+                            })}
+                          </div>
+                                <table className="table-small">
+                  <tbody key={i}>
+                    <tr>
+                      <th className="table-small-header" colSpan="2">
+                        <div className="flag-container-raceDetails">
+                          <div className="name-div-raceDetails">
+                            {location.raceName}
+                          </div>
                         </div>
-                        <div className="flag-raceDetails">
-                          {this.state.flags.map((flag, index) => {
-                            if (location.Circuit.Location.country === flag.en_short_name) {
-                              return (<Flag key={index} country={flag.alpha_2_code} size={84} />);
-                            } else if (location.Circuit.Location.country === "UK" && flag.en_short_name === "United Kingdom of Great Britain and Northern Ireland") {
-                              return (<Flag key={index} country="GB" size={84} />);
-                            } else if (location.Circuit.Location.country === "UAE" && flag.en_short_name === "United Arab Emirates") {
-                              return (<Flag key={index} country="AE" size={84} />);
-                            } else if (location.Circuit.Location.country === "Korea" && flag.en_short_name === "Korea (Democratic People's Republic of)") {
-                              return (<Flag key={index} country="KR" />);
-                            } else if (location.Circuit.Location.country === "USA" && flag.en_short_name === "United States of America") {
-                              return (<Flag key={i} country="US" size={84} />);
-                            }
-                          })}
-                        </div>
-                      </div>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>Country: </th>
-                    <td>{location.Circuit.Location.country}</td>
-                  </tr>
-                  <tr>
-                    <th>Location: </th>
-                    <td>{location.Circuit.Location.locality}</td>
-                  </tr>
-                  <tr>
-                    <th>Date: </th>
-                    <td>{location.date}</td>
-                  </tr>
-                  <tr>
-                    <th>Full report: </th>
-                    <td><a href={location.Circuit.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
-                  </tr>
-                </tbody>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Country: </th>
+                      <td>{location.Circuit.Location.country}</td>
+                    </tr>
+                    <tr>
+                      <th>Location: </th>
+                      <td>{location.Circuit.Location.locality}</td>
+                    </tr>
+                    <tr>
+                      <th>Date: </th>
+                      <td>{location.date}</td>
+                    </tr>
+                    <tr>
+                      <th>Full report: </th>
+                      <td><a href={location.Circuit.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
+                    </tr>
+                  </tbody>
+            </table>
+                </div>
               );
             })}
-          </table>
         </div>
         <div className="background-details">
           <div className="master-race">
