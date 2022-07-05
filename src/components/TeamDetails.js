@@ -68,7 +68,7 @@ export default class TeamDetails extends React.Component {
   };
 
 
-  
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -81,53 +81,55 @@ export default class TeamDetails extends React.Component {
     return (
       <div className="table-container">
         <div className="table-small-container">
-          <table className="table-small">
-            {this.state.details1.map((details1, seasons, i) => {
-              return (
-                <tbody key={i}>
-                  <tr>
-                    <th className="table-small-header" colSpan="2">
-                      <div className="image-container">
-                        <div className="img-div">
-                          <img src={require(`./../img/teams/${details1.Constructor.constructorId}.png`).default} />
-                        </div>
-                        <div className="flag-name-container">
-                          <div className="flag-div">
-                            {this.state.flags.map((flag, index) => {
-                              if (details1.Constructor.nationality === flag.nationality) {
-                                return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
-                              } else if (details1.Constructor.nationality === "British" && flag.nationality === "British, UK") {
-                                return (<Flag className="flag-size" key={index} country="GB" />);
-                              }
-                            })}
+          {this.state.details1.map((details1, seasons, i) => {
+            return (
+              <div className="master">
+                <div className="img-div">
+                  <img src={require(`./../img/teams/${details1.Constructor.constructorId}.png`).default} />
+                </div>
+                <table className="table-small">
+                  <tbody key={i}>
+                    <tr>
+                      <th className="table-small-header" colSpan="2">
+                        <div className="image-container">
+                          <div className="flag-name-container">
+                            <div className="flag-div">
+                              {this.state.flags.map((flag, index) => {
+                                if (details1.Constructor.nationality === flag.nationality) {
+                                  return (<Flag className="flag-size" key={index} country={flag.alpha_2_code} />);
+                                } else if (details1.Constructor.nationality === "British" && flag.nationality === "British, UK") {
+                                  return (<Flag className="flag-size" key={index} country="GB" />);
+                                }
+                              })}
+                            </div>
+                            <div className="name-div">
+                              {details1.Constructor.name}
+                            </div>
                           </div>
-                          <div className="name-div">
-                            {details1.Constructor.name}
-                          </div>
                         </div>
-                      </div>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>Country: </th>
-                    <td>{details1.Constructor.nationality}</td>
-                  </tr>
-                  <tr>
-                    <th>Position: </th>
-                    <td>{details1.position}</td>
-                  </tr>
-                  <tr>
-                    <th>Points: </th>
-                    <td>{details1.points}</td>
-                  </tr>
-                  <tr>
-                    <th>History: </th>
-                    <td><a href={details1.Constructor.url} target="_blank" style={{color: "white"}} ><img src={require("./../img/link-white.png").default} width={16} height={16}/></a></td>
-                  </tr>
-                </tbody>
-              );
-            })}
-          </table>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Country: </th>
+                      <td>{details1.Constructor.nationality}</td>
+                    </tr>
+                    <tr>
+                      <th>Position: </th>
+                      <td>{details1.position}</td>
+                    </tr>
+                    <tr>
+                      <th>Points: </th>
+                      <td>{details1.points}</td>
+                    </tr>
+                    <tr>
+                      <th>History: </th>
+                      <td><a href={details1.Constructor.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            );
+          })}
         </div>
         <div className="background-details">
           <table className="table-details">
@@ -166,8 +168,8 @@ export default class TeamDetails extends React.Component {
                         </div>
                       </div>
                     </td>
-                    <td style={{"backgroundColor": this.changeColor(details2.Results[0].position)}}>{details2.Results[0].position}</td>
-                    <td style={{"backgroundColor": this.changeColor(details2.Results[0].position)}}>{details2.Results[1].position}</td>
+                    <td style={{ "backgroundColor": this.changeColor(details2.Results[0].position) }}>{details2.Results[0].position}</td>
+                    <td style={{ "backgroundColor": this.changeColor(details2.Results[0].position) }}>{details2.Results[1].position}</td>
                     <td>{parseInt(details2.Results[0].points) + parseInt(details2.Results[1].points)}</td>
                   </tr>
                 </tbody>

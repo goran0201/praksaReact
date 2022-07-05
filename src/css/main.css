@@ -283,7 +283,9 @@ li a:active {
 }
 
 .img-div {
+    display: flex;
     text-align: center;
+    justify-content: center;
 }
 
 .img-div img {
@@ -325,6 +327,47 @@ li a:active {
 }
 
 @media screen and (max-width:1400px) {
+    .main {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .main-container {
+        display: flex;
+        width: 100%;
+        border-bottom: 1px solid rgb(90, 90, 90);
+        align-items: center;
+    }
+
+    .table-container {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .navigation {
+        display: flex;
+        width: 100%;
+        height: 100%;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+        border-top: none;
+    }
+
+    li {
+        display: flex;
+    }
+
+    li a {
+        font-size: 18px;
+        padding: 5px 25px;
+        width: 33%;
+        border-bottom: none;
+    }
 
     .background-details {
         padding: 0;
@@ -439,6 +482,10 @@ li a:active {
         width: 100%;
         border-right: none;
         align-items: center;
+    }
+
+    .master-race {
+        flex-direction: row;
     }
 
     .table td {
@@ -566,9 +613,13 @@ li a:active {
         font-size: 13px;
     }
 
-    .table-details tr
-    .table-details-race tr {
+    .table-details tr .table-details-race tr {
         height: fit-content;
+    }
+
+    .img-div {
+        padding-right: 25px;
+        align-items: center;
     }
 
 }
@@ -713,8 +764,7 @@ li a:active {
         margin: 0;
     }
 
-    .table-details th
-    .table-details-race th {
+    .table-details th .table-details-race th {
         padding: 2px;
     }
 
@@ -727,6 +777,10 @@ li a:active {
     .table-details tr,
     .table-details-race tr {
         height: fit-content;
+    }
+
+    .img-div {
+        padding-right: 0;
     }
 }
 
@@ -895,6 +949,14 @@ li a:active {
     .table-details tr,
     .table-details-race tr {
         height: fit-content;
+    }
+
+    .img-div {
+        justify-content: center;
+    }
+
+    .master-race {
+        flex-direction: column;
     }
 
 }
