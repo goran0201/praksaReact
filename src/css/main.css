@@ -187,6 +187,7 @@ li a:active {
 .master {
     display: flex;
     flex-direction: column;
+    padding: 20px 5px 10px 5px;
 }
 
 .master-race {
@@ -403,6 +404,10 @@ li a:active {
         width: 100%;
     }
 
+    .main-container {
+        border-bottom: 1px solid rgb(90, 90, 90);
+    }
+
     .navigation {
         display: flex;
         width: 100%;
@@ -532,6 +537,7 @@ li a:active {
     .master-race {
         display: flex;
         flex-direction: column;
+        padding: 10px;
     }
 
     .image-container {
@@ -834,6 +840,10 @@ li a:active {
         width: 100%;
         border-right: none;
         align-items: center;
+    }
+
+    .master {
+        flex-direction: column;
     }
 
     .flag-size {

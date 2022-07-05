@@ -73,21 +73,20 @@ export default class DriverDetails extends React.Component {
         </div>
       );
     }
-
     return (
       <div className="table-container">
         <div className="table-small-container">
-          <table className="table-small">
-            {this.state.driverDetails.map((driverDetail, i) => {
-              return (
-                <tbody key={i}>
-                  <tr>
-                    <th colSpan="2">
-                      <div className="master">
+          {this.state.driverDetails.map((driverDetail, i) => {
+            return (
+              <div className="master">
+                <div className="img-div">
+                  <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
+                </div>
+                <table className="table-small">
+                  <tbody key={i}>
+                    <tr>
+                      <th colSpan="2">
                         <div className="image-container">
-                          <div className="img-div">
-                            <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
-                          </div>
                           <div className="flag-name-container">
                             <div className="flag-div">
                               {this.state.flags.map((flag, i) => {
@@ -105,29 +104,30 @@ export default class DriverDetails extends React.Component {
                             </div>
                           </div>
                         </div>
-                      </div>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th>Country: </th>
-                    <td>{driverDetail.Driver.nationality}</td>
-                  </tr>
-                  <tr>
-                    <th>Team: </th>
-                    <td>{driverDetail.Constructors[0].name}</td>
-                  </tr>
-                  <tr>
-                    <th>Birth: </th>
-                    <td>{driverDetail.Driver.dateOfBirth}</td>
-                  </tr>
-                  <tr>
-                    <th>Biography: </th>
-                    <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
-                  </tr>
-                </tbody>
-              );
-            })}
-          </table>
+
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Country: </th>
+                      <td>{driverDetail.Driver.nationality}</td>
+                    </tr>
+                    <tr>
+                      <th>Team: </th>
+                      <td>{driverDetail.Constructors[0].name}</td>
+                    </tr>
+                    <tr>
+                      <th>Birth: </th>
+                      <td>{driverDetail.Driver.dateOfBirth}</td>
+                    </tr>
+                    <tr>
+                      <th>Biography: </th>
+                      <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            );
+          })}
         </div>
         <div className="background-details">
           <table className="table-details">
