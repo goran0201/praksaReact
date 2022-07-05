@@ -135,7 +135,7 @@ export default class TeamDetails extends React.Component {
               <tr>
                 <th colSpan="5" className="title-small">Formula 1 {this.state.seasons.season} Results</th>
               </tr>
-              <tr >
+              <tr className="subtitle-details">
                 <th>Round</th>
                 <th>Grand Prix</th>
                 <th>{this.state.details2[0].Results[0].Driver.familyName}</th>
