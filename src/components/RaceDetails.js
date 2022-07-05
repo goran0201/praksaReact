@@ -91,7 +91,7 @@ export default class RaceDetails extends React.Component {
                               } else if (location.Circuit.Location.country === "UAE" && flag.en_short_name === "United Arab Emirates") {
                                 return (<Flag className="large-flag" key={index} country="AE" size={84} />);
                               } else if (location.Circuit.Location.country === "Korea" && flag.en_short_name === "Korea (Democratic People's Republic of)") {
-                                return (<Flag className="large-flag" key={index} country="KR" />);
+                                return (<Flag className="large-flag" key={index} country="KR" size={84} />);
                               } else if (location.Circuit.Location.country === "USA" && flag.en_short_name === "United States of America") {
                                 return (<Flag className="large-flag" key={i} country="US" size={84} />);
                               }
