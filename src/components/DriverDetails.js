@@ -83,24 +83,26 @@ export default class DriverDetails extends React.Component {
                 <tbody key={i}>
                   <tr>
                     <th colSpan="2">
-                      <div className="image-container">
-                        <div className="img-div">
-                          <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
-                        </div>
-                        <div className="flag-name-container">
-                          <div className="flag-div">
-                            {this.state.flags.map((flag, i) => {
-                              if (driverDetail.Driver.nationality === flag.nationality) {
-                                return (<Flag key={i} country={flag.alpha_2_code} />);
-                              } else if (driverDetail.Driver.nationality === "British" && flag.nationality === "British, UK") {
-                                return (<Flag key={i} country="GB" />);
-                              } else if (driverDetail.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
-                                return (<Flag key={i} country="NL" />);
-                              }
-                            })}
+                      <div className="master">
+                        <div className="image-container">
+                          <div className="img-div">
+                            <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
                           </div>
-                          <div className="name-div">
-                            {driverDetail.Driver.givenName} {driverDetail.Driver.familyName}
+                          <div className="flag-name-container">
+                            <div className="flag-div">
+                              {this.state.flags.map((flag, i) => {
+                                if (driverDetail.Driver.nationality === flag.nationality) {
+                                  return (<Flag key={i} country={flag.alpha_2_code} />);
+                                } else if (driverDetail.Driver.nationality === "British" && flag.nationality === "British, UK") {
+                                  return (<Flag key={i} country="GB" />);
+                                } else if (driverDetail.Driver.nationality === "Dutch" && flag.nationality === "Dutch, Netherlandic") {
+                                  return (<Flag key={i} country="NL" />);
+                                }
+                              })}
+                            </div>
+                            <div className="name-div">
+                              {driverDetail.Driver.givenName} {driverDetail.Driver.familyName}
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -120,7 +122,7 @@ export default class DriverDetails extends React.Component {
                   </tr>
                   <tr>
                     <th>Biography: </th>
-                    <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16}/></a></td>
+                    <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
                   </tr>
                 </tbody>
               );

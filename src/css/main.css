@@ -145,6 +145,14 @@ li a:active {
     font-size: 18px;
 }
 
+.race-th th {
+    background-color: lightgrey;
+    text-shadow: 2px 2px 8px white;
+    border-radius: 5px 5px 0 0;
+    color: rgb(65, 64, 64);
+    font-size: 15px;
+}
+
 .table-race td {
     background-color: white;
     border-bottom: 1px solid #ddd;
@@ -418,6 +426,10 @@ li a:active {
         font-size: 15px;
     }
 
+    .race-th th {
+        font-size: 13px;
+    }
+
     .table-race td {
         padding: 3px 5px;
         font-size: 13px;
@@ -524,7 +536,6 @@ li a:active {
     }
 
     .table tr {
-        height: 22px;
         height: fit-content;
     }
 
@@ -534,12 +545,17 @@ li a:active {
     }
 
     .table-race tr {
-        height: 22px;
+
+        height: fit-content;
     }
 
     .table-race th {
         padding: 2px;
         font-size: 12px;
+    }
+
+    .race-th th {
+        font-size: 13px;
     }
 
     .table-race td {
@@ -641,8 +657,8 @@ li a:active {
     }
 
     .table-details td {
-        padding: 3px 5px;
-        font-size: 13px;
+        padding: 1px;
+        font-size: 11px;
     }
 
     .table-details tr {
@@ -689,6 +705,10 @@ li a:active {
 
     .table-race th {
         padding: 2px;
+        font-size: 11px;
+    }
+
+    .race-th th {
         font-size: 11px;
     }
 
@@ -771,6 +791,39 @@ li a:active {
     .link-img {
         width: 9px;
         height: 9px;
+    }
+
+    /* details media query */
+    .table-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+
+    .table-small-container {
+        width: 100%;
+        height: fit-content;
+        border-right: none;
+    }
+
+    .table-details {
+        padding: 0 2px;
+        margin: 0;
+    }
+
+    .table-details th {
+        padding: 2px;
+        font-size: 12px;
+    }
+
+    .table-details td {
+        padding: 1px;
+        font-size: 11px;
+    }
+
+    .table-details tr {
+        height: fit-content;
     }
 
 }
