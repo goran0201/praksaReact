@@ -44,36 +44,22 @@ export default class RaceDetails extends React.Component {
 
     let color = "";
     switch (points) {
-      case "25":
+      case "1":
         color = "yellow";
         break;
-      case "18":
+      case "2":
         color = "gray";
         break;
-      case "15":
+      case "3":
         color = "orange";
         break;
-      case "12":
+      case "4":
         color = "lightgreen";
         break;
-      case "10":
-        color = "#81c784";
+      case "5":
+        color = "lightblue";
         break;
-      case "8":
-        color = "#c8e6c9";
-        break;
-      case "6":
-        color = "#b2dfdb";
-        break;
-      case "4":
-        color = "#c5cae9";
-        break;
-      case "2":
-        color = "#A3CFCB";
-        break;
-      case "1":
-        color = "#b3e5fc";
-        break;
+     
       default:
         color = "lightgray";
         break;
@@ -229,7 +215,7 @@ export default class RaceDetails extends React.Component {
                     <td>{result.Constructor.name}</td>
                     {/* <td>{result.Time !== undefined ? result.Time.time: ""}</td> */}
                     <td>{result.Time?.time}</td>
-                    <td style={{ "backgroundColor": this.changeColor(result.points) }}>{result.points}</td>
+                    <td style={{ "backgroundColor": this.changeColor(result.position) }}>{result.points}</td>
                   </tr>
                 </tbody>
               );
