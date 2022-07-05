@@ -192,6 +192,7 @@ li a:active {
 
 .master-race {
     display: flex;
+    width: 100%;
 }
 
 .table-small th,
@@ -453,6 +454,11 @@ li a:active {
     .large-flag {
         width: 120px;
         height: 120px;
+    }
+
+    .img-div {
+        padding-right: 25px;
+        align-items: center;
     }
 }
 
