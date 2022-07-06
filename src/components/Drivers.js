@@ -16,7 +16,8 @@ export default class Drivers extends React.Component {
     }
 
     getDrivers = async () => {
-        const url = "http://ergast.com/api/f1/2013/driverStandings.json";
+        let year = 2012;
+        const url = `http://ergast.com/api/f1/${year}/driverStandings.json`;
         const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
         const response = await fetch(url);
         const responseFlags = await fetch(urlFlags);
