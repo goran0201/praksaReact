@@ -12,7 +12,7 @@ body {
 }
 
 .navigation {
-    width: 10vw;
+    width: 12vw;
     height: 100vh;
     border-right: 1px solid rgb(90, 90, 90);
 }
@@ -29,7 +29,7 @@ ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 10vw;
+    width: 12vw;
     border-top: 1px solid black;
 }
 
@@ -42,7 +42,7 @@ li a {
     text-decoration: none;
     padding: 15px 0;
     text-align: center;
-    width: 10vw;
+    width: 12vw;
     border-bottom: 1px solid black;
     text-shadow: 2px 2px 2px black, 0 0 5px white, 0 0 15px rgb(202, 200, 200);
 }
@@ -67,8 +67,8 @@ li a:active {
     background-color: darkgray;
     width: 100%;
     height: auto;
-    padding: 0 20px 10px 20px;
-    margin: 0 10px;
+    padding: 0 2px;
+    margin: 0 2px;
 }
 
 .background-details {
@@ -76,8 +76,8 @@ li a:active {
     justify-content: center;
     background-color: darkgrey;
     width: 100%;
-    padding: 20px 10px;
-    margin: 0 10px;
+    padding: 0 2px;
+    margin: 0 2px;
 }
 
 .title {
@@ -86,7 +86,7 @@ li a:active {
     color: white;
     text-shadow: 2px 2px 2px black, 0 0 5px white, 0 0 15px rgb(202, 200, 200);
     padding: 20px;
-    font-size: 40px;
+    font-size: 35px;
 }
 
 .title-small {
@@ -94,7 +94,7 @@ li a:active {
     text-shadow: 2px 2px 8px white;
     border-radius: 5px 5px 0 0;
     color: rgb(65, 64, 64);
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .table {
@@ -113,7 +113,7 @@ li a:active {
     background-image: linear-gradient(#dedede, #c9c6c6);
     text-align: left;
     padding: 8px;
-    font-size: 18px;
+    /* font-size: 18px; */
 }
 
 .table td {
@@ -142,7 +142,7 @@ li a:active {
     background-image: linear-gradient(#dedede, #c9c6c6);
     text-align: left;
     padding: 8px;
-    font-size: 18px;
+    /*     font-size: 18px; */
 }
 
 .race-th th,
@@ -207,9 +207,10 @@ li a:active {
     text-align: center !important;
 }
 
-.table-details {
-    padding: 20px;
-    margin: 10px;
+.table-details,
+.table-details-race {
+    padding: 2px;
+    margin: 2px;
     width: 100%;
     height: fit-content;
 }
@@ -254,13 +255,13 @@ li a:active {
     color: rgb(65, 64, 64);
 }
 
-.table-details-race {
+/* .table-details-race {
     padding: 20px;
     margin: 10px;
     width: 100%;
     height: fit-content;
 }
-
+ */
 .table-details-race th {
     background-image: linear-gradient(#dedede, #c9c6c6);
     text-align: left;
@@ -306,7 +307,10 @@ li a:active {
 }
 
 .logo {
-    width: 10vw;
+    display: flex;
+    justify-content: center;
+    width: 12vw;
+
 }
 
 .logo-img {
@@ -319,7 +323,7 @@ li a:active {
 }
 
 .main-container {
-    width: 10vw;
+    width: 12vw;
     border-right: 1px solid rgb(90, 90, 90);
 }
 
@@ -335,6 +339,11 @@ li a:active {
         width: 100%;
     }
 
+    .title {
+        font-size: 30px;
+        padding: 15px;
+    }
+
     .main-container {
         display: flex;
         width: 100%;
@@ -342,9 +351,18 @@ li a:active {
         align-items: center;
     }
 
-/*     .bacground {
+    .logo-img {
+        width: 100%;
+        padding: 3px;
+        margin-top: 3px;
+        margin-bottom: 3px;
+        margin-left: 3px;
+    }
+
+    .background {
         padding: 0;
-    } */
+        margin: 0;
+    }
 
     .table-container {
         width: 100%;
@@ -380,10 +398,24 @@ li a:active {
         padding: 0;
         margin: 0;
     }
+
     .table {
-        padding: 2px;
+        padding: 4px;
         margin: 2px;
-        width: 90vw;
+    }
+
+    .table td {
+        font-size: 14px;
+        padding: 3px 5px;
+    }
+
+    .table tr {
+        height: fit-content;
+    }
+
+    .table-race {
+        padding: 4px;
+        margin: 2px;
     }
 
     .table-small-container {
@@ -400,7 +432,7 @@ li a:active {
     }
 
     .title-small {
-        font-size: 16px;
+        font-size: 15px;
     }
 
     .table-details-race {
@@ -417,6 +449,7 @@ li a:active {
         height: fit-content;
     }
 
+    .race-th th,
     .subtitle-details th {
         font-size: 14px;
     }
@@ -436,7 +469,7 @@ li a:active {
     }
 
     .flag-size {
-        width: 52px;
+        width: 22px;
         height: 22px;
         padding-left: 3px;
     }
@@ -458,14 +491,19 @@ li a:active {
 
     .img-div {
         padding-right: 25px;
+        padding-bottom: 10px;
         align-items: center;
+    }
+
+    .flag-raceDetails {
+        border-bottom: none;
     }
 }
 
 /* media query max-width 900px */
 @media screen and (max-width:900px) {
     .title {
-        font-size: 30px;
+        font-size: 26px;
         padding: 10px;
     }
 
@@ -502,10 +540,8 @@ li a:active {
     }
 
     li a {
-        font-size: 18px;
+        font-size: 16px;
         padding: 5px 25px;
-        width: 33%;
-        border-bottom: none;
     }
 
     .main-container {
@@ -522,9 +558,8 @@ li a:active {
     }
 
     .table {
-        margin: 0;
-        padding: 0 4px;
-        ;
+        margin: 1px;
+        padding: 2px;
     }
 
     .table tr {
@@ -532,8 +567,8 @@ li a:active {
     }
 
     .table-race {
-        padding: 0px 4px;
-        margin: 0;
+        padding: 1px;
+        margin: 2px;
     }
 
     .table-race tr {
@@ -542,7 +577,7 @@ li a:active {
 
     .table-race th {
         padding: 4px;
-        font-size: 15px;
+        /*   font-size: 15px; */
     }
 
     .race-th th,
@@ -560,10 +595,10 @@ li a:active {
         padding: 4px;
     }
 
-    .background {
+    /*     .background {
         margin: 0;
         padding: 0 5px 5px 5px;
-    }
+    } */
 
     .logo {
         border: none;
@@ -572,14 +607,14 @@ li a:active {
         width: 15%;
     }
 
-    .logo-img {
+/*     .logo-img {
         width: 100%;
         padding: 3px;
         margin-top: 3px;
         margin-bottom: 3px;
         margin-left: 3px;
     }
-
+ */
     .link-img {
         width: 11px;
         height: 11px;
@@ -612,7 +647,8 @@ li a:active {
     .master-race {
         display: flex;
         flex-direction: row;
-        padding: 10px;
+        /*         padding: 10px; */
+        width: 100%;
     }
 
     .image-container {
@@ -626,8 +662,8 @@ li a:active {
 
     .table-details,
     .table-details-race {
-        padding: 0;
-        margin: 0 4px;
+        padding: 2px;
+        margin: 2px;
     }
 
     .table-details th,
@@ -655,7 +691,7 @@ li a:active {
 /* media query max-width 715px */
 @media screen and (max-width:715px) {
     .title {
-        font-size: 24px;
+        font-size: 22px;
         padding: 8px;
     }
 
@@ -669,20 +705,21 @@ li a:active {
         padding: 1px;
     }
 
+    /* 
     .table {
         margin: 0;
         padding: 0 2px;
-    }
+    } */
 
     .table tr {
         height: fit-content;
     }
 
-    .table-race {
-        padding: 0 2px;
+    /*     .table-race {
+        padding: 2px;
         margin: 0;
     }
-
+ */
     .table-race tr {
 
         height: fit-content;
@@ -690,7 +727,7 @@ li a:active {
 
     .table-race th {
         padding: 2px;
-        font-size: 12px;
+        /*  font-size: 12px; */
     }
 
     .race-th th,
@@ -743,10 +780,8 @@ li a:active {
     }
 
     li a {
-        font-size: 16px;
+        font-size: 15px;
         padding: 4px 20px;
-        width: 33%;
-        border-bottom: none;
     }
 
     .logo {
@@ -786,11 +821,11 @@ li a:active {
         border-right: none;
     }
 
-    .table-details,
+    /*     .table-details,
     .table-details-race {
-        padding: 0 2px;
-        margin: 0;
-    }
+        padding: 2px;
+        margin: 2px;
+    } */
 
     .table-details th .table-details-race th {
         padding: 2px;
@@ -815,7 +850,7 @@ li a:active {
 /* media query max-width 615px */
 @media screen and (max-width:615px) {
     .title {
-        font-size: 24px;
+        font-size: 18px;
         padding: 8px;
     }
 
@@ -830,19 +865,19 @@ li a:active {
     }
 
 
-    .table {
+    /*     .table {
         margin: 0px;
         padding: 0 2px;
-    }
+    } */
 
     .table tr {
         height: fit-content;
     }
 
-    .table-race {
+    /*     .table-race {
         padding: 0 2px;
         margin: 0;
-    }
+    } */
 
     .table-race tr {
         height: fit-content;
@@ -850,7 +885,7 @@ li a:active {
 
     .table-race th {
         padding: 2px;
-        font-size: 11px;
+        /* font-size: 11px; */
     }
 
     .race-th th,
@@ -900,8 +935,6 @@ li a:active {
     li a {
         font-size: 14px;
         padding: 3px 15px;
-        width: 33%;
-        border-bottom: none;
     }
 
     .logo {
@@ -910,10 +943,10 @@ li a:active {
 
     .logo-img {
         width: 100%;
-        padding: 3px;
-        margin-top: 3px;
-        margin-bottom: 3px;
-        margin-left: 3px;
+        padding: 1px;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        margin-left: 1px;
     }
 
     .main-container {
@@ -957,11 +990,11 @@ li a:active {
         border-right: none;
     }
 
-    .table-details,
+    /*     .table-details,
     .table-details-race {
-        padding: 0 2px;
-        margin: 0;
-    }
+        padding: 2px;
+        margin: 2px;
+    } */
 
     .table-details th,
     .table-details-race th {
@@ -981,10 +1014,15 @@ li a:active {
 
     .img-div {
         justify-content: center;
+        padding-bottom: 0;
     }
 
     .master-race {
         flex-direction: column;
+    }
+
+    .flag-raceDetails {
+        border-bottom: 1px solid rgb(90, 90, 90);
     }
 
 }
