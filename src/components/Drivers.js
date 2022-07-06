@@ -2,6 +2,7 @@ import React from "react";
 import history from "./../history";
 import Loader from "./Loader";
 import Flag from 'react-flagkit';
+import Breadcrumb from "./Breadcrumb";
 
 export default class Drivers extends React.Component {
     state = {
@@ -47,8 +48,17 @@ export default class Drivers extends React.Component {
                 </div>
             );
         }
+
+        const breadcrumb = [
+            {
+                title: "Drivers",
+                url: ""
+            }
+        ];
+
         return (
             <>
+            <Breadcrumb breadcrumb={breadcrumb} />
                 <div className="background">
                     <h1 className="title">Drivers Campionship</h1>
                     <table className="table">

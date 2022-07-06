@@ -1,6 +1,7 @@
 import React from "react";
 import Loader from "./Loader";
 import Flag from 'react-flagkit';
+import Breadcrumb from "./Breadcrumb";
 
 export default class RaceDetails extends React.Component {
   state = {
@@ -76,7 +77,21 @@ export default class RaceDetails extends React.Component {
         </div>
       );
     }
+
+    const breadcrumb = [
+      {
+          title: "Races",
+          url: "/races"
+      },
+      {
+          title: this.state.raceLocation[0].raceName,
+          url: ""
+      }
+  ];
+
     return (
+      <>
+      <Breadcrumb breadcrumb={breadcrumb} />
       <div className="table-container">
         <div className="table-small-container">
           {this.state.raceLocation.map((location, i) => {
@@ -227,6 +242,7 @@ export default class RaceDetails extends React.Component {
           </div>
         </div>
       </div>
+      </>
     );
   }
 }

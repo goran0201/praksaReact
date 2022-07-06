@@ -2,6 +2,7 @@ import React from "react";
 import history from "./../history";
 import Loader from "./Loader";
 import Flag from 'react-flagkit';
+import Breadcrumb from "./Breadcrumb";
 
 export default class Teams extends React.Component {
 
@@ -47,8 +48,17 @@ export default class Teams extends React.Component {
         </div>
       );
     }
+
+    const breadcrumb = [
+      {
+        title: "Teams",
+        url: ""
+      }
+    ];
+
     return (
       <>
+      <Breadcrumb breadcrumb={breadcrumb} className="breadcrumb"/>
         <div className="background">
           <h1 className="title">Constructors Campionship</h1>
           <table className="table">
@@ -78,7 +88,7 @@ export default class Teams extends React.Component {
                         </div>
                       </div>
                     </td>
-                    <td>Details <a href={team.Constructor.url} target="_blank"><img className="link-img" src={require("./../img/link-black.png").default} width={16} height={16}/></a></td>
+                    <td>Details <a href={team.Constructor.url} target="_blank"><img className="link-img" src={require("./../img/link-black.png").default} width={16} height={16} /></a></td>
                     <td>{team.points}</td>
                   </tr>
                 </tbody>
