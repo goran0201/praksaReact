@@ -52,7 +52,7 @@ export default class Races extends React.Component {
     const breadcrumb = [
       {
         title: "Races",
-        url: ""
+        url: "/races"
       }
     ];
 

@@ -24,7 +24,7 @@ export default class App extends React.Component {
                                 <div className="devider-logo">
                                     <Link to="/">
                                         {/* <div className="logo"> */}
-                                        <img className="logo-img" src={require(`./img/F1-logo.png`).default} />
+                                        <img className="logo-img" src={`/img/F1-logo.png`} />
                                         {/* </div> */}
                                     </Link>
                                 </div>

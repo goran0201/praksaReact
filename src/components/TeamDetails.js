@@ -86,9 +86,11 @@ export default class TeamDetails extends React.Component {
       },
       {
         title: this.state.details1[0].Constructor.name,
-        url: ""
+        url: "/teams/details/:constructorId"
       }
     ];
+
+    const fallbackSrc = "./../img/F1-logo.png";
 
     return (
       <>
@@ -100,7 +102,8 @@ export default class TeamDetails extends React.Component {
                 return (
                   <div className="master" key={i}>
                     <div className="img-div">
-                      <img src={require(`./../img/teams/${details1.Constructor.constructorId}.png`).default} />
+                    <img src={`/img/teams/${details1.Constructor.constructorId}.png`}
+                      onError={(e) => {e.target.onError = null; e.target.src = fallbackSrc}} />
                     </div>
                     <table className="table-small">
                       <tbody>
@@ -138,7 +141,7 @@ export default class TeamDetails extends React.Component {
                         </tr>
                         <tr>
                           <th>History: </th>
-                          <td><a href={details1.Constructor.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
+                          <td><a href={details1.Constructor.url} target="_blank" style={{ color: "white" }} ><img src={"/img/link-white.png"} width={16} height={16} /></a></td>
                         </tr>
                       </tbody>
                     </table>

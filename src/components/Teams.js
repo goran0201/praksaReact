@@ -52,7 +52,7 @@ export default class Teams extends React.Component {
     const breadcrumb = [
       {
         title: "Teams",
-        url: ""
+        url: "/teams"
       }
     ];
 
@@ -89,7 +89,7 @@ export default class Teams extends React.Component {
                           </div>
                         </div>
                       </td>
-                      <td>Details <a href={team.Constructor.url} target="_blank"><img className="link-img" src={require("./../img/link-black.png").default} width={16} height={16} /></a></td>
+                      <td>Details <a href={team.Constructor.url} target="_blank"><img className="link-img" src={"/img/link-black.png"} width={16} height={16} /></a></td>
                       <td>{team.points}</td>
                     </tr>
                   </tbody>

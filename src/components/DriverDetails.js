@@ -17,7 +17,8 @@ export default class DriverDetails extends React.Component {
   }
 
   getDriverDetails = async () => {
-    let year = 2013;
+    /* const fallbackSrc = "img/drivers/alonso.jpg" */
+    let year = 2012;
     const driverId = this.props.match.params.driverId;
     const url = `http://ergast.com/api/f1/${year}/drivers/${driverId}/driverStandings.json`;
     const urlRaces = `https://ergast.com/api/f1/${year}/drivers/${driverId}/results.json`;
@@ -65,7 +66,7 @@ export default class DriverDetails extends React.Component {
     }
     return color;
   };
-
+  
   render() {
     if (this.state.isLoading) {
       return (
@@ -75,7 +76,7 @@ export default class DriverDetails extends React.Component {
         </div>
       );
     }
-
+    
     const breadcrumb = [
       {
         title: "Drivers",
@@ -83,9 +84,14 @@ export default class DriverDetails extends React.Component {
       },
       {
         title: this.state.driverDetails[0].Driver.familyName,
-        url: ""
+        url: "/driverDetails/:driverId"
       }
     ];
+    
+    
+    const fallbackSrc = "./../img/F1-logo.png";
+    console.log(fallbackSrc)
+
     return (
       <>
         <div className="top-level-background">
@@ -96,7 +102,10 @@ export default class DriverDetails extends React.Component {
                 return (
                   <div className="master" key={i}>
                     <div className="img-div">
-                      <img src={require(`./../img/drivers/${driverDetail.Driver.driverId}.jpg`).default} />
+                      <img src={`/img/drivers/${driverDetail.Driver.driverId}.jpg`}
+                      onError={(e) => {
+                        e.target.onError = null; 
+                        e.target.src = fallbackSrc}} />
                     </div>
                     <table className="table-small">
                       <tbody>
@@ -136,7 +145,7 @@ export default class DriverDetails extends React.Component {
                         </tr>
                         <tr>
                           <th>Biography: </th>
-                          <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
+                          <td><a href={driverDetail.Driver.url} target="_blank" style={{ color: "white" }} ><img src={"/img/link-white.png"} width={16} height={16} /></a></td>
                         </tr>
                       </tbody>
                     </table>
