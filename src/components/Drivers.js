@@ -61,7 +61,8 @@ export default class Drivers extends React.Component {
         } else {
             const filterResult = this.state.searchApiData.filter(
                 (drivers) => drivers.Driver.givenName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
-                    drivers.Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase())
+                    drivers.Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase()) || 
+                    drivers.Constructors[0].name.toLowerCase().includes(searchText.target.value.toLowerCase())
             );
             this.setState({
                 allDrivers: filterResult,
