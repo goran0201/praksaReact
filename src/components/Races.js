@@ -51,7 +51,8 @@ export default class Races extends React.Component {
     } else {
       const filterResult = this.state.searchApiData.filter(
         (races) => races.raceName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
-          races.Circuit.circuitName.toLowerCase().includes(searchText.target.value.toLowerCase())
+          races.Circuit.circuitName.toLowerCase().includes(searchText.target.value.toLowerCase()) || 
+          races.Results[0].Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase())
       );
       this.setState({
         races: filterResult,
