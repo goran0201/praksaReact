@@ -1,4 +1,5 @@
 import React from "react";
+import Home from "./components/Home";
 import Drivers from "./components/Drivers";
 import DriverDetails from "./components/DriverDetails";
 import Teams from "./components/Teams";
@@ -16,22 +17,29 @@ export default class App extends React.Component {
         return (
             <div className="main">
                 <Router history={history}>
-                    <div className="main-container">
-                        <div className="logo">
-                            <img className="logo-img" src={require(`./img/F1-logo.png`).default} />
-                        </div>
-                        <nav className="navigation">
-                            <ul>
-                                <li>
-                                    <Link to="/">Drivers</Link>
+                    {/* <div className="main-container"> */}
+                    <nav className="navigation">
+                        <ul className="nav-list">
+                            <li className="nav-link">
+                                <div className="devider-logo">
+                                    <Link to="/">
+                                        {/* <div className="logo"> */}
+                                        <img className="logo-img" src={require(`./img/F1-logo.png`).default} />
+                                        {/* </div> */}
+                                    </Link>
+                                </div>
+                                <div className="devider-links">
+                                    <Link to="/drivers">Drivers</Link>
                                     <Link to="/teams">Teams</Link>
                                     <Link to="/races">Races</Link>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    {/* </div> */}
                     <Switch>
-                        <Route path="/" exact component={Drivers} />
+                        <Route path="/" exact component={Home} />
+                        <Route path="/drivers" exact component={Drivers} />
                         <Route path="/teams" exact component={Teams} />
                         <Route path="/races" exact component={Races} />
                         <Route path="/driverDetails/:driverId" exact component={DriverDetails} />
