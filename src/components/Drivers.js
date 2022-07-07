@@ -3,13 +3,16 @@ import history from "./../history";
 import Loader from "./Loader";
 import Flag from 'react-flagkit';
 import Breadcrumb from "./Breadcrumb";
+import Search from "./Search";
 
 export default class Drivers extends React.Component {
     state = {
         allDrivers: [],
         seasons: {},
         isLoading: true,
-        flags: []
+        flags: [],
+        searchApiData: [],
+        filterValue: ""
     };
 
     componentDidMount() {
@@ -30,7 +33,8 @@ export default class Drivers extends React.Component {
             allDrivers: allDrivers,
             seasons: seasons,
             isLoading: false,
-            flags: flags
+            flags: flags,
+            searchApiData: drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings
         });
     };
 
@@ -38,6 +42,22 @@ export default class Drivers extends React.Component {
         const linkTo = "/driverDetails/" + driverId;
         history.push(linkTo);
     };
+
+    handleFilter = (searchText) => {
+        if (searchText.target.value == "") {
+          return this.setState({
+            allDrivers: this.state.searchApiData,
+          });
+        } else {
+          const filterResult = this.state.searchApiData.filter(
+            (drivers) => drivers.Driver.givenName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
+                drivers.Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase())
+          );
+          this.setState({
+            allDrivers: filterResult,
+          });
+        }
+      };
 
     render() {
         if (this.state.isLoading) {
@@ -60,6 +80,7 @@ export default class Drivers extends React.Component {
             <>
                 <div className="top-level-background">
                     <Breadcrumb breadcrumb={breadcrumb} />
+                    <Search filterValue={this.state.filterValue} handleFilter={this.handleFilter} />
                     <div className="background">
                         <h1 className="title">Drivers Campionship</h1>
                         <table className="table">

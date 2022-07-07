@@ -3,6 +3,7 @@ import history from "./../history";
 import Loader from "./Loader";
 import Flag from 'react-flagkit';
 import Breadcrumb from "./Breadcrumb";
+import Search from "./Search";
 
 export default class Teams extends React.Component {
 
@@ -10,7 +11,9 @@ export default class Teams extends React.Component {
     allTeams: [],
     seasons: {},
     isLoading: true,
-    flags: []
+    flags: [],
+    searchApiData: [],
+    filterValue: ""
   };
 
   componentDidMount() {
@@ -30,13 +33,30 @@ export default class Teams extends React.Component {
       allTeams: allTeams,
       seasons: seasons,
       isLoading: false,
-      flags: flags
+      flags: flags,
+      searchApiData: teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
     });
   };
 
   handleTeams = (constructorId) => {
     const linkTo = "/teams/details/" + constructorId;
     history.push(linkTo);
+  };
+
+  handleFilter = (searchText) => {
+    if (searchText.target.value == "") {
+      return this.setState({
+        allTeams: this.state.searchApiData,
+      });
+    } else {
+      const filterResult = this.state.searchApiData.filter(
+        (teams) =>
+          teams.Constructor.constructorId.toLowerCase().includes(searchText.target.value.toLowerCase())
+      );
+      this.setState({
+        allTeams: filterResult,
+      });
+    }
   };
 
   render() {
@@ -60,6 +80,7 @@ export default class Teams extends React.Component {
       <>
         <div className="top-level-background">
           <Breadcrumb breadcrumb={breadcrumb} className="breadcrumb" />
+          <Search filterValue={this.state.filterValue} handleFilter={this.handleFilter} />
           <div className="background">
             <h1 className="title">Constructors Campionship</h1>
             <table className="table">

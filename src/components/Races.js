@@ -3,13 +3,16 @@ import history from "./../history";
 import Loader from "./Loader";
 import Flag from 'react-flagkit';
 import Breadcrumb from "./Breadcrumb";
+import Search from "./Search";
 
 export default class Races extends React.Component {
   state = {
     races: [],
     seasons: {},
     isLoading: true,
-    flags: []
+    flags: [],
+    searchApiData: [],
+    filterValue: ""
   };
 
   componentDidMount() {
@@ -29,7 +32,8 @@ export default class Races extends React.Component {
       races: allRaces,
       seasons: seasons,
       isLoading: false,
-      flags: flagsConvert
+      flags: flagsConvert,
+      searchApiData: races.MRData.RaceTable.Races
     });
 
   };
@@ -37,6 +41,22 @@ export default class Races extends React.Component {
   handleQualifyng = (raceId) => {
     const linkTo = "/raceDetails/" + raceId;
     history.push(linkTo);
+  };
+
+  handleFilter = (searchText) => {
+    if (searchText.target.value == "") {
+      return this.setState({
+        races: this.state.searchApiData,
+      });
+    } else {
+      const filterResult = this.state.searchApiData.filter(
+        (races) => races.raceName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
+          races.Circuit.circuitName.toLowerCase().includes(searchText.target.value.toLowerCase())
+      );
+      this.setState({
+        races: filterResult,
+      });
+    }
   };
 
   render() {
@@ -60,6 +80,7 @@ export default class Races extends React.Component {
       <>
         <div className="top-level-background">
           <Breadcrumb breadcrumb={breadcrumb} />
+          <Search filterValue={this.state.filterValue} handleFilter={this.handleFilter} />
           <div className="background">
             <h1 className="title">Race calendar</h1>
             <table className="table-race">
