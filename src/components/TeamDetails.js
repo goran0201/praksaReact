@@ -8,7 +8,7 @@ export default class TeamDetails extends React.Component {
   state = {
     details1: [],
     details2: [],
-    seasons: {},
+    selectedSeason: null,
     isLoading: true,
     flags: []
   };
@@ -17,10 +17,18 @@ export default class TeamDetails extends React.Component {
     this.getDetails();
   };
 
+  componentDidUpdate() {
+    this.getDetails();
+}
+
   getDetails = async () => {
+    const season = localStorage.getItem("selectedSeason");
+        if (season === this.state.selectedSeason) {
+            return
+        }
     const constructorId = this.props.match.params.constructorId;
-    const urlDetails = `http://ergast.com/api/f1/2013/constructors/${constructorId}/constructorStandings.json`;
-    const urlResults = `http://ergast.com/api/f1/2013/constructors/${constructorId}/results.json`;
+    const urlDetails = `http://ergast.com/api/f1/${season}/constructors/${constructorId}/constructorStandings.json`;
+    const urlResults = `http://ergast.com/api/f1/${season}/constructors/${constructorId}/results.json`;
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response1 = await fetch(urlDetails);
     const response2 = await fetch(urlResults);
@@ -35,7 +43,7 @@ export default class TeamDetails extends React.Component {
     this.setState({
       details1: details1,
       details2: details2,
-      seasons: seasons,
+      selectedSeason: season,
       isLoading: false,
       flags: flags
     });
@@ -154,7 +162,7 @@ export default class TeamDetails extends React.Component {
               <table className="table-details">
                 <thead>
                   <tr>
-                    <th colSpan="5" className="title-small">Formula 1 {this.state.seasons.season} Results</th>
+                    <th colSpan="5" className="title-small">Formula 1 {this.state.selectedSeason} Results</th>
                   </tr>
                   <tr className="subtitle-details">
                     <th>Round</th>

@@ -9,7 +9,7 @@ export default class Teams extends React.Component {
 
   state = {
     allTeams: [],
-    seasons: {},
+    selectedSeason: null,
     isLoading: true,
     flags: [],
     searchApiData: [],
@@ -19,9 +19,17 @@ export default class Teams extends React.Component {
   componentDidMount() {
     this.getTeams();
   };
+  
+  componentDidUpdate() {
+    this.getTeams();
+}
 
   getTeams = async () => {
-    const url = "http://ergast.com/api/f1/2013/constructorStandings.json";
+    const season = localStorage.getItem("selectedSeason")
+    if (season === this.state.selectedSeason) {
+        return
+    }
+    const url = `http://ergast.com/api/f1/${season}/constructorStandings.json`;
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const data = await fetch(url);
     const dataFlags = await fetch(urlFlags);
@@ -31,7 +39,7 @@ export default class Teams extends React.Component {
     const seasons = teams.MRData.StandingsTable;
     this.setState({
       allTeams: allTeams,
-      seasons: seasons,
+      selectedSeason: seasons,
       isLoading: false,
       flags: flags,
       searchApiData: teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
@@ -86,7 +94,7 @@ export default class Teams extends React.Component {
             <table className="table">
               <thead>
                 <tr>
-                  <th colSpan="4" className="title-small">Constructors Championship Standings - {this.state.seasons.season}</th>
+                  <th colSpan="4" className="title-small">Constructors Championship Standings - {this.state.selectedSeason.season}</th>
                 </tr>
               </thead>
               {this.state.allTeams.map((team, i) => {

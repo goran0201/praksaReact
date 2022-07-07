@@ -7,7 +7,7 @@ export default class DriverDetails extends React.Component {
   state = {
     driverDetails: [],
     racesDetails: [],
-    seasons: {},
+    selectedSeason: null,
     isLoading: true,
     flags: []
   };
@@ -16,12 +16,18 @@ export default class DriverDetails extends React.Component {
     this.getDriverDetails();
   }
 
+  componentDidUpdate() {
+    this.getDriverDetails();
+}
+
   getDriverDetails = async () => {
-    /* const fallbackSrc = "img/drivers/alonso.jpg" */
-    let year = 2012;
+    const season = localStorage.getItem("selectedSeason");
+        if (season === this.state.selectedSeason) {
+            return
+        }
     const driverId = this.props.match.params.driverId;
-    const url = `http://ergast.com/api/f1/${year}/drivers/${driverId}/driverStandings.json`;
-    const urlRaces = `https://ergast.com/api/f1/${year}/drivers/${driverId}/results.json`;
+    const url = `http://ergast.com/api/f1/${season}/drivers/${driverId}/driverStandings.json`;
+    const urlRaces = `https://ergast.com/api/f1/${season}/drivers/${driverId}/results.json`;
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response = await fetch(url);
     const responseRaces = await fetch(urlRaces);
@@ -35,7 +41,7 @@ export default class DriverDetails extends React.Component {
     this.setState({
       driverDetails: driverDetails,
       racesDetails: racesDetails,
-      seasons: seasons,
+      selectedSeason: season,
       isLoading: false,
       flags: flags
     });
@@ -157,7 +163,7 @@ export default class DriverDetails extends React.Component {
               <table className="table-details">
                 <thead>
                   <tr>
-                    <th className="title-small" colSpan="5" >Formula 1 {this.state.seasons.season} Results</th>
+                    <th className="title-small" colSpan="5" >Formula 1 {this.state.selectedSeason} Results</th>
                   </tr>
                   <tr className="subtitle-details">
                     <th>Round</th>

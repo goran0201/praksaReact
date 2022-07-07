@@ -8,7 +8,7 @@ import Search from "./Search";
 export default class Races extends React.Component {
   state = {
     races: [],
-    seasons: {},
+    selectedSeason: null,
     isLoading: true,
     flags: [],
     searchApiData: [],
@@ -19,8 +19,16 @@ export default class Races extends React.Component {
     this.getRaces();
   }
 
+  componentDidUpdate() {
+    this.getRaces();
+}
+
   getRaces = async () => {
-    const url = "http://ergast.com/api/f1/2013/results/1.json";
+    const season = localStorage.getItem("selectedSeason")
+    if (season === this.state.selectedSeason) {
+        return
+    }
+    const url = `http://ergast.com/api/f1/${season}/results/1.json`;
     const response = await fetch(url);
     const races = await response.json();
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
@@ -30,7 +38,7 @@ export default class Races extends React.Component {
     const seasons = races.MRData.RaceTable;
     this.setState({
       races: allRaces,
-      seasons: seasons,
+      selectedSeason: seasons,
       isLoading: false,
       flags: flagsConvert,
       searchApiData: races.MRData.RaceTable.Races
@@ -87,7 +95,7 @@ export default class Races extends React.Component {
             <table className="table-race">
               <thead>
                 <tr>
-                  <th colSpan="5" className="title-small" >Race callendar - {this.state.seasons.season}</th>
+                  <th colSpan="5" className="title-small" >Race callendar - {this.state.selectedSeason.season}</th>
                 </tr>
                 <tr className="race-th">
                   <th>Round</th>

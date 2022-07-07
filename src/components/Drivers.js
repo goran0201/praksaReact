@@ -5,10 +5,11 @@ import Flag from 'react-flagkit';
 import Breadcrumb from "./Breadcrumb";
 import Search from "./Search";
 
+
 export default class Drivers extends React.Component {
     state = {
         allDrivers: [],
-        seasons: {},
+        selectedSeason: null,
         isLoading: true,
         flags: [],
         searchApiData: [],
@@ -19,9 +20,16 @@ export default class Drivers extends React.Component {
         this.getDrivers();
     }
 
+    componentDidUpdate() {
+        this.getDrivers();
+    }
+
     getDrivers = async () => {
-        let year = 2012;
-        const url = `http://ergast.com/api/f1/${year}/driverStandings.json`;
+        const season = localStorage.getItem("selectedSeason")
+        if (season === this.state.selectedSeason) {
+            return
+        }
+        const url = `http://ergast.com/api/f1/${season}/driverStandings.json`;
         const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
         const response = await fetch(url);
         const responseFlags = await fetch(urlFlags);
@@ -29,13 +37,15 @@ export default class Drivers extends React.Component {
         const flags = await responseFlags.json();
         const allDrivers = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
         const seasons = drivers.MRData.StandingsTable;
+       /*  console.log(seasons) */
         this.setState({
             allDrivers: allDrivers,
-            seasons: seasons,
+            selectedSeason: seasons,
             isLoading: false,
             flags: flags,
             searchApiData: drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings
         });
+        
     };
 
     handleDrivers = (driverId) => {
@@ -51,8 +61,7 @@ export default class Drivers extends React.Component {
         } else {
             const filterResult = this.state.searchApiData.filter(
                 (drivers) => drivers.Driver.givenName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
-                    drivers.Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase()) || 
-                    drivers.Constructors[0].name.toLowerCase().includes(searchText.target.value.toLowerCase())
+                    drivers.Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase())
             );
             this.setState({
                 allDrivers: filterResult,
@@ -77,6 +86,7 @@ export default class Drivers extends React.Component {
             }
         ];
 
+
         return (
             <>
                 <div className="top-level-background">
@@ -87,7 +97,8 @@ export default class Drivers extends React.Component {
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th colSpan="4" className="title-small">Drivers Championship Standings - {this.state.seasons.season}</th>
+                                    <th colSpan="4" className="title-small">Drivers Championship Standings - {this.state.selectedSeason.season}</th>
+                                    
                                 </tr>
                             </thead>
                             {this.state.allDrivers.map((driver, i) => {

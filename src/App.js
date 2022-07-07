@@ -13,12 +13,51 @@ import history from "./history";
 
 export default class App extends React.Component {
 
+    constructor() {
+        super();
+
+        let selectedSeason = localStorage.getItem("selectedSeason");
+        if (!selectedSeason) {
+            selectedSeason = new Date().getFullYear();
+        }
+        localStorage.setItem("selectedSeason", selectedSeason);
+        this.state = {
+            seasons: [],
+            selectedSeason: selectedSeason
+        };
+    }
+
+    async componentDidMount() {
+        const url = "http://ergast.com/api/f1/seasons.json?limit=100";
+        const response = await fetch(url);
+        const allSeasons = await response.json();
+
+        this.setState({
+            seasons: allSeasons.MRData.SeasonTable.Seasons
+        });
+    }
+
+    seasonChanged = (event) => {
+        const selectedSeason = parseInt(event.target.value);
+        localStorage.setItem("selectedSeason", selectedSeason);
+        this.setState({
+            selectedSeason: selectedSeason
+        });
+    };
+
     render() {
         return (
             <div className="main">
                 <Router history={history}>
+                    <div className="seasonSelectionWrapper">
+                    </div>
                     {/* <div className="main-container"> */}
                     <nav className="navigation">
+                        <select onChange={this.seasonChanged} value={this.state.selectedSeason}>
+                            {this.state.seasons.map((season) => {
+                                return (<option key={season.season}>{season.season}</option>);
+                            })}
+                        </select>
                         <ul className="nav-list">
                             <li className="nav-link">
                                 <div className="devider-logo">
