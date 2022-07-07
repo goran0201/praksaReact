@@ -20,7 +20,7 @@ export default class Drivers extends React.Component {
     }
 
     getDrivers = async () => {
-        let year = 2013;
+        let year = 2012;
         const url = `http://ergast.com/api/f1/${year}/driverStandings.json`;
         const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
         const response = await fetch(url);
@@ -72,7 +72,7 @@ export default class Drivers extends React.Component {
         const breadcrumb = [
             {
                 title: "Drivers",
-                url: ""
+                url: "/drivers"
             }
         ];
 

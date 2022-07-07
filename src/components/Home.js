@@ -17,7 +17,7 @@ export default class Home extends React.Component {
                 <Breadcrumb breadcrumb={breadcrumb} />
                 <div className="background">
                     <div className="home-img">
-                        <img src={require(`./../img/F1_home.jpg`).default} />
+                        <img src={`/img/F1_home.jpg`} />
                     </div>
                 </div>
             </div>

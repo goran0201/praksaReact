@@ -85,7 +85,7 @@ export default class RaceDetails extends React.Component {
       },
       {
         title: this.state.raceLocation[0].raceName,
-        url: ""
+        url: "/raceDetails/:raceId"
       }
     ];
 
@@ -138,7 +138,7 @@ export default class RaceDetails extends React.Component {
                         </tr>
                         <tr>
                           <th>Full report: </th>
-                          <td><a href={location.Circuit.url} target="_blank" style={{ color: "white" }} ><img src={require("./../img/link-white.png").default} width={16} height={16} /></a></td>
+                          <td><a href={location.Circuit.url} target="_blank" style={{ color: "white" }} ><img src={"/img/link-white.png"} width={16} height={16} /></a></td>
                         </tr>
                       </tbody>
                     </table>
