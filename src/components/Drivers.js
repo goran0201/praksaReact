@@ -12,7 +12,7 @@ export default class Drivers extends React.Component {
         selectedYear: [],
         isLoading: true,
         flags: [],
-        searchApiData: [],
+        searchDrivers: [],
         filterValue: ""
     };
 
@@ -43,7 +43,7 @@ export default class Drivers extends React.Component {
             selectedYear: year,
             isLoading: false,
             flags: flags,
-            searchApiData: drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings
+            searchDrivers: drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings
         });  
     };
 
@@ -52,16 +52,16 @@ export default class Drivers extends React.Component {
         history.push(linkTo);
     };
 
-    handleSearch = (searchText) => {
-        if (searchText.target.value == "") {
+    handleSearch = (item) => {
+        if (item.target.value == "") {
             return this.setState({
-                allDrivers: this.state.searchApiData,
+                allDrivers: this.state.searchDrivers,
             });
         } else {
-            const searchResults = this.state.searchApiData.filter(
-                (drivers) => drivers.Driver.givenName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
-                    drivers.Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase()) || 
-                    drivers.Constructors[0].name.toLowerCase().includes(searchText.target.value.toLowerCase())
+            const searchResults = this.state.searchDrivers.filter(
+                (drivers) => drivers.Driver.givenName.toLowerCase().includes(item.target.value.toLowerCase()) ||
+                    drivers.Driver.familyName.toLowerCase().includes(item.target.value.toLowerCase()) || 
+                    drivers.Constructors[0].name.toLowerCase().includes(item.target.value.toLowerCase())
             );
             this.setState({
                 allDrivers: searchResults,

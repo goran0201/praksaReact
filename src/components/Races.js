@@ -11,7 +11,7 @@ export default class Races extends React.Component {
     isLoading: true,
     flags: [],
     selectedYear: [],
-    searchApiData: [],
+    searchRaces: [],
     filterValue: ""
   };
 
@@ -41,7 +41,7 @@ export default class Races extends React.Component {
       selectedYear: year,
       isLoading: false,
       flags: flagsConvert,
-      searchApiData: races.MRData.RaceTable.Races
+      searchRaces: races.MRData.RaceTable.Races
     });
 
   };
@@ -51,16 +51,16 @@ export default class Races extends React.Component {
     history.push(linkTo);
   };
 
-  handleSearch = (searchText) => {
-    if (searchText.target.value == "") {
+  handleSearch = (item) => {
+    if (item.target.value == "") {
       return this.setState({
-        races: this.state.searchApiData,
+        races: this.state.searchRaces,
       });
     } else {
-      const searchResults = this.state.searchApiData.filter(
-        (races) => races.raceName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
-          races.Circuit.circuitName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
-          races.Results[0].Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase())
+      const searchResults = this.state.searchRaces.filter(
+        (races) => races.raceName.toLowerCase().includes(item.target.value.toLowerCase()) ||
+          races.Circuit.circuitName.toLowerCase().includes(item.target.value.toLowerCase()) ||
+          races.Results[0].Driver.familyName.toLowerCase().includes(item.target.value.toLowerCase())
       );
       this.setState({
         races: searchResults,

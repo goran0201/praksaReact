@@ -12,7 +12,7 @@ export default class Teams extends React.Component {
     selectedYear: [],
     isLoading: true,
     flags: [],
-    searchApiData: [],
+    searchTeams: [],
     filterValue: ""
   };
 
@@ -42,7 +42,7 @@ export default class Teams extends React.Component {
       selectedYear: year,
       isLoading: false,
       flags: flags,
-      searchApiData: teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
+      searchTeams: teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
     });
   };
 
@@ -51,15 +51,15 @@ export default class Teams extends React.Component {
     history.push(linkTo);
   };
 
-  handleSearch = (searchText) => {
-    if (searchText.target.value == "") {
+  handleSearch = (items) => {
+    if (items.target.value == "") {
       return this.setState({
-        allTeams: this.state.searchApiData,
+        allTeams: this.state.searchTeams,
       });
     } else {
-      const searchResult = this.state.searchApiData.filter(
+      const searchResult = this.state.searchTeams.filter(
         (teams) =>
-          teams.Constructor.constructorId.toLowerCase().includes(searchText.target.value.toLowerCase())
+          teams.Constructor.constructorId.toLowerCase().includes(items.target.value.toLowerCase())
       );
       this.setState({
         allTeams: searchResult,
