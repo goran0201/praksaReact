@@ -35,7 +35,6 @@ export default class Races extends React.Component {
     const responseFlags = await fetch(urlFlags);
     const flagsConvert = await responseFlags.json();
     const allRaces = races.MRData.RaceTable.Races;
-    /* const seasons = races.MRData.RaceTable; */
     this.setState({
       races: allRaces,
       selectedYear: year,
@@ -43,7 +42,6 @@ export default class Races extends React.Component {
       flags: flagsConvert,
       searchRaces: races.MRData.RaceTable.Races
     });
-
   };
 
   handleRaces = (raceId) => {

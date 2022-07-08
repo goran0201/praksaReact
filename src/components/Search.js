@@ -7,8 +7,8 @@ export default class Search extends React.Component {
                 className="search"
                 placeholder="Search..."
                 defaultValue={this.props.searchValues}
-                onChange={(e) => this.props.handleSearch(e)}
-            ></input>
+                onChange={(e) => this.props.handleSearch(e)}>                  
+                </input>
         );
     }
 }

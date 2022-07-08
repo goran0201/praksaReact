@@ -36,8 +36,6 @@ export default class Drivers extends React.Component {
         const drivers = await response.json();
         const flags = await responseFlags.json();
         const allDrivers = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-        /* const seasons = drivers.MRData.StandingsTable; */
-        console.log("god",year)
         this.setState({
             allDrivers: allDrivers,
             selectedYear: year,

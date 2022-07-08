@@ -36,7 +36,6 @@ export default class Teams extends React.Component {
     const teams = await data.json();
     const flags = await dataFlags.json();
     const allTeams = teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
-    /* const seasons = teams.MRData.StandingsTable; */
     this.setState({
       allTeams: allTeams,
       selectedYear: year,

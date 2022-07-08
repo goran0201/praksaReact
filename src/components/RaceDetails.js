@@ -13,8 +13,6 @@ export default class RaceDetails extends React.Component {
     isLoading: true
   };
 
-
-
   componentDidMount() {
     this.getQualifiersDetails();
   }

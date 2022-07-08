@@ -63,7 +63,6 @@ body {
     width: 10vw;
 }
 
-
 .nav-link a:hover {
     color: rgb(241, 10, 10);
 }
@@ -401,7 +400,7 @@ body {
     font-weight: 600;
 }
 
-
+/* media query max-width 1360px */
 @media screen and (max-width:1360px) {
     .main {
         flex-direction: column;
@@ -800,7 +799,6 @@ body {
         padding-right: 25px;
         align-items: center;
     }
-
 }
 
 /* media query max-width 715px */
@@ -911,7 +909,7 @@ body {
         height: 10px;
     }
 
-    /* details media query */
+/* details media query */
     .table-container {
         display: flex;
         flex-direction: column;
@@ -1039,9 +1037,6 @@ body {
 
     .logo-img {
         width: 110%;
-/*         padding: 1px;
-        margin-top: 1px; */
-/*         margin-bottom: 1px; */
         margin-left: 1px;
     }
 
@@ -1114,5 +1109,4 @@ body {
     .flag-raceDetails {
         border-bottom: 1px solid rgb(90, 90, 90);
     }
-
 }

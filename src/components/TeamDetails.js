@@ -38,8 +38,6 @@ export default class TeamDetails extends React.Component {
     const flags = await dataFlags.json();
     const details1 = teams1.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
     const details2 = teams2.MRData.RaceTable.Races;
-    /* const seasons = teams1.MRData.StandingsTable; */
-
     this.setState({
       details1: details1,
       details2: details2,

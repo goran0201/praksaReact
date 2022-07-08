@@ -4,7 +4,6 @@ import Breadcrumb from "./Breadcrumb";
 
 export default class Home extends React.Component {
 
-
     render() {
         const breadcrumb = [
             {
@@ -23,5 +22,4 @@ export default class Home extends React.Component {
             </div>
         );
     }
-
 }

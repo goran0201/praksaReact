@@ -3,7 +3,6 @@ import PulseLoader from "react-spinners/PulseLoader";
 
 export default class Loader extends React.Component {
 
-
     render() {
         return(
             <div className="loadr-container">
