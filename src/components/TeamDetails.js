@@ -8,7 +8,7 @@ export default class TeamDetails extends React.Component {
   state = {
     details1: [],
     details2: [],
-    selectedSeason: null,
+    selectedYear: [],
     isLoading: true,
     flags: []
   };
@@ -22,13 +22,13 @@ export default class TeamDetails extends React.Component {
 }
 
   getDetails = async () => {
-    const season = localStorage.getItem("selectedSeason");
-        if (season === this.state.selectedSeason) {
+    const year = localStorage.getItem("selectedYear");
+        if (year === this.state.selectedYear) {
             return
         }
     const constructorId = this.props.match.params.constructorId;
-    const urlDetails = `http://ergast.com/api/f1/${season}/constructors/${constructorId}/constructorStandings.json`;
-    const urlResults = `http://ergast.com/api/f1/${season}/constructors/${constructorId}/results.json`;
+    const urlDetails = `http://ergast.com/api/f1/${year}/constructors/${constructorId}/constructorStandings.json`;
+    const urlResults = `http://ergast.com/api/f1/${year}/constructors/${constructorId}/results.json`;
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response1 = await fetch(urlDetails);
     const response2 = await fetch(urlResults);
@@ -38,12 +38,12 @@ export default class TeamDetails extends React.Component {
     const flags = await dataFlags.json();
     const details1 = teams1.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
     const details2 = teams2.MRData.RaceTable.Races;
-    const seasons = teams1.MRData.StandingsTable;
+    /* const seasons = teams1.MRData.StandingsTable; */
 
     this.setState({
       details1: details1,
       details2: details2,
-      selectedSeason: season,
+      selectedYear: year,
       isLoading: false,
       flags: flags
     });
@@ -98,7 +98,7 @@ export default class TeamDetails extends React.Component {
       }
     ];
 
-    const fallbackSrc = "./../img/F1-logo.png";
+    const fallbackSrc = "/img/rteam.jpg";
 
     return (
       <>
@@ -111,7 +111,9 @@ export default class TeamDetails extends React.Component {
                   <div className="master" key={i}>
                     <div className="img-div">
                     <img src={`/img/teams/${details1.Constructor.constructorId}.png`}
-                      onError={(e) => {e.target.onError = null; e.target.src = fallbackSrc}} />
+                      onError={(e) => {
+                        e.target.onError = null; 
+                        e.target.src = fallbackSrc}} />
                     </div>
                     <table className="table-small">
                       <tbody>
@@ -162,7 +164,7 @@ export default class TeamDetails extends React.Component {
               <table className="table-details">
                 <thead>
                   <tr>
-                    <th colSpan="5" className="title-small">Formula 1 {this.state.selectedSeason} Results</th>
+                    <th colSpan="5" className="title-small">Formula1 {this.state.selectedYear} Results</th>
                   </tr>
                   <tr className="subtitle-details">
                     <th>Round</th>

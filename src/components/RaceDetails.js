@@ -8,7 +8,7 @@ export default class RaceDetails extends React.Component {
     qualifyngDetails: [],
     raceResults: [],
     raceLocation: [],
-    selectedSeason: null,
+    selectedYear: [],
     flags: [],
     isLoading: true
   };
@@ -24,13 +24,13 @@ export default class RaceDetails extends React.Component {
   }
 
   getQualifiersDetails = async () => {
-    const season = localStorage.getItem("selectedSeason");
-        if (season === this.state.selectedSeason) {
+    const year = localStorage.getItem("selectedYear");
+        if (year === this.state.selectedYear) {
             return
         }
     const raceId = this.props.match.params.raceId;
-    const url = `http://ergast.com/api/f1/${season}/${raceId}/qualifying.json`;
-    const urlResults = `http://ergast.com/api/f1/${season}/${raceId}/results.json`;
+    const url = `http://ergast.com/api/f1/${year}/${raceId}/qualifying.json`;
+    const urlResults = `http://ergast.com/api/f1/${year}/${raceId}/results.json`;
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response = await fetch(url);
     const response2 = await fetch(urlResults);
@@ -45,7 +45,7 @@ export default class RaceDetails extends React.Component {
       qualifyngDetails: qualifiersDetails,
       raceResults: raceResults,
       raceLocation: location,
-      selectedSeason: season,
+      selectedYear: year,
       flags: flagsConvert,
       isLoading: false
     });
@@ -161,7 +161,7 @@ export default class RaceDetails extends React.Component {
                 <table className="table-details-race">
                   <thead>
                     <tr>
-                      <th colSpan="4" className="title-small">Qualifying results - {this.state.selectedSeason}</th>
+                      <th colSpan="4" className="title-small">Qualifying results - {this.state.selectedYear}</th>
                     </tr>
                     <tr className="subtitle-details">
                       <th>Pos</th>
@@ -208,7 +208,7 @@ export default class RaceDetails extends React.Component {
                 <table className="table-details-race">
                   <thead>
                     <tr>
-                      <th colSpan="5" className="title-small">Race results - {this.state.selectedSeason}</th>
+                      <th colSpan="5" className="title-small">Race results - {this.state.selectedYear}</th>
                     </tr>
                     <tr className="subtitle-details">
                       <th>Pos</th>

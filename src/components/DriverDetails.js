@@ -7,7 +7,7 @@ export default class DriverDetails extends React.Component {
   state = {
     driverDetails: [],
     racesDetails: [],
-    selectedSeason: null,
+    selectedYear: [],
     isLoading: true,
     flags: []
   };
@@ -18,16 +18,16 @@ export default class DriverDetails extends React.Component {
 
   componentDidUpdate() {
     this.getDriverDetails();
-}
+  }
 
   getDriverDetails = async () => {
-    const season = localStorage.getItem("selectedSeason");
-        if (season === this.state.selectedSeason) {
-            return
-        }
+    const year = localStorage.getItem("selectedYear");
+    if (year === this.state.selectedYear) {
+      return;
+    }
     const driverId = this.props.match.params.driverId;
-    const url = `http://ergast.com/api/f1/${season}/drivers/${driverId}/driverStandings.json`;
-    const urlRaces = `https://ergast.com/api/f1/${season}/drivers/${driverId}/results.json`;
+    const url = `http://ergast.com/api/f1/${year}/drivers/${driverId}/driverStandings.json`;
+    const urlRaces = `https://ergast.com/api/f1/${year}/drivers/${driverId}/results.json`;
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const response = await fetch(url);
     const responseRaces = await fetch(urlRaces);
@@ -37,11 +37,10 @@ export default class DriverDetails extends React.Component {
     const flags = await responseFlags.json();
     const driverDetails = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
     const racesDetails = races.MRData.RaceTable.Races;
-    const seasons = drivers.MRData.StandingsTable;
     this.setState({
       driverDetails: driverDetails,
       racesDetails: racesDetails,
-      selectedSeason: season,
+      selectedYear: year,
       isLoading: false,
       flags: flags
     });
@@ -72,7 +71,7 @@ export default class DriverDetails extends React.Component {
     }
     return color;
   };
-  
+
   render() {
     if (this.state.isLoading) {
       return (
@@ -82,7 +81,7 @@ export default class DriverDetails extends React.Component {
         </div>
       );
     }
-    
+
     const breadcrumb = [
       {
         title: "Drivers",
@@ -93,10 +92,9 @@ export default class DriverDetails extends React.Component {
         url: "/driverDetails/:driverId"
       }
     ];
-    
-    
-    const fallbackSrc = "./../img/F1-logo.png";
-    console.log(fallbackSrc)
+
+
+    const fallbackSrc = "/img/avatar.png";
 
     return (
       <>
@@ -109,9 +107,10 @@ export default class DriverDetails extends React.Component {
                   <div className="master" key={i}>
                     <div className="img-div">
                       <img src={`/img/drivers/${driverDetail.Driver.driverId}.jpg`}
-                      onError={(e) => {
-                        e.target.onError = null; 
-                        e.target.src = fallbackSrc}} />
+                        onError={(e) => {
+                          e.target.onError = null;
+                          e.target.src = fallbackSrc;
+                        }} />
                     </div>
                     <table className="table-small">
                       <tbody>
@@ -163,7 +162,7 @@ export default class DriverDetails extends React.Component {
               <table className="table-details">
                 <thead>
                   <tr>
-                    <th className="title-small" colSpan="5" >Formula 1 {this.state.selectedSeason} Results</th>
+                    <th className="title-small" colSpan="5" >Formula1 {this.state.selectedYear} Results</th>
                   </tr>
                   <tr className="subtitle-details">
                     <th>Round</th>
