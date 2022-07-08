@@ -10,72 +10,64 @@ import { Router, Switch, Route, Link } from "react-router-dom";
 import history from "./history";
 
 
+const minOffset = 0;
+const maxOffset = 72;
 
 export default class App extends React.Component {
 
     constructor() {
         super();
-
-        let selectedSeason = localStorage.getItem("selectedSeason");
-        if (!selectedSeason) {
-            selectedSeason = new Date().getFullYear();
-        }
-        localStorage.setItem("selectedSeason", selectedSeason);
+        let selectedYear = localStorage.getItem("selectedYear");
+        const thisYear = new Date().getFullYear();
+        localStorage.setItem("selectedYear", selectedYear);
         this.state = {
-            seasons: [],
-            selectedSeason: selectedSeason
+            thisYear: thisYear,
+            selectedYear: thisYear
         };
     }
 
-    async componentDidMount() {
-        const url = "http://ergast.com/api/f1/seasons.json?limit=100";
-        const response = await fetch(url);
-        const allSeasons = await response.json();
-
+    selectYear = (evt) => {
+        const selectedYear = parseInt(evt.target.value);
+        localStorage.setItem("selectedYear", selectedYear);
         this.setState({
-            seasons: allSeasons.MRData.SeasonTable.Seasons
-        });
-    }
-
-    seasonChanged = (event) => {
-        const selectedSeason = parseInt(event.target.value);
-        localStorage.setItem("selectedSeason", selectedSeason);
-        this.setState({
-            selectedSeason: selectedSeason
+            selectedYear: selectedYear
         });
     };
 
     render() {
+        const { thisYear, selectedYear } = this.state;
+        const options = [];
+        for (let i = minOffset; i <= maxOffset; i++) {
+            const year = thisYear - i;
+            options.push(<option value={year}>{year}</option>);
+        }
         return (
+
             <div className="main">
                 <Router history={history}>
-                    <div className="seasonSelectionWrapper">
+                    <div className="main-container">
+                        <nav className="navigation">
+                            <ul className="nav-list">
+                                <li className="nav-link">
+                                    <div className="devider-logo">
+                                        <Link to="/">
+                                            <img className="logo-img" src={`/img/F1-logo.png`} />
+                                        </Link>
+                                    </div>
+                                    <div className="devider-links">
+                                        <Link to="/drivers">Drivers</Link>
+                                        <Link to="/teams">Teams</Link>
+                                        <Link to="/races">Races</Link>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+                        <div className="year-selector">
+                            <select className="year-select" value={this.selectedYear} onChange={this.selectYear}>
+                                {options}
+                            </select>
+                        </div>
                     </div>
-                    {/* <div className="main-container"> */}
-                    <nav className="navigation">
-                        <select onChange={this.seasonChanged} value={this.state.selectedSeason}>
-                            {this.state.seasons.map((season) => {
-                                return (<option key={season.season}>{season.season}</option>);
-                            })}
-                        </select>
-                        <ul className="nav-list">
-                            <li className="nav-link">
-                                <div className="devider-logo">
-                                    <Link to="/">
-                                        {/* <div className="logo"> */}
-                                        <img className="logo-img" src={`/img/F1-logo.png`} />
-                                        {/* </div> */}
-                                    </Link>
-                                </div>
-                                <div className="devider-links">
-                                    <Link to="/drivers">Drivers</Link>
-                                    <Link to="/teams">Teams</Link>
-                                    <Link to="/races">Races</Link>
-                                </div>
-                            </li>
-                        </ul>
-                    </nav>
-                    {/* </div> */}
                     <Switch>
                         <Route path="/" exact component={Home} />
                         <Route path="/drivers" exact component={Drivers} />
@@ -87,6 +79,7 @@ export default class App extends React.Component {
                     </Switch>
                 </Router>
             </div>
+
         );
 
     }
