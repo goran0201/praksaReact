@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 const breadcrumb = {
     backgroundColor: "white",
-    /* border: "1px solid rgb(0,0,0, .125)", */
-    /* borderRadius: "0.37rem" */
     textDecoration: "none"
 };
 
