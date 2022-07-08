@@ -8,9 +8,9 @@ import Search from "./Search";
 export default class Races extends React.Component {
   state = {
     races: [],
-    selectedSeason: null,
     isLoading: true,
     flags: [],
+    selectedYear: [],
     searchApiData: [],
     filterValue: ""
   };
@@ -21,24 +21,24 @@ export default class Races extends React.Component {
 
   componentDidUpdate() {
     this.getRaces();
-}
+  }
 
   getRaces = async () => {
-    const season = localStorage.getItem("selectedSeason")
-    if (season === this.state.selectedSeason) {
-        return
+    const year = localStorage.getItem("selectedYear");
+    if (year === this.state.selectedYear) {
+      return;
     }
-    const url = `http://ergast.com/api/f1/${season}/results/1.json`;
+    const url = `http://ergast.com/api/f1/${year}/results/1.json`;
     const response = await fetch(url);
     const races = await response.json();
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const responseFlags = await fetch(urlFlags);
     const flagsConvert = await responseFlags.json();
     const allRaces = races.MRData.RaceTable.Races;
-    const seasons = races.MRData.RaceTable;
+    /* const seasons = races.MRData.RaceTable; */
     this.setState({
       races: allRaces,
-      selectedSeason: seasons,
+      selectedYear: year,
       isLoading: false,
       flags: flagsConvert,
       searchApiData: races.MRData.RaceTable.Races
@@ -46,24 +46,24 @@ export default class Races extends React.Component {
 
   };
 
-  handleQualifyng = (raceId) => {
+  handleRaces = (raceId) => {
     const linkTo = "/raceDetails/" + raceId;
     history.push(linkTo);
   };
 
-  handleFilter = (searchText) => {
+  handleSearch = (searchText) => {
     if (searchText.target.value == "") {
       return this.setState({
         races: this.state.searchApiData,
       });
     } else {
-      const filterResult = this.state.searchApiData.filter(
+      const searchResults = this.state.searchApiData.filter(
         (races) => races.raceName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
-          races.Circuit.circuitName.toLowerCase().includes(searchText.target.value.toLowerCase()) || 
+          races.Circuit.circuitName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
           races.Results[0].Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase())
       );
       this.setState({
-        races: filterResult,
+        races: searchResults,
       });
     }
   };
@@ -89,13 +89,13 @@ export default class Races extends React.Component {
       <>
         <div className="top-level-background">
           <Breadcrumb breadcrumb={breadcrumb} />
-          <Search filterValue={this.state.filterValue} handleFilter={this.handleFilter} />
+          <Search filterValue={this.state.filterValue} handleSearch={this.handleSearch} />
           <div className="background">
             <h1 className="title">Race calendar</h1>
             <table className="table-race">
               <thead>
                 <tr>
-                  <th colSpan="5" className="title-small" >Race callendar - {this.state.selectedSeason.season}</th>
+                  <th colSpan="5" className="title-small" >Race callendar - {this.state.selectedYear}</th>
                 </tr>
                 <tr className="race-th">
                   <th>Round</th>
@@ -108,7 +108,7 @@ export default class Races extends React.Component {
               <tbody >
                 {this.state.races.map((race, i) => {
                   return (
-                    <tr key={i} onClick={() => this.handleQualifyng(race.round)}>
+                    <tr key={i} onClick={() => this.handleRaces(race.round)}>
                       <td>{race.round}</td>
                       <td>
                         <div className="flag-container">

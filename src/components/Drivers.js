@@ -9,7 +9,7 @@ import Search from "./Search";
 export default class Drivers extends React.Component {
     state = {
         allDrivers: [],
-        selectedSeason: null,
+        selectedYear: [],
         isLoading: true,
         flags: [],
         searchApiData: [],
@@ -25,27 +25,26 @@ export default class Drivers extends React.Component {
     }
 
     getDrivers = async () => {
-        const season = localStorage.getItem("selectedSeason")
-        if (season === this.state.selectedSeason) {
+        const year = localStorage.getItem("selectedYear")
+        if (year === this.state.selectedYear) {
             return
         }
-        const url = `http://ergast.com/api/f1/${season}/driverStandings.json`;
+        const url = `http://ergast.com/api/f1/${year}/driverStandings.json`;
         const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
         const response = await fetch(url);
         const responseFlags = await fetch(urlFlags);
         const drivers = await response.json();
         const flags = await responseFlags.json();
         const allDrivers = drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings;
-        const seasons = drivers.MRData.StandingsTable;
-       /*  console.log(seasons) */
+        /* const seasons = drivers.MRData.StandingsTable; */
+        console.log("god",year)
         this.setState({
             allDrivers: allDrivers,
-            selectedSeason: seasons,
+            selectedYear: year,
             isLoading: false,
             flags: flags,
             searchApiData: drivers.MRData.StandingsTable.StandingsLists[0].DriverStandings
-        });
-        
+        });  
     };
 
     handleDrivers = (driverId) => {
@@ -53,19 +52,19 @@ export default class Drivers extends React.Component {
         history.push(linkTo);
     };
 
-    handleFilter = (searchText) => {
+    handleSearch = (searchText) => {
         if (searchText.target.value == "") {
             return this.setState({
                 allDrivers: this.state.searchApiData,
             });
         } else {
-            const filterResult = this.state.searchApiData.filter(
+            const searchResults = this.state.searchApiData.filter(
                 (drivers) => drivers.Driver.givenName.toLowerCase().includes(searchText.target.value.toLowerCase()) ||
                     drivers.Driver.familyName.toLowerCase().includes(searchText.target.value.toLowerCase()) || 
                     drivers.Constructors[0].name.toLowerCase().includes(searchText.target.value.toLowerCase())
             );
             this.setState({
-                allDrivers: filterResult,
+                allDrivers: searchResults,
             });
         }
     };
@@ -92,13 +91,13 @@ export default class Drivers extends React.Component {
             <>
                 <div className="top-level-background">
                     <Breadcrumb breadcrumb={breadcrumb} />
-                    <Search filterValue={this.state.filterValue} handleFilter={this.handleFilter} />
+                    <Search searchValues={this.state.searchValues} handleSearch={this.handleSearch} />
                     <div className="background">
                         <h1 className="title">Drivers Campionship</h1>
                         <table className="table">
                             <thead>
                                 <tr>
-                                    <th colSpan="4" className="title-small">Drivers Championship Standings - {this.state.selectedSeason.season}</th>
+                                    <th colSpan="4" className="title-small">Drivers Championship Standings - {this.state.selectedYear}</th>
                                     
                                 </tr>
                             </thead>

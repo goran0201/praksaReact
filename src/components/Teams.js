@@ -9,7 +9,7 @@ export default class Teams extends React.Component {
 
   state = {
     allTeams: [],
-    selectedSeason: null,
+    selectedYear: [],
     isLoading: true,
     flags: [],
     searchApiData: [],
@@ -19,27 +19,27 @@ export default class Teams extends React.Component {
   componentDidMount() {
     this.getTeams();
   };
-  
+
   componentDidUpdate() {
     this.getTeams();
-}
+  }
 
   getTeams = async () => {
-    const season = localStorage.getItem("selectedSeason")
-    if (season === this.state.selectedSeason) {
-        return
+    const year = localStorage.getItem("selectedYear");
+    if (year === this.state.selectedYear) {
+      return;
     }
-    const url = `http://ergast.com/api/f1/${season}/constructorStandings.json`;
+    const url = `http://ergast.com/api/f1/${year}/constructorStandings.json`;
     const urlFlags = "https://raw.githubusercontent.com/Dinuks/country-nationality-list/master/countries.json";
     const data = await fetch(url);
     const dataFlags = await fetch(urlFlags);
     const teams = await data.json();
     const flags = await dataFlags.json();
     const allTeams = teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings;
-    const seasons = teams.MRData.StandingsTable;
+    /* const seasons = teams.MRData.StandingsTable; */
     this.setState({
       allTeams: allTeams,
-      selectedSeason: seasons,
+      selectedYear: year,
       isLoading: false,
       flags: flags,
       searchApiData: teams.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
@@ -51,18 +51,18 @@ export default class Teams extends React.Component {
     history.push(linkTo);
   };
 
-  handleFilter = (searchText) => {
+  handleSearch = (searchText) => {
     if (searchText.target.value == "") {
       return this.setState({
         allTeams: this.state.searchApiData,
       });
     } else {
-      const filterResult = this.state.searchApiData.filter(
+      const searchResult = this.state.searchApiData.filter(
         (teams) =>
           teams.Constructor.constructorId.toLowerCase().includes(searchText.target.value.toLowerCase())
       );
       this.setState({
-        allTeams: filterResult,
+        allTeams: searchResult,
       });
     }
   };
@@ -88,13 +88,13 @@ export default class Teams extends React.Component {
       <>
         <div className="top-level-background">
           <Breadcrumb breadcrumb={breadcrumb} className="breadcrumb" />
-          <Search filterValue={this.state.filterValue} handleFilter={this.handleFilter} />
+          <Search searchValues={this.state.searchValues} handleSearch={this.handleSearch} />
           <div className="background">
             <h1 className="title">Constructors Campionship</h1>
             <table className="table">
               <thead>
                 <tr>
-                  <th colSpan="4" className="title-small">Constructors Championship Standings - {this.state.selectedSeason.season}</th>
+                  <th colSpan="4" className="title-small">Constructors Championship Standings - {this.state.selectedYear}</th>
                 </tr>
               </thead>
               {this.state.allTeams.map((team, i) => {
