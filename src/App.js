@@ -35,7 +35,7 @@ export default class App extends React.Component {
     };
 
     render() {
-        const { thisYear, selectedYear } = this.state;
+        const thisYear= this.state.thisYear;
         const options = [];
         for (let i = minOffset; i <= maxOffset; i++) {
             const year = thisYear - i;
@@ -79,8 +79,6 @@ export default class App extends React.Component {
                     </Switch>
                 </Router>
             </div>
-
         );
-
     }
 }
