@@ -39,7 +39,7 @@ export default class App extends React.Component {
         const options = [];
         for (let i = minOffset; i <= maxOffset; i++) {
             const year = thisYear - i;
-            options.push(<option value={year}>{year}</option>);
+            options.push(<option key={year} value={year}>{year}</option>);
         }
         return (
 
