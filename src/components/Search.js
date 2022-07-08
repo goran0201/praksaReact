@@ -4,9 +4,10 @@ export default class Search extends React.Component {
     render() {
         return (
             <input
-                placeholder="Search"
-                defaultValue={this.props.filterValue}
-                onChange={(e) => this.props.handleFilter(e)}
+                className="search"
+                placeholder="Search..."
+                defaultValue={this.props.searchValues}
+                onChange={(e) => this.props.handleSearch(e)}
             ></input>
         );
     }
